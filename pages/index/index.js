@@ -1,21 +1,120 @@
-// index.js
-// 获取应用实例
+//index.js
+//获取应用实例
 const app = getApp()
+const timeutil = require('../../utils/timeutil.js')
 
 Page({
   data: {
-    motto: 'Hello World',
+    read: '读书打卡',
+    records: '打卡历史',
     userInfo: {},
     hasUserInfo: false,
+    PageCur: 'tta',
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  // 事件处理函数
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  NavChange(e) {
+    var currentData = e.currentTarget.dataset.cur;
+
+    if (currentData === 'about') {
+      wx.getClipboardData({
+        success(res) {
+          var data = res.data;
+          if (data && !data.startsWith("【")) {
+            var transData = '【' + timeutil.formatDay(new Date(), '.') + ' 阅读笔记】' + data;
+            console.log(transData);
+            wx.setClipboardData({
+              data: transData,
+            })
+          }
+        }
+      })
+    }
+    console.log(currentData);
+    this.setData({
+      PageCur: e.currentTarget.dataset.cur
     })
   },
-  onLoad() {
+
+  //事件处理函数
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../records/records'
+    })
+  },
+  goToReadPage: function () {
+    wx.navigateTo({
+      url: '../reads/read'
+    })
+  },
+  goToRecordsPage: function () {
+    wx.navigateTo({
+      url: '../records/records'
+    })
+  },
+  onLoad: function () {
+    var thatThat = this;
+    // 获取用户信息
+    wx.getSetting({
+      success: res => {
+        if (!res.authSetting['scope.userInfo']) {
+          console.log('还没授权222？？')
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success: function (obj) {
+              console.log('授权成功!')
+              var thatThat2 = thatThat;
+              wx.getUserInfo({
+                success: res => {
+                  // 可以将 res 发送给后台解码出 unionId
+                  app.globalData.userInfo = res.userInfo
+                  thatThat2.setData({
+                    userInfo: app.globalData.userInfo,
+                    hasUserInfo: true
+                  })
+                }
+              })
+            },
+            fail: function (fobj) {
+              console.log('失败2')
+              //wx.navigateBack()
+            }
+          })
+        }
+      }
+    })
+
+    // 登录
+    wx.login({
+      success: res => {
+        if (res.code) {
+          //发起网络请求
+          //console.log('login...')
+          wx.request({
+            url: 'https://aborn.me/api/wechart/jscode2session?code=' + res.code,
+            data: {
+              code: res.code
+            },
+            success: function (res) {
+              //console.log(res);
+              if (res.data.code === 200) {
+                app.globalData.openid = res.data.openid;
+                //console.log(app.globalData.userInfo);
+                //console.log('login success.')
+
+                // 接入来获取最新列表
+              } else {
+                console.log('login failed.')
+              }
+            }
+          })
+        } else {
+          console.log('用户登录态失败！' + res.errMsg)
+        }
+        //console.log(res)
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      }
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -43,7 +142,7 @@ Page({
       })
     }
   },
-  getUserInfo(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

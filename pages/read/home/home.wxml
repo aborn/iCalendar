@@ -1,0 +1,26 @@
+<!--pages/read/home/home.wxml-->
+
+<scroll-view scroll-y class="scrollPage">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
+    <view slot="content">编程日历</view>
+  </cu-custom>
+
+  <view class="bg-white padding-xs flex align-center">
+    <calendar config="{{calendarConfig}}" bind:takeoverTap="takeoverTap" bind:afterTapDate="afterTapDate"
+      bind:afterCalendarRender="afterCalendarRender" bind:onSwipe="onSwipe" bind:whenChangeMonth="whenChangeMonth" />
+  </view>
+
+  <view class="cu-bar margin-top bg-white padding-xs flex align-center">
+		<view class="flex-sub text-center">
+			<text class="padding">编程时间</text>
+		</view>
+	</view>
+
+	<view class="bg-white solids-bottom padding-xs flex align-center">
+		<view class="flex-sub text-center">
+			<view class="solid-bottom text-sl padding">
+				<text class="text-green text-bold">{{codeTime}}</text>
+			</view>
+		</view>
+	</view>
+</scroll-view>
