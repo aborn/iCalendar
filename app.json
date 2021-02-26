@@ -10,5 +10,9 @@
     "navigationBarTextStyle":"black"
   },
   "style": "v2",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "calendar": "/calendar/index"
+  },
   "sitemapLocation": "sitemap.json"
 }
