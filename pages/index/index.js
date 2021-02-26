@@ -9,7 +9,7 @@ Page({
     records: '打卡历史',
     userInfo: {},
     hasUserInfo: false,
-    PageCur: 'tta',
+    PageCur: 'read',
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   NavChange(e) {
