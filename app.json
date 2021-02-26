@@ -4,10 +4,10 @@
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#39b54a",
     "navigationBarTitleText": "WebX",
-    "navigationBarTextStyle":"black"
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
   "usingComponents": {
