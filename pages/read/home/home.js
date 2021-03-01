@@ -65,6 +65,9 @@ Component({
         month = '0' + month;
       }
       var date = e.detail.date;
+      if (date < 10) {
+        date = '0' + date;
+      }
       var dayInfo = year + '-' +  month + '-' + date;
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
 
