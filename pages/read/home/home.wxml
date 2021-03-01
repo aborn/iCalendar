@@ -8,8 +8,6 @@
 	<van-calendar
   poppable="{{ false }}"
 	show-confirm="{{ false }}"
-	min-date="{{ minDate }}"
-  max-date="{{ maxDate }}"
   class="calendar"
 />
 
