@@ -20,6 +20,8 @@ Component({
     addGlobalClass: true,
   },
   data: {
+    minDate: new Date(2021, 2, 1).getTime(),
+    maxDate: new Date(2021, 2, 28).getTime(),
     dayStaticByHour : [
       {value:0, level:0 },
       {value:0, level:0 },

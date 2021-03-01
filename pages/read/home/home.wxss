@@ -1,4 +1,7 @@
 /* pages/read/home/home.wxss */
+.calendar {
+  --calendar-height: 500px;
+}
 
 .webx-hcell {
   background-color: rgb(255, 255, 255);

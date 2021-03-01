@@ -2,8 +2,16 @@
 
 <scroll-view scroll-y class="scrollPage">
 	<cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
-		<view slot="content">极客日历2</view>
+		<view slot="content">极客日历</view>
 	</cu-custom>
+
+	<van-calendar
+  poppable="{{ false }}"
+	show-confirm="{{ false }}"
+	min-date="{{ minDate }}"
+  max-date="{{ maxDate }}"
+  class="calendar"
+/>
 
 	<view class="bg-white padding-xs flex align-center">
 		<calendar config="{{calendarConfig}}" bind:takeoverTap="takeoverTap" bind:afterTapDate="afterTapDate"
