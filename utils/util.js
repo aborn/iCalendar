@@ -247,6 +247,29 @@ const readTimeDesc = (second) => {
   }
 }
 
+const transToLevelValue = (value) => {
+  if (value <= 0) {
+    return 0;
+  } else if (value <= 2*5) {   // 5分钟
+    return 1;
+  } else if (value <= 2*20) {
+    return 2;
+  } else if (value <= 2*40) {
+    return 3;
+  } else {
+    return 4;
+  }
+}
+const transToLevel = (dayStaticByHour) => {
+  return dayStaticByHour.map((item, _) => {
+    return {value: item, level: transToLevelValue(item)}
+  })
+}
+
+const initCellData = () => {
+  return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
 module.exports = {
   updateTodayInfo: updateTodayInfo,
   getTimeSegType: getTimeSegType,
@@ -256,4 +279,6 @@ module.exports = {
   dateDiffIndays: dateDiffIndays,
   formatTimeLineTodayBefore: formatTimeLineTodayBefore,
   readTimeDesc: readTimeDesc,
+  transToLevel: transToLevel,
+  initCellData: initCellData
 }

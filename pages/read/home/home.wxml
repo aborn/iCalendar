@@ -1,16 +1,16 @@
 <!--pages/read/home/home.wxml-->
 
 <scroll-view scroll-y class="scrollPage">
-  <cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
-    <view slot="content">极客日历</view>
-  </cu-custom>
+	<cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
+		<view slot="content">极客日历</view>
+	</cu-custom>
 
-  <view class="bg-white padding-xs flex align-center">
-    <calendar config="{{calendarConfig}}" bind:takeoverTap="takeoverTap" bind:afterTapDate="afterTapDate"
-      bind:afterCalendarRender="afterCalendarRender" bind:onSwipe="onSwipe" bind:whenChangeMonth="whenChangeMonth" />
-  </view>
+	<view class="bg-white padding-xs flex align-center">
+		<calendar config="{{calendarConfig}}" bind:takeoverTap="takeoverTap" bind:afterTapDate="afterTapDate"
+			bind:afterCalendarRender="afterCalendarRender" bind:onSwipe="onSwipe" bind:whenChangeMonth="whenChangeMonth" />
+	</view>
 
-  <view class="cu-bar margin-top bg-white padding-xs flex align-center">
+	<view class="cu-bar margin-top bg-white padding-xs flex align-center">
 		<view class="flex-sub text-center">
 			<text class="padding">编程时间</text>
 		</view>
@@ -23,4 +23,13 @@
 			</view>
 		</view>
 	</view>
+
+	<van-toast id="van-toast" />
+
+	<van-grid column-num="24" icon-size="0px" square clickable border="{{ false }}">
+		<van-grid-item bind:click="hcellClickEvent" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}"
+			wx:key="*this">
+		</van-grid-item>
+	</van-grid>
+
 </scroll-view>

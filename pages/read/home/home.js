@@ -1,5 +1,6 @@
 // pages/read/home/home.js
 const util = require('../../../utils/util.js')
+import Toast from '../../../vant/toast/toast';
 const app = getApp();
 // 引入插件安装器
 import plugin from '../../../calendar/plugins/index'
@@ -18,8 +19,39 @@ Component({
   options: {
     addGlobalClass: true,
   },
-
+  data: {
+    dayStaticByHour : [
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+      {value:0, level:0 },
+    ]
+  },
   methods: {
+    hcellClickEvent(e) {
+      console.log(e)
+      Toast('我是提示文案，建议不超过十五字~');
+    },
     afterCalendarRender(e) {
       var self = this;
       // 获取写代码的时间信息
@@ -33,12 +65,14 @@ Component({
 
             self.setData({
               codeTimeDesc: res.data.data.desc,
+              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour),
               codeTime: util.readTimeDesc(codeTimeSecond)
             })
             // 接入来获取最新列表
           } else {
             self.setData({
-              codeTime: '0分钟'
+              codeTime: '未知-501',
+              dayStaticByHour: util.transToLevel(util.initCellData)
             })
             console.log('获取数据失败。')
           }
@@ -82,12 +116,14 @@ Component({
             var codeTimeSecond = res.data.data.codeTime;
             self.setData({
               codeTimeDesc: res.data.data.desc,
+              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour),
               codeTime: util.readTimeDesc(codeTimeSecond)
             })
             // 接入来获取最新列表
           } else {
             self.setData({
-              codeTime: '0分钟'
+              codeTime: '未知-501',
+              dayStaticByHour: util.transToLevel(util.initCellData())
             })
             console.log('获取数据失败。')
           }

@@ -1,9 +1,9 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/logs/logs"
   ],
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#39b54a",
     "navigationBarTitleText": "极客日历",
     "navigationStyle": "custom",
@@ -12,7 +12,10 @@
   "style": "v2",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "calendar": "/calendar/index"
+    "calendar": "/calendar/index",
+    "van-grid": "/vant/grid/index",
+    "van-toast": "/vant/toast/index",
+    "van-grid-item": "/vant/grid-item/index"
   },
   "sitemapLocation": "sitemap.json"
 }
