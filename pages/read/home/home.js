@@ -7,9 +7,12 @@ import plugin from '../../../calendar/plugins/index'
 import todo from '../../../calendar/plugins/todo'
 // 农历相关功能
 import solarLunar from '../../../calendar/plugins/solarLunar/index'
+// 节假日相关功能
+import holidays from '../../../calendar/plugins/holidays/index'
 plugin
   .use(todo)
   .use(solarLunar)
+  .use(holidays)
 
 Component({
   options: {
@@ -112,6 +115,8 @@ Component({
       weekMode: false, // 周视图模式
       theme: 'default', // 日历主题，目前共两款可选择，默认 default 及 elegant，自定义主题色在参考 /theme 文件夹
       showLunar: true, // 是否显示农历，此配置会导致 setTodoLabels 中 showLabelAlways 配置失效
+      showHolidays: true, // 显示法定节假日班/休情况，需引入holidays插件
+      showFestival: true, // 显示节日信息（如教师节等），需引入holidays插件
       inverse: false, // 单选模式下是否支持取消选中,
       emphasisWeek: true, // 是否高亮显示周末日期
       highlightToday: true, // 是否高亮显示当天，区别于选中样式（初始化时当天高亮并不代表已选中当天）
