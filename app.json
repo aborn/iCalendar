@@ -16,7 +16,8 @@
     "van-grid": "/vant/grid/index",
     "van-toast": "/vant/toast/index",
     "van-grid-item": "/vant/grid-item/index",
-    "van-calendar": "/vant/calendar/index"
+    "van-calendar": "/vant/calendar/index",
+    "van-panel": "/vant/panel/index"
   },
   "sitemapLocation": "sitemap.json"
 }

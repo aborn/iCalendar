@@ -54,6 +54,49 @@ Component({
       console.log(e)
       Toast('我是提示文案，建议不超过十五字~');
     },
+    afterSelectDate(date) {
+      console.log(date)
+
+      var self = this;
+      var date = new Date(date)
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      if (month < 10) {
+        month = '0' + month;
+      }
+      var date = date.getDay();
+      if (date < 10) {
+        date = '0' + date;
+      }
+      var dayInfo = year + '-' +  month + '-' + date;
+      console.log(dayInfo)
+      var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
+
+      console.log('url=' + url);
+      // 获取写代码的时间信息
+      wx.request({
+        url: url,
+        data: {},
+        success: function (res) {
+          console.log(res);
+          if (res.data.code === 200) {
+            var codeTimeSecond = res.data.data.codeTime;
+            self.setData({
+              codeTimeDesc: res.data.data.desc,
+              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour),
+              codeTime: util.readTimeDesc(codeTimeSecond)
+            })
+            // 接入来获取最新列表
+          } else {
+            self.setData({
+              codeTime: '未知-501',
+              dayStaticByHour: util.transToLevel(util.initCellData())
+            })
+            console.log('获取数据失败。')
+          }
+        }
+      })
+    },
     afterCalendarRender(e) {
       var self = this;
       // 获取写代码的时间信息
