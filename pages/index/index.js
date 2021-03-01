@@ -90,7 +90,7 @@ Page({
           //发起网络请求
           //console.log('login...')
           wx.request({
-            url: 'https://aborn.me/api/wechart/jscode2session?code=' + res.code,
+            url: 'https://aborn.me/api/wechart/jscode2session?name=webx&code=' + res.code,
             data: {
               code: res.code
             },
