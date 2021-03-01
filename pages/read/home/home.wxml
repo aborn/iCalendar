@@ -2,7 +2,7 @@
 
 <scroll-view scroll-y class="scrollPage">
   <cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
-    <view slot="content">编程日历</view>
+    <view slot="content">极客日历</view>
   </cu-custom>
 
   <view class="bg-white padding-xs flex align-center">

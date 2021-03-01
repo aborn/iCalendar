@@ -1,6 +1,15 @@
 // pages/read/home/home.js
 const util = require('../../../utils/util.js')
 const app = getApp();
+// 引入插件安装器
+import plugin from '../../../calendar/plugins/index'
+// 设置代办
+import todo from '../../../calendar/plugins/todo'
+// 农历相关功能
+import solarLunar from '../../../calendar/plugins/solarLunar/index'
+plugin
+  .use(todo)
+  .use(solarLunar)
 
 Component({
   options: {

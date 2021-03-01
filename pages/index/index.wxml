@@ -5,7 +5,7 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/component{{PageCur=='read'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='read'?'text-green':'text-gray'}}">编程日历</view>
+    <view class="{{PageCur=='read'?'text-green':'text-gray'}}">极客日历</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="about">
     <view class='cuIcon-cu-image'>
