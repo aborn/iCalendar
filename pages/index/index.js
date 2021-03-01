@@ -99,7 +99,7 @@ Page({
               if (res.data.code === 200) {
                 app.globalData.openid = res.data.openid;
                 //console.log(app.globalData.userInfo);
-                //console.log('login success.')
+                console.log('login success.')
 
                 // 接入来获取最新列表
               } else {
