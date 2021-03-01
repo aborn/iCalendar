@@ -1,7 +1,5 @@
 <view class="van-calendar">
   <header
-    title="{{ title }}"
-    showTitle="{{ showTitle }}"
     subtitle="{{ subtitle }}"
     showSubtitle="{{ showSubtitle }}"
   >
@@ -34,32 +32,4 @@
       bind:click="onClickDay"
     />
   </scroll-view>
-
-  <view
-    class="{{ utils.bem('calendar__footer', { safeAreaInsetBottom }) }}"
-  >
-    <slot name="footer"></slot>
-  </view>
-
-  <view
-    class="{{ utils.bem('calendar__footer', { safeAreaInsetBottom }) }}"
-  >
-    <van-button
-      wx:if="{{ showConfirm }}"
-      round
-      block
-      type="danger"
-      color="{{ color }}"
-      custom-class="van-calendar__confirm"
-      disabled="{{ computed.getButtonDisabled(type, currentDate) }}"
-      nativeType="text"
-      bind:click="onConfirm"
-    >
-      {{
-        computed.getButtonDisabled(type, currentDate)
-          ? confirmDisabledText
-          : confirmText
-      }}
-    </van-button>
-  </view>
 </view>
