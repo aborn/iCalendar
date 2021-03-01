@@ -50,13 +50,17 @@ VantComponent({
     },
     minDate: {
       type: null,
-      value: Date.now(),
+      value: new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        1
+      ).getTime(),
     },
     maxDate: {
       type: null,
       value: new Date(
         new Date().getFullYear(),
-        new Date().getMonth() + 6,
+        new Date().getMonth(),
         new Date().getDate()
       ).getTime(),
     },
