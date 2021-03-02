@@ -2,21 +2,7 @@
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
 import Toast from '../../vant/toast/toast';
-const app = getApp();
-// 引入插件安装器
-import plugin from '../../calendar/plugins/index'
-// 设置代办
-import todo from '../../calendar/plugins/todo'
-// 农历相关功能
-import solarLunar from '../../calendar/plugins/solarLunar/index'
-// 节假日相关功能
-import holidays from '../../calendar/plugins/holidays/index'
 import convertSolarLunar from '../../utils/lunar'
-
-plugin
-  .use(todo)
-  .use(solarLunar)
-  .use(holidays)
 
 Component({
   options: {
