@@ -54,25 +54,24 @@ Component({
       console.log(e)
       Toast('我是提示文案，建议不超过十五字~');
     },
-    afterSelectDate(date) {
-      console.log(date)
-
+    afterSelectDate(e) {
       var self = this;
-      var date = new Date(date)
+      // 详情数据对象
+      var date = e.detail;
       var year = date.getFullYear();
-      var month = date.getMonth();
+      var month = date.getMonth() + 1;
       if (month < 10) {
         month = '0' + month;
       }
-      var date = date.getDay();
-      if (date < 10) {
-        date = '0' + date;
+     
+      var day = date.getDay();
+      if (day < 10) {
+        day = '0' + day;
       }
-      var dayInfo = year + '-' +  month + '-' + date;
-      console.log(dayInfo)
+      var dayInfo = year + '-' +  month + '-' + day;
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
-
       console.log('url=' + url);
+      
       // 获取写代码的时间信息
       wx.request({
         url: url,

@@ -57,7 +57,7 @@ Page({
     wx.getSetting({
       success: res => {
         if (!res.authSetting['scope.userInfo']) {
-          console.log('还没授权222？？')
+          console.log('还没授权？')
           wx.authorize({
             scope: 'scope.userInfo',
             success: function (obj) {
@@ -75,7 +75,7 @@ Page({
               })
             },
             fail: function (fobj) {
-              console.log('失败2')
+              //console.log('失败2')
               //wx.navigateBack()
             }
           })
