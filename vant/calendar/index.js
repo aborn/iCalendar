@@ -18,6 +18,10 @@ VantComponent({
       type: String,
       value: '日期选择',
     },
+    subtitle: {
+      type: String,
+      value: ''
+    },
     color: String,
     show: {
       type: Boolean,

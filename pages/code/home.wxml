@@ -5,7 +5,7 @@
 	</cu-custom>
 
 	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}"
-		defaultDate="{{ defaultDate }}" />
+		defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" showSubtitle />
 
 	<van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
 		编程时间：{{codeTime}}

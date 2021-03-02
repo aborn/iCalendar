@@ -1,8 +1,4 @@
 <view class="van-calendar__header">
-  <block wx:if="{{ showTitle }}">
-    <view class="van-calendar__header-title"><slot name="title"></slot></view>
-    <view class="van-calendar__header-title">{{ title }}</view>
-  </block>
 
   <view wx:if="{{ showSubtitle }}" class="van-calendar__header-subtitle">
     {{ subtitle }}
@@ -13,4 +9,5 @@
       {{ item }}
     </view>
   </view>
+
 </view>

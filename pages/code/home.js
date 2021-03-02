@@ -22,7 +22,7 @@ Component({
   data: {
     minDate: new Date(2021, 2, 1).getTime(),
     maxDate: new Date(2021, 2, 28).getTime(),
-    defaultDate: new Date().getTime(),
+    defaultDate: new Date().getTime(),   // 默认选中为今天
     dayStaticByHour: [{
         value: 0,
         level: 0
@@ -201,8 +201,13 @@ Component({
    */
   lifetimes: {
     ready() {
-      console.log('ready in component')
+      console.log('ready in component')  // 这个在最后
       var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      this.setData({
+        subtitle: year + "年" + month + "月"
+      })
       this.showCodingTime(date);
     }
   },
