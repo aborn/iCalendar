@@ -24,7 +24,7 @@ Page({
           var data = res.data;
           if (data && !data.startsWith("【")) {
             var transData = '【' + timeutil.formatDay(new Date(), '.') + ' 阅读笔记】' + data;
-            console.log(transData);
+            //console.log(transData);
             wx.setClipboardData({
               data: transData,
             })

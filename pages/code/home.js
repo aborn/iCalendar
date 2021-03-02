@@ -22,36 +22,107 @@ Component({
   data: {
     minDate: new Date(2021, 2, 1).getTime(),
     maxDate: new Date(2021, 2, 28).getTime(),
-    dayStaticByHour : [
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
-      {value:0, level:0 },
+    dayStaticByHour: [{
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
+      {
+        value: 0,
+        level: 0
+      },
     ],
     formatter: (day) => {
       const month = day.date.getMonth() + 1;
       const date = day.date.getDate();
-      
+
       // console.log('month===' + month + ', date==' + date)
       if (month === 3) {
         if (date === 1) {
@@ -86,12 +157,12 @@ Component({
       if (month < 10) {
         month = '0' + month;
       }
-     
+
       var day = date.getDay();
       if (day < 10) {
         day = '0' + day;
       }
-      var dayInfo = year + '-' +  month + '-' + day;
+      var dayInfo = year + '-' + month + '-' + day;
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
       console.log('url=' + url);
 
@@ -122,6 +193,19 @@ Component({
   },
 
   /**
+   * 页面加载完成执行
+   */
+  lifetimes: {
+    ready() {
+      console.log('ready in component')
+    }
+  },
+  attached() {
+    // 第二种方式通过组件的生命周期函数执行代码
+    console.log('component attached')
+  },
+
+  /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
@@ -131,8 +215,7 @@ Component({
   /**
    * Lifecycle function--Called when page is initially rendered
    */
-  onReady: function () {
-  },
+  onReady: function () {},
 
   /**
    * Lifecycle function--Called when page show
