@@ -9,13 +9,18 @@ Page({
     records: '打卡历史',
     userInfo: {},
     hasUserInfo: false,
-    PageCur: 'read',
+    pageCur: 'code', // 首次打开时进入的page页
+    active: 0, // 激活的tab
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  NavChange(e) {
-    var currentData = e.currentTarget.dataset.cur;
+  onTabChange(e) {
+    var tabIndex = e.detail;
+    var pageCur = 'code';
+    if (tabIndex === 1) {
+      pageCur = 'about';
+    }
 
-    if (currentData === 'about') {
+    if (pageCur === 'about') {
       wx.getClipboardData({
         success(res) {
           var data = res.data;
@@ -29,26 +34,10 @@ Page({
         }
       })
     }
-    console.log(currentData);
-    this.setData({
-      PageCur: e.currentTarget.dataset.cur
-    })
-  },
 
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../records/records'
-    })
-  },
-  goToReadPage: function () {
-    wx.navigateTo({
-      url: '../reads/read'
-    })
-  },
-  goToRecordsPage: function () {
-    wx.navigateTo({
-      url: '../records/records'
+    this.setData({
+      active: e.detail,
+      pageCur
     })
   },
   onLoad: function () {

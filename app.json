@@ -1,7 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/index/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
@@ -17,7 +16,11 @@
     "van-toast": "/vant/toast/index",
     "van-grid-item": "/vant/grid-item/index",
     "van-calendar": "/vant/calendar/index",
-    "van-panel": "/vant/panel/index"
+    "van-panel": "/vant/panel/index",
+    "van-divider": "/vant/divider/index",
+    "van-tabbar": "/vant/tabbar/index",
+    "van-tabbar-item": "/vant/tabbar-item/index",
+    "van-icon": "/vant/icon/index"
   },
   "sitemapLocation": "sitemap.json"
 }
