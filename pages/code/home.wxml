@@ -1,0 +1,25 @@
+<!--pages/read/home/home.wxml-->
+<scroll-view scroll-y class="scrollPage">
+	<cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
+		<view slot="content">极客日历</view>
+	</cu-custom>
+
+	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" />
+	
+	<van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
+		编程时间：
+	</van-divider>
+
+	<view>
+		<text class="text-green text-bold">
+			{{codeTime}}
+		</text>
+	</view>
+
+	<van-grid column-num="24" icon-size="0px" square clickable border="{{ false }}">
+		<van-grid-item bind:click="hcellClickEvent" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}"
+			wx:key="*this">
+		</van-grid-item>
+	</van-grid>
+
+</scroll-view>
