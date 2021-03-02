@@ -7,14 +7,8 @@
 	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" />
 	
 	<van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
-		编程时间：
+		编程时间：{{codeTime}}
 	</van-divider>
-
-	<view>
-		<text class="text-green text-bold">
-			{{codeTime}}
-		</text>
-	</view>
 
 	<van-grid column-num="24" icon-size="0px" square clickable border="{{ false }}">
 		<van-grid-item bind:click="hcellClickEvent" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}"
