@@ -22,6 +22,7 @@ Component({
   data: {
     minDate: new Date(2021, 2, 1).getTime(),
     maxDate: new Date(2021, 2, 28).getTime(),
+    defaultDate: new Date().getTime(),
     dayStaticByHour: [{
         value: 0,
         level: 0

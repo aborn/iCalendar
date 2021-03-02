@@ -4,8 +4,9 @@
 		<view slot="content">极客日历</view>
 	</cu-custom>
 
-	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" />
-	
+	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}"
+		defaultDate="{{ defaultDate }}" />
+
 	<van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
 		编程时间：{{codeTime}}
 	</van-divider>
