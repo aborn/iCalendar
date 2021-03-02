@@ -148,16 +148,14 @@ Component({
       console.log(e)
       Toast('我是提示文案，建议不超过十五字~');
     },
-    afterSelectDate(e) {
+    showCodingTime(date) {
       var self = this;
-      // 详情数据对象
-      var date = e.detail;
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       if (month < 10) {
         month = '0' + month;
       }
-
+  
       var day = date.getDay();
       if (day < 10) {
         day = '0' + day;
@@ -165,7 +163,7 @@ Component({
       var dayInfo = year + '-' + month + '-' + day;
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
       console.log('url=' + url);
-
+  
       // 获取写代码的时间信息
       wx.request({
         url: url,
@@ -190,6 +188,11 @@ Component({
         }
       })
     },
+    afterSelectDate(e) {
+      // 详情数据对象
+      var date = e.detail;
+      this.showCodingTime(date);
+    },
   },
 
   /**
@@ -198,6 +201,8 @@ Component({
   lifetimes: {
     ready() {
       console.log('ready in component')
+      var date = new Date();
+      this.showCodingTime(date);
     }
   },
   attached() {
