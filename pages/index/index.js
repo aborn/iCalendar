@@ -5,8 +5,6 @@ const timeutil = require('../../utils/timeutil.js')
 
 Page({
   data: {
-    read: '读书打卡',
-    records: '打卡历史',
     userInfo: {},
     hasUserInfo: false,
     pageCur: 'code', // 首次打开时进入的page页
