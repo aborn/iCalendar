@@ -75,6 +75,14 @@ const convertToReadable = (minutes) => {
   }
 }
 
+const lunarToReadable = (lunarDate) => {
+  if (lunarDate.lDay === 1) {
+    return lunarDate.IMonthCn;
+  } else {
+    return lunarDate.IDayCn;
+  }
+}
+
 module.exports = {
   formatDay: formatDay,
   formatTime: formatTime,
@@ -83,4 +91,5 @@ module.exports = {
   dayOfThisYear: dayOfThisYear,
   diffBetweenDate: diffBetweenDate,
   convertToReadable: convertToReadable,
+  lunarToReadable: lunarToReadable
 }

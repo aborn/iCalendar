@@ -1,5 +1,6 @@
 // pages/read/home/home.js
 const util = require('../../utils/util.js')
+const timeUtil = require('../../utils/timeutil.js')
 import Toast from '../../vant/toast/toast';
 const app = getApp();
 // 引入插件安装器
@@ -10,6 +11,8 @@ import todo from '../../calendar/plugins/todo'
 import solarLunar from '../../calendar/plugins/solarLunar/index'
 // 节假日相关功能
 import holidays from '../../calendar/plugins/holidays/index'
+import convertSolarLunar from '../../utils/lunar'
+
 plugin
   .use(todo)
   .use(solarLunar)
@@ -22,7 +25,7 @@ Component({
   data: {
     minDate: new Date(2021, 2, 1).getTime(),
     maxDate: new Date(2021, 2, 28).getTime(),
-    defaultDate: new Date().getTime(),   // 默认选中为今天
+    defaultDate: new Date().getTime(), // 默认选中为今天
     dayStaticByHour: [{
         value: 0,
         level: 0
@@ -121,10 +124,17 @@ Component({
       },
     ],
     formatter: (day) => {
+      const year = day.date.getFullYear();
       const month = day.date.getMonth() + 1;
       const date = day.date.getDate();
+      var res = convertSolarLunar.solar2lunar(year, month, date);
+      var lunaDetail = timeUtil.lunarToReadable(res);
+      day.bottomInfo = lunaDetail;
 
-      // console.log('month===' + month + ', date==' + date)
+      //console.log(year + '-' + month + '-' + date)
+      //console.log(res);
+
+      /**
       if (month === 3) {
         if (date === 1) {
           day.bottomInfo = '劳动节';
@@ -140,6 +150,7 @@ Component({
       } else if (day.type === 'end') {
         day.bottomInfo = '离店';
       }
+      */
 
       return day;
     },
@@ -156,7 +167,7 @@ Component({
       if (month < 10) {
         month = '0' + month;
       }
-  
+
       var day = date.getDay();
       if (day < 10) {
         day = '0' + day;
@@ -164,7 +175,7 @@ Component({
       var dayInfo = year + '-' + month + '-' + day;
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
       console.log('url=' + url);
-  
+
       // 获取写代码的时间信息
       wx.request({
         url: url,
@@ -201,7 +212,7 @@ Component({
    */
   lifetimes: {
     ready() {
-      console.log('ready in component')  // 这个在最后
+      console.log('ready in component') // 这个在最后
       var date = new Date();
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
