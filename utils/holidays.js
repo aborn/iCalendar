@@ -27,6 +27,13 @@ export const festival = {
         label: '元宵'
       }
     },
+    2: {
+      2: {
+        type: 'festival',
+        name: '龙抬头',
+        label: '龙抬头'
+      }
+    },
     7: {
       7: {
         type: 'festival',
