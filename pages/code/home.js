@@ -9,8 +9,16 @@ Component({
     addGlobalClass: true,
   },
   data: {
-    minDate: new Date(2021, 2, 1).getTime(),
-    maxDate: new Date(2021, 2, 28).getTime(),
+    minDate: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      1
+    ).getTime(),
+    maxDate: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate()
+    ).getTime(),
     defaultDate: new Date().getTime(), // 默认选中为今天
     dayStaticByHour: [{
         value: 0,
@@ -109,16 +117,33 @@ Component({
         level: 0
       },
     ],
-    dayStaticHint: [
-      {value: 0},
-      {value: 3},
-      {value: 6},
-      {value: 9},
-      {value: 12},
-      {value: 15},
-      {value: 18},
-      {value: 21},
-      {value: 23},
+    dayStaticHint: [{
+        value: 0
+      },
+      {
+        value: 3
+      },
+      {
+        value: 6
+      },
+      {
+        value: 9
+      },
+      {
+        value: 12
+      },
+      {
+        value: 15
+      },
+      {
+        value: 18
+      },
+      {
+        value: 21
+      },
+      {
+        value: 23
+      },
     ],
     formatter: (day) => {
       const year = day.date.getFullYear();
@@ -129,7 +154,7 @@ Component({
       if (dateInfo.Term) {
         day.bottomStyle = 'lunar-term'
       }
-      day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail;  // term为24节气
+      day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
 
       //console.log(year + '-' + month + '-' + date)
       //console.log(dateInfo);
@@ -211,6 +236,41 @@ Component({
       var date = e.detail;
       this.showCodingTime(date);
     },
+    changeMonth(e) {
+      const {
+        type
+      } = e.currentTarget.dataset
+      console.log('切换到上个月' + type)
+
+      var currentDate = new Date(this.data.defaultDate);
+      var lastDayOfMonth = timeUtil.getMonthEndDay(currentDate.getFullYear(), currentDate.getMonth());
+      console.log("当前日期：" + timeUtil.formatTime(currentDate) + '最后一天' + lastDayOfMonth)
+      var currentDateInfo = {
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth()
+      }
+      var targetMonthInfo = "next_month" === type ?
+        timeUtil.getNextMonthInfo(currentDateInfo) : timeUtil.getPrevMonthInfo(currentDateInfo);
+      //console.log(targetMonthInfo)
+
+      var targetMonthDate = new Date(targetMonthInfo.year, targetMonthInfo.month, 1)
+      var targetMonthLastDate = new Date(targetMonthInfo.year, targetMonthInfo.month,
+        timeUtil.getMonthEndDay(targetMonthInfo.year, targetMonthInfo.month))
+
+      console.log(targetMonthDate)
+      this.setData({
+        minDate: targetMonthDate.getTime(),
+        maxDate: targetMonthLastDate.getTime(),
+        subtitle: targetMonthInfo.year + "年" + (targetMonthInfo.month + 1) + "月",
+        defaultDate: targetMonthDate
+      })
+      var currentDate = new Date(this.data.defaultDate);
+      var lastDayOfMonth = timeUtil.getMonthEndDay(currentDate.getFullYear(), currentDate.getMonth());
+      console.log("当前日期after：" + timeUtil.formatTime(currentDate) + ", lastday" + lastDayOfMonth)
+
+      const calender = this.selectComponent('.calendar');
+      calender.reset();
+    }
   },
 
   /**

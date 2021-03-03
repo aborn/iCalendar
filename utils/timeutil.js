@@ -104,6 +104,37 @@ const lunarToReadable = (lunarDate) => {
   }
 }
 
+const getPrevMonthInfo = (date = {}) => {
+  const prevMonthInfo =
+    Number(date.month) >= 1
+      ? {
+          year: +date.year,
+          month: Number(date.month) - 1
+        }
+      : {
+          year: Number(date.year) - 1,
+          month: 11
+        }
+  return prevMonthInfo
+}
+const getNextMonthInfo = (date = {}) => {
+  const nextMonthInfo =
+    Number(date.month) < 11
+      ? {
+          year: +date.year,
+          month: Number(date.month) + 1
+        }
+      : {
+          year: Number(date.year) + 1,
+          month: 0
+        }
+  return nextMonthInfo
+}
+
+const getMonthEndDay = (year, month) => {
+  return 32 - new Date(year, month, 32).getDate();
+}
+
 module.exports = {
   formatDay: formatDay,
   formatTime: formatTime,
@@ -112,5 +143,8 @@ module.exports = {
   dayOfThisYear: dayOfThisYear,
   diffBetweenDate: diffBetweenDate,
   convertToReadable: convertToReadable,
-  lunarToReadable: lunarToReadable
+  lunarToReadable: lunarToReadable,
+  getPrevMonthInfo: getPrevMonthInfo,
+  getNextMonthInfo: getNextMonthInfo,
+  getMonthEndDay: getMonthEndDay
 }

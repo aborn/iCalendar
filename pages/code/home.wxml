@@ -5,10 +5,17 @@
 	</cu-custom>
 
 	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}"
-		defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" showSubtitle />
+		defaultDate="{{ defaultDate }}" minDate="{{ minDate }}" maxDate="{{ maxDate }}" subtitle="{{ subtitle }}"
+		showSubtitle />
 
 	<van-row>
-		<van-col span="24" class="webx-text-m">编程足迹</van-col>
+		<van-col span="8" class="webx-text-m">
+			<van-icon name="arrow-left" bind:click="changeMonth" data-type="prev_month" />
+		</van-col>
+		<van-col span="8" class="webx-text-m">编程足迹</van-col>
+		<van-col span="8" class="webx-text-m">
+			<van-icon name="arrow" bind:click="changeMonth" data-type="next_month"/>
+		</van-col>
 	</van-row>
 
 	<van-grid column-num="9" icon-size="0px" square border="{{ fasle }}">
@@ -28,8 +35,7 @@
 
 	<van-row>
 		<van-col span="24" class="webx-text-m">
-			<van-circle value="{{ 100 }}" color="#07c160" text="{{ codeTime }}"
-			stroke-width="15" size="150" fill="#FFFFFF"/>
+			<van-circle value="{{ 100 }}" color="#07c160" text="{{ codeTime }}" stroke-width="15" size="150" fill="#FFFFFF" />
 		</van-col>
 	</van-row>
 
