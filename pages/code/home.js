@@ -176,6 +176,12 @@ Component({
               codeTime: util.readTimeDesc(codeTimeSecond)
             })
             // 接入来获取最新列表
+          } else if (res.data.code === 201) {
+            self.setData({
+              codeTime: '0分钟',
+              dayStaticByHour: util.transToLevel(util.initCellData())
+            })
+            console.log('暂无编程数据。')
           } else {
             self.setData({
               codeTime: '未知-501',
