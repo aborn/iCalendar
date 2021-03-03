@@ -14,18 +14,21 @@
 		</van-col>
 		<van-col span="8" class="webx-text-m">编程足迹</van-col>
 		<van-col span="8" class="webx-text-m">
-			<van-icon name="arrow" bind:click="changeMonth" data-type="next_month"/>
+			<van-icon name="arrow" bind:click="changeMonth" data-type="next_month" />
 		</van-col>
 	</van-row>
 
+<!--
 	<van-grid column-num="9" icon-size="0px" square border="{{ fasle }}">
 		<van-grid-item wx:for="{{dayStaticHint}}" text="{{ item.value }}" wx:key="*this">
 		</van-grid-item>
 	</van-grid>
+-->
 
-	<van-grid column-num="24" icon-size="0px" square clickable border="{{ true }}">
-		<van-grid-item bind:click="hcellClickEvent" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}"
-			wx:key="*this">
+	<van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
+		<van-grid-item bind:click="hcellClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
+		text="{{ item.stepValue }}"
+			content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}" wx:key="*this">
 		</van-grid-item>
 	</van-grid>
 

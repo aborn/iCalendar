@@ -160,7 +160,9 @@ const getRecordItem = (record, index, originArray) => {
 
 const buildEvent = (record, previousRecord) => {
   var desc = getTimeSegType(record.timeSegType);
-  if (record.status === 's') {desc = '';}  // 如果只是开始事件，那就不显示时间
+  if (record.status === 's') {
+    desc = '';
+  } // 如果只是开始事件，那就不显示时间
   desc = (desc == null || desc == '' || '未知' === desc) ? '' : ' : ' + desc;
   var event = record.type + '-' + record.action + desc;
   if (previousRecord && record.status == 'e') {
@@ -250,19 +252,34 @@ const readTimeDesc = (second) => {
 const transToLevelValue = (value) => {
   if (value <= 0) {
     return 0;
-  } else if (value <= 2*5) {   // 5分钟
+  } else if (value <= 2 * 5) { // 5分钟
     return 1;
-  } else if (value <= 2*20) {
+  } else if (value <= 2 * 20) {
     return 2;
-  } else if (value <= 2*40) {
+  } else if (value <= 2 * 40) {
     return 3;
   } else {
     return 4;
   }
 }
-const transToLevel = (dayStaticByHour) => {
-  return dayStaticByHour.map((item, _) => {
-    return {value: item, level: transToLevelValue(item)}
+const stepValue = (value, isToday) => {
+  var time = new Date();
+  var hour = time.getHours();
+  if (!isToday) {
+    return value;
+  } else if (value <= hour) {
+    return value;
+  } else {
+    return undefined;
+  }
+}
+const transToLevel = (dayStaticByHour, isToday) => {
+  return dayStaticByHour.map((item, index) => {
+    return {
+      value: item,
+      level: transToLevelValue(item),
+      stepValue: stepValue(index, isToday)
+    }
   })
 }
 

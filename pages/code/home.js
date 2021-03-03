@@ -182,18 +182,30 @@ Component({
   },
   methods: {
     hcellClickEvent(e) {
-      console.log(e)
-      Toast('我是提示文案，建议不超过十五字~');
+      const {
+        value,
+        hour
+      } = e.currentTarget.dataset
+      console.log('hour:' + hour + "，编程时间:" + (value * 0.5) + "分钟");
     },
     showCodingTime(date) {
       var self = this;
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
+      var day = date.getDay();
+      var isToday = false;
+      var today = new Date();
+
+      if (year === today.getFullYear() &&
+        month === today.getMonth() + 1 &&
+        day === today.getDay()) {
+        isToday = true;
+      }
       if (month < 10) {
         month = '0' + month;
       }
 
-      var day = date.getDay();
+
       if (day < 10) {
         day = '0' + day;
       }
@@ -211,7 +223,7 @@ Component({
             var codeTimeSecond = res.data.data.codeTime;
             self.setData({
               codeTimeDesc: res.data.data.desc,
-              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour),
+              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, isToday),
               codeTime: util.readTimeDesc(codeTimeSecond)
             })
             // 接入来获取最新列表
@@ -257,7 +269,7 @@ Component({
       var targetMonthLastDate = new Date(targetMonthInfo.year, targetMonthInfo.month,
         timeUtil.getMonthEndDay(targetMonthInfo.year, targetMonthInfo.month))
 
-      console.log(targetMonthDate)
+      //console.log(targetMonthDate)
       this.setData({
         minDate: targetMonthDate.getTime(),
         maxDate: targetMonthLastDate.getTime(),
