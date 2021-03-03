@@ -109,6 +109,17 @@ Component({
         level: 0
       },
     ],
+    dayStaticHint: [
+      {value: 0},
+      {value: 3},
+      {value: 6},
+      {value: 9},
+      {value: 12},
+      {value: 15},
+      {value: 18},
+      {value: 21},
+      {value: 23},
+    ],
     formatter: (day) => {
       const year = day.date.getFullYear();
       const month = day.date.getMonth() + 1;

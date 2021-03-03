@@ -22,3 +22,12 @@
 .webx-hcell4 {
   background-color: rgb(0, 100, 0);
 }
+
+.webx-text-m {
+  text-align: center;
+  background-color: white;
+}
+
+.webx-bg-white {
+  background-color: white;
+}
