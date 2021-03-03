@@ -113,12 +113,15 @@ Component({
       const year = day.date.getFullYear();
       const month = day.date.getMonth() + 1;
       const date = day.date.getDate();
-      var res = convertSolarLunar.solar2lunar(year, month, date);
-      var lunaDetail = timeUtil.lunarToReadable(res);
-      day.bottomInfo = lunaDetail;
+      var dateInfo = convertSolarLunar.solar2lunar(year, month, date);
+      var lunaDetail = timeUtil.lunarToReadable(dateInfo);
+      if (dateInfo.Term) {
+        day.bottomStyle = 'lunar-term'
+      }
+      day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail;  // term为24节气
 
       //console.log(year + '-' + month + '-' + date)
-      //console.log(res);
+      //console.log(dateInfo);
 
       /**
       if (month === 3) {
