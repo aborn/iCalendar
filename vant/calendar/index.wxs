@@ -1,6 +1,23 @@
 /* eslint-disable */
 var utils = require('./utils.wxs');
 
+/**
+ * 
+ * @param minDate 
+ * @param frameIndex 可能的值为[0, 1, 2]
+ */
+function getFrameDates(minDate, frameIndex) {
+  var cursor = getDate(minDate);
+  cursor.setDate(1);
+
+   if (frameIndex === 2) {
+    cursor.setMonth(cursor.getMonth() + 1);
+  } else if (frameIndex === 0) {
+    cursor.setMonth(cursor.getMonth() - 1);
+  }
+  return cursor;
+}
+
 function getMonths(minDate, maxDate) {
   var months = [];
   var cursor = getDate(minDate);
@@ -33,5 +50,6 @@ function getButtonDisabled(type, currentDate) {
 
 module.exports = {
   getMonths: getMonths,
+  getFrameDates: getFrameDates,
   getButtonDisabled: getButtonDisabled
 };

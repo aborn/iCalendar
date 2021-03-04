@@ -20,10 +20,6 @@ VantComponent({
       type: null,
       observer: 'setDays',
     },
-    maxDate: {
-      type: null,
-      observer: 'setDays',
-    },
     showMark: Boolean,
     rowHeight: null,
     formatter: {
@@ -53,6 +49,8 @@ VantComponent({
     setDays() {
       const days = [];
       const startDate = new Date(this.data.date);
+      console.log('ddddd')
+      console.log(startDate)
       const year = startDate.getFullYear();
       const month = startDate.getMonth();
       const totalDay = getMonthEndDay(
@@ -126,9 +124,9 @@ VantComponent({
     },
     getDayType(day) {
       const { type, minDate, maxDate, currentDate } = this.data;
-      if (compareDay(day, minDate) < 0 || compareDay(day, maxDate) > 0) {
+      /**if (compareDay(day, minDate) < 0 || compareDay(day, maxDate) > 0) {
         return 'disabled';
-      }
+      }**/
       if (type === 'single') {
         return compareDay(day, currentDate) === 0 ? 'selected' : '';
       }

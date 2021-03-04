@@ -9,6 +9,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
+    frameIndex: 1,
     minDate: new Date(
       new Date().getFullYear(),
       new Date().getMonth(),

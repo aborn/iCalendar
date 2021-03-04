@@ -38,6 +38,10 @@ VantComponent({
       value: '确定',
     },
     rangePrompt: String,
+    frameIndex: {
+      type: Number,
+      value: 1
+    },
     defaultDate: {
       type: null,
       observer(val) {
