@@ -83,3 +83,30 @@ export function changeType(preIndex, currentIndex) {
     return "prev";   // 表示左滑，切到上个月
   }
 }
+
+export function getPrevMonthInfo(date = {}){
+  const prevMonthInfo =
+    Number(date.month) >= 1
+      ? {
+          year: +date.year,
+          month: Number(date.month) - 1
+        }
+      : {
+          year: Number(date.year) - 1,
+          month: 11
+        }
+  return prevMonthInfo
+}
+export function getNextMonthInfo(date = {}) {
+  const nextMonthInfo =
+    Number(date.month) < 11
+      ? {
+          year: +date.year,
+          month: Number(date.month) + 1
+        }
+      : {
+          year: Number(date.year) + 1,
+          month: 0
+        }
+  return nextMonthInfo
+}

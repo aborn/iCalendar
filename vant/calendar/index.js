@@ -12,6 +12,8 @@ import {
   getMonths,
   getDayByOffset,
   changeType,
+  getPrevMonthInfo,
+  getNextMonthInfo,
 } from './utils';
 import Toast from '../toast/toast';
 import {
@@ -129,11 +131,13 @@ VantComponent({
     currentDate: null,
     scrollIntoView: '',
     preIndex: null, // 滑动的时候记录上一次的Index,初始化默认为当前的
+    cFrameDate: null,
   },
   created() {
     this.setData({
       currentDate: this.getInitialDate(),
-      preIndex: this.frameIndex || 1
+      preIndex: this.frameIndex || 1,
+      cFrameDate: new Date(this.data.currentDate)
     });
   },
   mounted() {
@@ -152,13 +156,21 @@ VantComponent({
       var preIndex = this.data.preIndex;
       var eventType = changeType(preIndex, current);
 
-      var currentDate = new Date(this.data.currentDate);
+      var currentDate = new Date(this.data.cFrameDate);
+      var currentDateInfo = {
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth()
+      }
+      var targetDateInfo = "next" === eventType ? getNextMonthInfo(currentDateInfo) : getPrevMonthInfo(currentDateInfo);
+      var targetDate = new Date(targetDateInfo.year, targetDateInfo.month, 1);
+
       console.log('frame chnaged. current=' + current + ", cource=" + source +
         ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);
-      console.log(currentDate)
+
       this.setData({
-        subtitle: "frame:" + current,
-        preIndex: current
+        subtitle: targetDate.getFullYear() + "年" + (targetDate.getMonth() + 1) + "月",
+        preIndex: current,
+        cFrameDate: targetDate    // 当前月份所在frame的第一天日期
       })
     },
     reset() {
