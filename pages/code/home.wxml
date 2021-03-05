@@ -10,13 +10,7 @@
 		showSubtitle />
 
 	<van-row>
-		<van-col span="8" class="webx-text-m">
-			<van-icon name="arrow-left" bind:click="changeMonth" data-type="prev_month" />
-		</van-col>
-		<van-col span="8" class="webx-text-m">编程足迹</van-col>
-		<van-col span="8" class="webx-text-m">
-			<van-icon name="arrow" bind:click="changeMonth" data-type="next_month" />
-		</van-col>
+		<van-col span="24" class="webx-text-m">编程足迹</van-col>
 	</van-row>
 
 	<van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
