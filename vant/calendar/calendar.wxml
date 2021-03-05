@@ -4,14 +4,29 @@
   </header>
 
   <swiper circular current="{{ frameIndex }}" indicator-dots="{{ true }}" bindchange="changeFrame" style="height:350px">
-    <swiper-item wx:for="{{ [0,1,2] }}" wx:key="*this" data-id="{{item}}" item-id="frame_id_{{item}}">
+    <swiper-item item-id="frame_id_0">
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
-        <month id="month{{ index }}" class="month" data-date="{{ computed.getFrameDates(minDate, index) }}"
-          date="{{ computed.getFrameDates(minDate, index) }}" type="{{ type }}" color="{{ color }}"
-          minDate="{{ minDate }}" maxDate="{{ maxDate }}" showMark="{{ showMark }}" formatter="{{ formatter }}"
-          rowHeight="{{ rowHeight }}" currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}"
-          allowSameDay="{{ allowSameDay }}" bind:click="onClickDay" />
+        <month id="month0" class="month" data-date="{{ cDatas[0] }}" date="{{ cDatas[0] }}" type="{{ type }}"
+          color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
+          showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
       </scroll-view>
+    </swiper-item>
+
+    <swiper-item item-id="frame_id_1">
+      <scroll-view class="van-calendar__body" scroll-y style="height: auto">
+        <month id="month1" class="month" data-date="{{ cDatas[1] }}" date="{{ cDatas[1] }}" type="{{ type }}"
+          color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
+          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
+      </scroll-view>
+    </swiper-item>
+
+    <swiper-item item-id="frame_id_2">
+      <scroll-view class="van-calendar__body" scroll-y style="height: auto">
+        <month id="month2" class="month" data-date="{{ cDatas[2] }}" date="{{ cDatas[2] }}" type="{{ type }}"
+          color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
+          showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
+      </scroll-view>
+
     </swiper-item>
   </swiper>
 </view>

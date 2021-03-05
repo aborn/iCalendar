@@ -133,10 +133,12 @@ VantComponent({
     scrollIntoView: '',
     preIndex: null, // 滑动的时候记录上一次的Index,初始化默认为当前的
     cFrameDate: null,
+    cDatas: [],
   },
   created() {
     this.setData({
       currentDate: this.getInitialDate(),
+      cDatas: this.initCalenderDatas(),
       preIndex: this.frameIndex || 1,
       cFrameDate: new Date(this.data.currentDate)
     });
@@ -154,16 +156,19 @@ VantComponent({
         source,
         currentItemId
       } = e.detail;
-      var preIndex = this.data.preIndex;
+      
+      const {preIndex, cDatas} = this.data;
       var eventType = changeType(preIndex, current);
       var targetDate = getTargetMonthFirstDate(new Date(this.data.cFrameDate), eventType);
+      cDatas[current] = targetDate.getTime();
 
-      console.log('frame chnaged. current=' + current + ", cource=" + source +
-        ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);
+      //console.log('frame chnaged. current=' + current + ", cource=" + source +
+      //  ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);
 
       this.setData({
         subtitle: targetDate.getFullYear() + "年" + (targetDate.getMonth() + 1) + "月",
         preIndex: current,
+        cDatas,                   // 刷新当前月的数据
         cFrameDate: targetDate    // 当前月份所在frame的第一天日期
       })
     },
@@ -191,6 +196,22 @@ VantComponent({
           });
         }
       });
+    },
+    initCalenderDatas() {
+      var cDatas = [];
+      var cursor = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        1
+      );
+
+      cursor.setMonth(cursor.getMonth() - 1);
+      cDatas.push(cursor.getTime());
+      cursor.setMonth(cursor.getMonth() + 1);
+      cDatas.push(cursor.getTime());
+      cursor.setMonth(cursor.getMonth() + 1);
+      cDatas.push(cursor.getTime());
+      return cDatas;
     },
     getInitialDate() {
       const {
