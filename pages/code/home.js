@@ -257,7 +257,6 @@ Component({
    */
   lifetimes: {
     ready() {
-      console.log('ready in component') // 这个在最后
       var date = new Date();
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
@@ -269,7 +268,6 @@ Component({
   },
   attached() {
     // 第二种方式通过组件的生命周期函数执行代码
-    console.log('component attached')
   },
 
   /**

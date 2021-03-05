@@ -3,5 +3,5 @@
 
 <van-tabbar active="{{ active }}" placeholder bind:change="onTabChange">
   <van-tabbar-item icon="home-o">极客日历</van-tabbar-item>
-  <van-tabbar-item icon="friends-o">关于</van-tabbar-item>
+  <van-tabbar-item icon="user-o">关于</van-tabbar-item>
 </van-tabbar>
