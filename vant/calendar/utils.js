@@ -76,3 +76,10 @@ export function getMonths(minDate, maxDate) {
   } while (compareMonth(cursor, maxDate) !== 1);
   return months;
 }
+export function changeType(preIndex, currentIndex) {
+  if ((preIndex +1) % 3 === currentIndex ) {
+    return "next";   // 表示右滑，切到下个月
+  } else {
+    return "prev";   // 表示左滑，切到上个月
+  }
+}

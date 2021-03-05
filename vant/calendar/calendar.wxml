@@ -3,8 +3,8 @@
     <slot name="title" slot="title"></slot>
   </header>
 
-  <swiper circular current="{{ frameIndex }}" indicator-dots="{{ true }}"  style="height:350px">
-    <swiper-item wx:for="{{ [0,1,2] }}" wx:key="*this">
+  <swiper circular current="{{ frameIndex }}" indicator-dots="{{ true }}" bindchange="changeFrame" style="height:350px">
+    <swiper-item wx:for="{{ [0,1,2] }}" wx:key="*this" data-id="{{item}}" item-id="frame_id_{{item}}">
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
         <month id="month{{ index }}" class="month" data-date="{{ computed.getFrameDates(minDate, index) }}"
           date="{{ computed.getFrameDates(minDate, index) }}" type="{{ type }}" color="{{ color }}"

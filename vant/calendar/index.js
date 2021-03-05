@@ -1,4 +1,6 @@
-import { VantComponent } from '../common/component';
+import {
+  VantComponent
+} from '../common/component';
 import {
   ROW_HEIGHT,
   getNextDay,
@@ -9,9 +11,12 @@ import {
   compareMonth,
   getMonths,
   getDayByOffset,
+  changeType,
 } from './utils';
 import Toast from '../toast/toast';
-import { requestAnimationFrame } from '../common/utils';
+import {
+  requestAnimationFrame
+} from '../common/utils';
 VantComponent({
   props: {
     title: {
@@ -45,7 +50,9 @@ VantComponent({
     defaultDate: {
       type: null,
       observer(val) {
-        this.setData({ currentDate: val });
+        this.setData({
+          currentDate: val
+        });
         this.scrollIntoView();
       },
     },
@@ -121,10 +128,12 @@ VantComponent({
     subtitle: '',
     currentDate: null,
     scrollIntoView: '',
+    preIndex: null, // 滑动的时候记录上一次的Index,初始化默认为当前的
   },
   created() {
     this.setData({
       currentDate: this.getInitialDate(),
+      preIndex: this.frameIndex || 1
     });
   },
   mounted() {
@@ -134,8 +143,28 @@ VantComponent({
     }
   },
   methods: {
+    changeFrame(e) {
+      const {
+        current,
+        source,
+        currentItemId
+      } = e.detail;
+      var preIndex = this.data.preIndex;
+      var eventType = changeType(preIndex, current);
+
+      var currentDate = new Date(this.data.currentDate);
+      console.log('frame chnaged. current=' + current + ", cource=" + source +
+        ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);
+      console.log(currentDate)
+      this.setData({
+        subtitle: "frame:" + current,
+        preIndex: current
+      })
+    },
     reset() {
-      this.setData({ currentDate: this.getInitialDate() });
+      this.setData({
+        currentDate: this.getInitialDate()
+      });
       this.scrollIntoView();
     },
     initRect() {
@@ -151,12 +180,18 @@ VantComponent({
       contentObserver.observe('.month', (res) => {
         if (res.boundingClientRect.top <= res.relativeRect.top) {
           // @ts-ignore
-          this.setData({ subtitle: formatMonthTitle(res.dataset.date) });
+          this.setData({
+            subtitle: formatMonthTitle(res.dataset.date)
+          });
         }
       });
     },
     getInitialDate() {
-      const { type, defaultDate, minDate } = this.data;
+      const {
+        type,
+        defaultDate,
+        minDate
+      } = this.data;
       if (type === 'range') {
         const [startDay, endDay] = defaultDate || [];
         return [
@@ -188,7 +223,9 @@ VantComponent({
         const months = getMonths(minDate, maxDate);
         months.some((month, index) => {
           if (compareMonth(month, targetDate) === 0) {
-            this.setData({ scrollIntoView: `month${index}` });
+            this.setData({
+              scrollIntoView: `month${index}`
+            });
             return true;
           }
           return false;
@@ -208,8 +245,14 @@ VantComponent({
       this.$emit('closed');
     },
     onClickDay(event) {
-      const { date } = event.detail;
-      const { type, currentDate, allowSameDay } = this.data;
+      const {
+        date
+      } = event.detail;
+      const {
+        type,
+        currentDate,
+        allowSameDay
+      } = this.data;
       if (type === 'range') {
         // @ts-ignore
         const [startDay, endDay] = currentDate;
@@ -238,7 +281,9 @@ VantComponent({
         if (selected) {
           // @ts-ignore
           const cancelDate = currentDate.splice(selectedIndex, 1);
-          this.setData({ currentDate });
+          this.setData({
+            currentDate
+          });
           this.unselect(cancelDate);
         } else {
           // @ts-ignore
@@ -283,7 +328,10 @@ VantComponent({
       this.$emit('select', copyDates(date));
     },
     checkRange(date) {
-      const { maxRange, rangePrompt } = this.data;
+      const {
+        maxRange,
+        rangePrompt
+      } = this.data;
       if (maxRange && calcDateNum(date) > maxRange) {
         Toast({
           context: this,

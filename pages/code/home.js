@@ -179,7 +179,7 @@ Component({
       */
 
       return day;
-    },
+    }
   },
   methods: {
     hcellClickEvent(e) {
