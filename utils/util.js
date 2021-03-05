@@ -240,7 +240,6 @@ const dateDiffIndays = (date1, date2) => {
 const readTimeDesc = (second) => {
   var hour = Math.floor(second / 3600);
   var minute = second / 60.0;
-  console.log('hour:' + hour + ', minute:' + minute)
   if (hour < 1) {
     return minute + '分钟';
   } else {

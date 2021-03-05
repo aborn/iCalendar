@@ -12,8 +12,6 @@ import {
   getMonths,
   getDayByOffset,
   changeType,
-  getPrevMonthInfo,
-  getNextMonthInfo,
   getTargetMonthFirstDate,
 } from './utils';
 import Toast from '../toast/toast';
@@ -156,11 +154,21 @@ VantComponent({
         source,
         currentItemId
       } = e.detail;
-      
-      const {preIndex, cDatas} = this.data;
+
+      const {
+        preIndex,
+        cDatas
+      } = this.data;
       var eventType = changeType(preIndex, current);
       var targetDate = getTargetMonthFirstDate(new Date(this.data.cFrameDate), eventType);
       cDatas[current] = targetDate.getTime();
+
+      var currentDate = targetDate.getTime()
+      var today = new Date();
+      if (today.getFullYear() == targetDate.getFullYear() &&
+        today.getMonth() == targetDate.getMonth()) {
+        currentDate = today.getTime() // 处理当月的今天
+      }
 
       //console.log('frame chnaged. current=' + current + ", cource=" + source +
       //  ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);
@@ -168,9 +176,12 @@ VantComponent({
       this.setData({
         subtitle: targetDate.getFullYear() + "年" + (targetDate.getMonth() + 1) + "月",
         preIndex: current,
-        cDatas,                   // 刷新当前月的数据
-        cFrameDate: targetDate    // 当前月份所在frame的第一天日期
+        cDatas, // 刷新当前月的数据
+        cFrameDate: targetDate, // 当前月份所在frame的第一天日期
+        currentDate
       })
+
+      this.$emit('select', copyDates(currentDate));
     },
     reset() {
       this.setData({

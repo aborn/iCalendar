@@ -77,37 +77,37 @@ export function getMonths(minDate, maxDate) {
   return months;
 }
 export function changeType(preIndex, currentIndex) {
-  if ((preIndex +1) % 3 === currentIndex ) {
-    return "next";   // 表示右滑，切到下个月
+  if ((preIndex + 1) % 3 === currentIndex) {
+    return "next"; // 表示右滑，切到下个月
   } else {
-    return "prev";   // 表示左滑，切到上个月
+    return "prev"; // 表示左滑，切到上个月
   }
 }
 
-export function getPrevMonthInfo(date = {}){
+export function getPrevMonthInfo(date = {}) {
   const prevMonthInfo =
-    Number(date.month) >= 1
-      ? {
-          year: +date.year,
-          month: Number(date.month) - 1
-        }
-      : {
-          year: Number(date.year) - 1,
-          month: 11
-        }
+    Number(date.month) >= 1 ?
+    {
+      year: +date.year,
+      month: Number(date.month) - 1
+    } :
+    {
+      year: Number(date.year) - 1,
+      month: 11
+    }
   return prevMonthInfo
 }
 export function getNextMonthInfo(date = {}) {
   const nextMonthInfo =
-    Number(date.month) < 11
-      ? {
-          year: +date.year,
-          month: Number(date.month) + 1
-        }
-      : {
-          year: Number(date.year) + 1,
-          month: 0
-        }
+    Number(date.month) < 11 ?
+    {
+      year: +date.year,
+      month: Number(date.month) + 1
+    } :
+    {
+      year: Number(date.year) + 1,
+      month: 0
+    }
   return nextMonthInfo
 }
 
@@ -118,5 +118,4 @@ export function getTargetMonthFirstDate(cDate, eventType) {
   }
   var targetDateInfo = "next" === eventType ? getNextMonthInfo(currentDateInfo) : getPrevMonthInfo(currentDateInfo);
   return new Date(targetDateInfo.year, targetDateInfo.month, 1);
-
 }

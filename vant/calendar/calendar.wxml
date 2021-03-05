@@ -3,12 +3,12 @@
     <slot name="title" slot="title"></slot>
   </header>
 
-  <swiper circular current="{{ frameIndex }}" indicator-dots="{{ true }}" bindchange="changeFrame" style="height:350px">
+  <swiper circular current="{{ frameIndex }}" bindchange="changeFrame" style="height:400px">
     <swiper-item item-id="frame_id_0">
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
         <month id="month0" class="month" data-date="{{ cDatas[0] }}" date="{{ cDatas[0] }}" type="{{ type }}"
           color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
-          showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
+          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
       </scroll-view>
     </swiper-item>
 
@@ -24,7 +24,7 @@
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
         <month id="month2" class="month" data-date="{{ cDatas[2] }}" date="{{ cDatas[2] }}" type="{{ type }}"
           color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
-          showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
+          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
       </scroll-view>
 
     </swiper-item>

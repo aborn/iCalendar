@@ -155,29 +155,10 @@ Component({
       if (dateInfo.Term) {
         day.bottomStyle = 'lunar-term'
       }
+      if (day.date.getTime() > new Date().getTime()) {
+        day.type = 'disabled'
+      }
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
-
-      //console.log(year + '-' + month + '-' + date)
-      //console.log(dateInfo);
-
-      /**
-      if (month === 3) {
-        if (date === 1) {
-          day.bottomInfo = '劳动节';
-        } else if (date === 4) {
-          day.bottomInfo = '五四青年节';
-        } else if (date === 11) {
-          day.text = '今天';
-        }
-      }
-
-      if (day.type === 'start') {
-        day.bottomInfo = '入住';
-      } else if (day.type === 'end') {
-        day.bottomInfo = '离店';
-      }
-      */
-
       return day;
     }
   },
