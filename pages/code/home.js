@@ -171,20 +171,8 @@ Component({
     },
     showCodingTime(date) {
       var self = this;
-      var year = date.getFullYear();
-      var month = date.getMonth() + 1;
-      var day = date.getDate();
-
       var isToday = util.isToday(date);
-      
-      if (month < 10) {
-        month = '0' + month;
-      }
-
-      if (day < 10) {
-        day = '0' + day;
-      }
-      var dayInfo = year + '-' + month + '-' + day;
+      var dayInfo = util.getDayFullValue(date);
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
       console.log('url=' + url);
 

@@ -101,6 +101,22 @@ const isToday = (date) => {
     dateInput.getDate() === today.getDate())
 }
 
+const getDayFullValue = (date) => {
+  date = getDate(date);
+
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+
+  if (month < 10) {
+    month = '0' + month;
+  }
+  if (day < 10) {
+    day = '0' + day;
+  }
+  return year + '-' + month + '-' + day;
+}
+
 const getTime = (date) => (date instanceof Date ? date.getTime() : date);
 
 const getDate = (date) => (date instanceof Date ? date : new Date(date));
@@ -110,5 +126,6 @@ module.exports = {
   readTimeDesc: readTimeDesc,
   transToLevel: transToLevel,
   initCellData: initCellData,
-  isToday: isToday
+  isToday: isToday,
+  getDayFullValue: getDayFullValue
 }
