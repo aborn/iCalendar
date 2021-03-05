@@ -2,8 +2,9 @@ const timeutil = require('timeutil.js')
 
 // https://flaviocopes.com/rgb-color-codes/
 const DayCicleColor = {
-  '0h': "#8FBC8F",
-  '1h': "#90EE90",
+  '0h' : "#E0FFFF", // 0h
+  'p0h': "#98FB98", // 0~1h
+  '1h': "#90EE90",  // 1~2h
   '2h': "#32CD32",
   '3h': "#00FF00",
   '5h': "#228B22",
@@ -95,8 +96,10 @@ const getCodeDayColor = (second) => {
     level = 2
   } else if (hour >=1 ) {
     level = 1
+  } else if (second > 0) {
+    level = "p0"
   } else {
-    level = 0;
+    level = 0
   }
   return DayCicleColor[level + "h"];
 }
