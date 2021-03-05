@@ -175,14 +175,8 @@ Component({
       var month = date.getMonth() + 1;
       var day = date.getDate();
 
-      var isToday = false;
-      var today = new Date();
-
-      if (year === today.getFullYear() &&
-        month === today.getMonth() + 1 &&
-        day === today.getDay()) {
-        isToday = true;
-      }
+      var isToday = util.isToday(date);
+      
       if (month < 10) {
         month = '0' + month;
       }

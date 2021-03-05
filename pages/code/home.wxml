@@ -19,13 +19,6 @@
 		</van-col>
 	</van-row>
 
-<!--
-	<van-grid column-num="9" icon-size="0px" square border="{{ fasle }}">
-		<van-grid-item wx:for="{{dayStaticHint}}" text="{{ item.value }}" wx:key="*this">
-		</van-grid-item>
-	</van-grid>
--->
-
 	<van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
 		<van-grid-item bind:click="hcellClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
 		text="{{ item.stepValue }}" 
@@ -42,11 +35,5 @@
 			<van-circle value="{{ 100 }}" color="#07c160" text="{{ codeTime }}" stroke-width="15" size="150" fill="#FFFFFF" />
 		</van-col>
 	</van-row>
-
-	<!--
-	<van-divider contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;">
-		编程时间：{{codeTime}}
-	</van-divider>
--->
 
 </scroll-view>
