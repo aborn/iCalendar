@@ -41,6 +41,7 @@ Page({
   onLoad: function () {
     var thatThat = this;
     // 获取用户信息
+    /**
     wx.getSetting({
       success: res => {
         if (!res.authSetting['scope.userInfo']) {
@@ -101,6 +102,7 @@ Page({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
+     */
 
     if (app.globalData.userInfo) {
       this.setData({
