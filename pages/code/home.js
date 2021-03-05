@@ -8,6 +8,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
+    codeDayColor: "#07c160",
     frameIndex: 1,
     minDate: new Date(
       new Date().getFullYear(),
@@ -187,19 +188,22 @@ Component({
             self.setData({
               codeTimeDesc: res.data.data.desc,
               dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, isToday),
-              codeTime: util.readTimeDesc(codeTimeSecond)
+              codeTime: util.readTimeDesc(codeTimeSecond),
+              codeDayColor: util.getCodeDayColor(codeTimeSecond)
             })
             // 接入来获取最新列表
           } else if (res.data.code === 201) {
             self.setData({
               codeTime: '0分钟',
-              dayStaticByHour: util.transToLevel(util.initCellData())
+              dayStaticByHour: util.transToLevel(util.initCellData()),
+              codeDayColor: util.getCodeDayColor(0)
             })
             console.log('暂无编程数据。')
           } else {
             self.setData({
               codeTime: '未知-501',
-              dayStaticByHour: util.transToLevel(util.initCellData())
+              dayStaticByHour: util.transToLevel(util.initCellData()),
+              codeDayColor: util.getCodeDayColor(0)
             })
             console.log('获取数据失败。')
           }

@@ -1,23 +1,14 @@
 const timeutil = require('timeutil.js')
 
-const StatusBackground = {
-  'm': "grey",
-  's': "white",
-  'e': "black"
-}
-
-const StatusDesc = {
-  'm': "进行中...",
-  's': "开始",
-  'e': "结束"
-}
-
-const TimeSegDesc = {
-  "t0": '持续中...',
-  "t15": '花费15分钟',
-  "t30": '花费半个小时',
-  "t60": '花费1个小时',
-  "t120": '花费2个小时',
+// https://flaviocopes.com/rgb-color-codes/
+const DayCicleColor = {
+  '0h': "#8FBC8F",
+  '1h': "#90EE90",
+  '2h': "#32CD32",
+  '3h': "#00FF00",
+  '5h': "#228B22",
+  '8h': "#008000",
+  '12h':"#006400"
 }
 
 const getStoregeLastDayInfo = () => {
@@ -89,6 +80,27 @@ const transToLevel = (dayStaticByHour, isToday) => {
   })
 }
 
+const getCodeDayColor = (second) => {
+  var level = 0
+  var hour = Math.floor(second / 3600);
+  if (hour >= 12) {   // 1 2 3 5 8 12
+    level = 12
+  } else if (hour >= 8) {
+    level = 8
+  } else if (hour >= 5) {
+    level = 5
+  } else if (hour >= 3) {
+    level = 3
+  } else if (hour >= 2) {
+    level = 2
+  } else if (hour >=1 ) {
+    level = 1
+  } else {
+    level = 0;
+  }
+  return DayCicleColor[level + "h"];
+}
+
 const initCellData = () => {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
@@ -127,5 +139,6 @@ module.exports = {
   transToLevel: transToLevel,
   initCellData: initCellData,
   isToday: isToday,
-  getDayFullValue: getDayFullValue
+  getDayFullValue: getDayFullValue,
+  getCodeDayColor: getCodeDayColor
 }
