@@ -86,12 +86,10 @@ export function changeType(preIndex, currentIndex) {
 
 export function getPrevMonthInfo(date = {}) {
   const prevMonthInfo =
-    Number(date.month) >= 1 ?
-    {
+    Number(date.month) >= 1 ? {
       year: +date.year,
       month: Number(date.month) - 1
-    } :
-    {
+    } : {
       year: Number(date.year) - 1,
       month: 11
     }
@@ -99,12 +97,10 @@ export function getPrevMonthInfo(date = {}) {
 }
 export function getNextMonthInfo(date = {}) {
   const nextMonthInfo =
-    Number(date.month) < 11 ?
-    {
+    Number(date.month) < 11 ? {
       year: +date.year,
       month: Number(date.month) + 1
-    } :
-    {
+    } : {
       year: Number(date.year) + 1,
       month: 0
     }
@@ -118,4 +114,11 @@ export function getTargetMonthFirstDate(cDate, eventType) {
   }
   var targetDateInfo = "next" === eventType ? getNextMonthInfo(currentDateInfo) : getPrevMonthInfo(currentDateInfo);
   return new Date(targetDateInfo.year, targetDateInfo.month, 1);
+}
+
+export function isToday(date) {
+  var today = new Date();
+  return today.getFullYear() === date.getFullYear() &&
+    today.getMonth() === date.getMonth() &&
+    today.getDate() === date.getDate()
 }

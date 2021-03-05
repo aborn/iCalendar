@@ -1,5 +1,5 @@
 <view class="van-calendar">
-  <header subtitle="{{ subtitle }}" showSubtitle="{{ showSubtitle }}">
+  <header subtitle="{{ subtitle }}" showSubtitle="{{ showSubtitle }}" showToday="{{showToday}}" currentDate="{{ currentDate }}" bind:switchToday="switch2Today">
     <slot name="title" slot="title"></slot>
   </header>
 
