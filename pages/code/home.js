@@ -1,7 +1,6 @@
 // pages/read/home/home.js
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
-import Toast from '../../vant/toast/toast';
 import convertSolarLunar from '../../utils/lunar'
 
 Component({
@@ -171,7 +170,7 @@ Component({
       console.log('hour:' + hour + "，编程时间:" + (value * 0.5) + "分钟");
     },
     showCodingTime(date) {
-      var self = this;      
+      var self = this;
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var day = date.getDate();
