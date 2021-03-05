@@ -190,10 +190,11 @@ Component({
       console.log('hour:' + hour + "，编程时间:" + (value * 0.5) + "分钟");
     },
     showCodingTime(date) {
-      var self = this;
+      var self = this;      
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
-      var day = date.getDay();
+      var day = date.getDate();
+
       var isToday = false;
       var today = new Date();
 
@@ -205,7 +206,6 @@ Component({
       if (month < 10) {
         month = '0' + month;
       }
-
 
       if (day < 10) {
         day = '0' + day;
