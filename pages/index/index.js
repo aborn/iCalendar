@@ -17,7 +17,7 @@ Page({
     if (tabIndex === 1) {
       pageCur = 'about';
     }
-
+    
     if (pageCur === 'about') {
       wx.getClipboardData({
         success(res) {

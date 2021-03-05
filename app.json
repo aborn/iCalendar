@@ -11,7 +11,6 @@
   "style": "v2",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "calendar": "/calendar/index",
     "van-grid": "/vant/grid/index",
     "van-toast": "/vant/toast/index",
     "van-grid-item": "/vant/grid-item/index",
