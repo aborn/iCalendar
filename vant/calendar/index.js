@@ -14,6 +14,7 @@ import {
   changeType,
   getPrevMonthInfo,
   getNextMonthInfo,
+  getTargetMonthFirstDate,
 } from './utils';
 import Toast from '../toast/toast';
 import {
@@ -155,14 +156,7 @@ VantComponent({
       } = e.detail;
       var preIndex = this.data.preIndex;
       var eventType = changeType(preIndex, current);
-
-      var currentDate = new Date(this.data.cFrameDate);
-      var currentDateInfo = {
-        year: currentDate.getFullYear(),
-        month: currentDate.getMonth()
-      }
-      var targetDateInfo = "next" === eventType ? getNextMonthInfo(currentDateInfo) : getPrevMonthInfo(currentDateInfo);
-      var targetDate = new Date(targetDateInfo.year, targetDateInfo.month, 1);
+      var targetDate = getTargetMonthFirstDate(new Date(this.data.cFrameDate), eventType);
 
       console.log('frame chnaged. current=' + current + ", cource=" + source +
         ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);

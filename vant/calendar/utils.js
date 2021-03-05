@@ -110,3 +110,13 @@ export function getNextMonthInfo(date = {}) {
         }
   return nextMonthInfo
 }
+
+export function getTargetMonthFirstDate(cDate, eventType) {
+  var currentDateInfo = {
+    year: cDate.getFullYear(),
+    month: cDate.getMonth()
+  }
+  var targetDateInfo = "next" === eventType ? getNextMonthInfo(currentDateInfo) : getPrevMonthInfo(currentDateInfo);
+  return new Date(targetDateInfo.year, targetDateInfo.month, 1);
+
+}
