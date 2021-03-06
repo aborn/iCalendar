@@ -183,7 +183,7 @@ VantComponent({
       if (source !== "touch") {
         return;
       }
-      
+
       console.log('frame chnaged. current=' + current + ", cource=" + source +
         ", currentItemId=" + currentItemId + ", preId=" + curIndex + ", changeType=" + eventType);
       
@@ -228,7 +228,7 @@ VantComponent({
         showToday,
       })
 
-      this.$emit('select', copyDates(currentDate));
+      this.$emit('select', copyDates(targetDateD.getTime()));
     },
     reset() {
       this.setData({
