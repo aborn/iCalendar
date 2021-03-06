@@ -84,6 +84,29 @@ export function changeType(preIndex, currentIndex) {
   }
 }
 
+export function getTargetFrameIndex(currentIndex, eventType) {
+  if (eventType === "cur") {
+    return currentIndex;
+  } else if (eventType === "next") { // 右滑动
+    return (currentIndex + 1) % 3
+  } else {
+    return ((currentIndex -1) + 3) % 3
+  }
+}
+
+export function getChangeType(currentDate, targetDate) {
+  var currentDateD = getDate(currentDate);
+  var targetDateD = getDate(targetDate);
+  if (currentDateD.getFullYear() === targetDateD.getFullYear() &&
+    currentDateD.getMonth() === targetDateD.getMonth()) {
+    return "cur" // 表示同一个月，不滑动
+  } else if (targetDateD.getTime() > currentDateD.getTime()) {
+    return "next" // 表示右滑
+  } else {
+    return "prev" // 表示左滑
+  }
+}
+
 export function getPrevMonthInfo(date = {}) {
   const prevMonthInfo =
     Number(date.month) >= 1 ? {
@@ -122,3 +145,7 @@ export function isToday(date) {
     today.getMonth() === date.getMonth() &&
     today.getDate() === date.getDate()
 }
+
+export function getDate(date) {
+  return (date instanceof Date ? date : new Date(date))
+};

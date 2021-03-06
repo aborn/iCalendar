@@ -14,6 +14,9 @@ import {
   changeType,
   getTargetMonthFirstDate,
   isToday,
+  getDate,
+  getChangeType,
+  getTargetFrameIndex,
 } from './utils';
 import Toast from '../toast/toast';
 import {
@@ -105,19 +108,11 @@ VantComponent({
       type: Boolean,
       value: true,
     },
-    showConfirm: {
-      type: Boolean,
-      value: true,
-    },
     showSubtitle: {
       type: Boolean,
       value: true,
     },
     safeAreaInsetBottom: {
-      type: Boolean,
-      value: true,
-    },
-    closeOnClickOverlay: {
       type: Boolean,
       value: true,
     },
@@ -131,15 +126,18 @@ VantComponent({
     currentDate: null,
     scrollIntoView: '',
     preIndex: null, // 滑动的时候记录上一次的Index,初始化默认为当前的
+    curIndex: null, // 当前的index
     cFrameDate: null,
     cDatas: [],
     showToday: false,
+    frameIndex: 1
   },
   created() {
     this.setData({
       currentDate: this.getInitialDate(),
       cDatas: this.initCalenderDatas(),
       preIndex: this.frameIndex || 1,
+      curIndex: this.frameIndex || 1,
       cFrameDate: new Date(this.data.currentDate)
     });
   },
@@ -153,7 +151,11 @@ VantComponent({
     switch2Today(e) {
       console.log('switch2Today called')
       var currentDate = new Date(e.detail)
+      var curIndex = this.data.curIndex
       console.log(currentDate)
+      console.log('current frame=' + curIndex)
+
+      this.switch2day(new Date());
     },
     changeFrame(e) {
       const {
@@ -163,10 +165,10 @@ VantComponent({
       } = e.detail;
 
       const {
-        preIndex,
+        curIndex,   // 上一次的frameIndex
         cDatas
       } = this.data;
-      var eventType = changeType(preIndex, current);
+      var eventType = changeType(curIndex, current);
       var targetDate = getTargetMonthFirstDate(new Date(this.data.cFrameDate), eventType);
       cDatas[current] = targetDate.getTime();
 
@@ -178,15 +180,51 @@ VantComponent({
       }
       var showToday = !isToday(new Date(currentDate))
 
-      //console.log('frame chnaged. current=' + current + ", cource=" + source +
-      //  ", currentItemId=" + currentItemId + ", preId=" + preIndex + ", changeType=" + eventType);
+      if (source !== "touch") {
+        return;
+      }
+      
+      console.log('frame chnaged. current=' + current + ", cource=" + source +
+        ", currentItemId=" + currentItemId + ", preId=" + curIndex + ", changeType=" + eventType);
       
       this.setData({
         subtitle: targetDate.getFullYear() + "年" + (targetDate.getMonth() + 1) + "月",
-        preIndex: current,
+        curIndex: current,
         cDatas, // 刷新当前月的数据
         cFrameDate: targetDate, // 当前月份所在frame的第一天日期
-        currentDate,
+        currentDate,            // 选中的具体哪一天
+        showToday,
+      })
+
+      this.$emit('select', copyDates(currentDate));
+    },
+    switch2day(targetDate) {  // 切换到具体某一天
+      const {
+        curIndex,   // 上一次的frameIndex
+        cDatas,
+        currentDate
+      } = this.data;
+
+      var eventType = getChangeType(currentDate, targetDate);
+      if ("cur" === eventType) { // 不需要滑动
+        return
+      }
+      var targetIndex = getTargetFrameIndex(curIndex, eventType);
+      var targetDateD = getDate(targetDate);
+      var targetDateMonthFirstDay = new Date(targetDateD.getFullYear(), targetDateD.getMonth(), 1);
+      cDatas[targetIndex] = targetDateMonthFirstDay.getTime();
+      var showToday = !isToday(new Date(targetDateD))
+
+      console.log('switch2day chnaged. current=' + curIndex + ", targetIndex=" + targetIndex +
+        ", changeType=" + eventType);
+      
+      this.setData({
+        frameIndex: targetIndex,
+        subtitle: targetDateD.getFullYear() + "年" + (targetDateD.getMonth() + 1) + "月",
+        curIndex: targetIndex,
+        cDatas, // 刷新当前月的数据
+        cFrameDate: targetDateD, // 当前月份所在frame的第一天日期
+        currentDate: targetDateD.getTime(),            // 选中的具体哪一天
         showToday,
       })
 
