@@ -30,6 +30,7 @@ VantComponent({
       type: null,
       observer: 'setDays',
     },
+    tips: null,
     allowSameDay: Boolean,
     showSubtitle: Boolean,
     showMonthTitle: Boolean,

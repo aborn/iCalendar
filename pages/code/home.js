@@ -160,6 +160,9 @@ Component({
       }
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
+    },
+    tips:{
+      1:1
     }
   },
   methods: {
@@ -171,6 +174,46 @@ Component({
       console.log('hour:' + hour + "，编程时间:" + (value * 0.5) + "分钟");
     },
     showCodingTime(date) {
+      var self = this;
+      var isToday = util.isToday(date);
+      var dayInfo = util.getDayFullValue(date);
+      var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
+      console.log('url=' + url);
+
+      // 获取写代码的时间信息
+      wx.request({
+        url: url,
+        data: {},
+        success: function (res) {
+          console.log(res);
+          if (res.data.code === 200) {
+            var codeTimeSecond = res.data.data.codeTime;
+            self.setData({
+              codeTimeDesc: res.data.data.desc,
+              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, isToday),
+              codeTime: util.readTimeDesc(codeTimeSecond),
+              codeDayColor: util.getCodeDayColor(codeTimeSecond)
+            })
+            // 接入来获取最新列表
+          } else if (res.data.code === 201) {
+            self.setData({
+              codeTime: '0分钟',
+              dayStaticByHour: util.transToLevel(util.initCellData()),
+              codeDayColor: util.getCodeDayColor(0)
+            })
+            console.log('暂无编程数据。')
+          } else {
+            self.setData({
+              codeTime: '未知-501',
+              dayStaticByHour: util.transToLevel(util.initCellData()),
+              codeDayColor: util.getCodeDayColor(0)
+            })
+            console.log('获取数据失败。')
+          }
+        }
+      })
+    },
+    showTips(month) {
       var self = this;
       var isToday = util.isToday(date);
       var dayInfo = util.getDayFullValue(date);

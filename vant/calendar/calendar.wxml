@@ -4,14 +4,15 @@
   </header>
 
   <swiper circular current="{{ frameIndex }}" bindchange="changeFrame" style="height:400px">
-    <swiper-item item-id="frame_id_0">
+    <swiper-item item-id="frame_id_{{index}}" wx:for="{{3}}" wx:key="index">
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
-        <month id="month0" class="month" data-date="{{ cDatas[0] }}" date="{{ cDatas[0] }}" type="{{ type }}"
+        <month id="month{{index}}" class="month" data-date="{{ cDatas[index] }}" date="{{ cDatas[index] }}" type="{{ type }}"
           color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
-          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
+          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" tips="{{tips}}" />
       </scroll-view>
     </swiper-item>
 
+    <!--
     <swiper-item item-id="frame_id_1">
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
         <month id="month1" class="month" data-date="{{ cDatas[1] }}" date="{{ cDatas[1] }}" type="{{ type }}"
@@ -26,7 +27,7 @@
           color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
           currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" />
       </scroll-view>
-
     </swiper-item>
+    -->
   </swiper>
 </view>

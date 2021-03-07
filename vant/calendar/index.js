@@ -120,6 +120,10 @@ VantComponent({
       type: null,
       value: null,
     },
+    tips: {
+      type: Object,
+      value: null,
+    }
   },
   data: {
     subtitle: '',
@@ -130,7 +134,7 @@ VantComponent({
     cFrameDate: null,
     cDatas: [],
     showToday: false,
-    frameIndex: 1
+    frameIndex: 1,
   },
   created() {
     this.setData({
