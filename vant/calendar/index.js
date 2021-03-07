@@ -173,6 +173,11 @@ VantComponent({
       } = this.data;
       var eventType = changeType(curIndex, current);
       var targetDate = getTargetMonthFirstDate(new Date(this.data.cFrameDate), eventType);
+      var today = new Date();
+      if (today.getFullYear() == targetDate.getFullYear() &&
+        today.getMonth() == targetDate.getMonth()) {
+        targetDate = today;
+      }
       this.navigateToDay(targetDate, source);
     },
     navigateToDay(targetDate, source) { // 切换到具体某一天
@@ -190,7 +195,7 @@ VantComponent({
         this.setData({
           showToday,
         })
-        this.$emit('select', copyDates(targetDateD.getTime()));
+        this.emit(targetDateD.getTime())
         return
       }
 
@@ -201,7 +206,7 @@ VantComponent({
       //console.log('navigateToDay called. current=' + curIndex + ", targetIndex=" + targetIndex +
       //  ", changeType=" + eventType);
 
-      if (source === 'autoplay' || source === 'touch') {        
+      if (source === 'autoplay' || source === 'touch') {
         this.setData({
           subtitle: targetDateD.getFullYear() + "年" + (targetDateD.getMonth() + 1) + "月",
           curIndex: targetIndex,
@@ -216,14 +221,13 @@ VantComponent({
           frameIndex: targetIndex,
           subtitle: targetDateD.getFullYear() + "年" + (targetDateD.getMonth() + 1) + "月",
           curIndex: targetIndex,
-          cDatas,                    // 刷新当前月的数据
-          cFrameDate: targetDateD,   // 当前月份所在frame的第一天日期
+          cDatas, // 刷新当前月的数据
+          cFrameDate: targetDateD, // 当前月份所在frame的第一天日期
           currentDate: targetDateD.getTime(), // 选中的具体哪一天
           showToday,
         })
       }
-
-      this.$emit('select', copyDates(targetDateD.getTime()));
+      this.emit(targetDateD.getTime())
     },
     reset() {
       this.setData({
@@ -271,17 +275,7 @@ VantComponent({
         type,
         defaultDate,
         minDate
-      } = this.data;
-      if (type === 'range') {
-        const [startDay, endDay] = defaultDate || [];
-        return [
-          startDay || minDate,
-          endDay || getNextDay(new Date(minDate)).getTime(),
-        ];
-      }
-      if (type === 'multiple') {
-        return defaultDate || [minDate];
-      }
+      } = this.data;      
       return defaultDate || minDate;
     },
     scrollIntoView() {
@@ -325,53 +319,11 @@ VantComponent({
       this.$emit('closed');
     },
     onClickDay(event) {
+      // 日期切换事件
       const {
         date
       } = event.detail;
-      const {
-        type,
-        currentDate,
-        allowSameDay
-      } = this.data;
-      if (type === 'range') {
-        // @ts-ignore
-        const [startDay, endDay] = currentDate;
-        if (startDay && !endDay) {
-          const compareToStart = compareDay(date, startDay);
-          if (compareToStart === 1) {
-            this.select([startDay, date], true);
-          } else if (compareToStart === -1) {
-            this.select([date, null]);
-          } else if (allowSameDay) {
-            this.select([date, date]);
-          }
-        } else {
-          this.select([date, null]);
-        }
-      } else if (type === 'multiple') {
-        let selectedIndex;
-        // @ts-ignore
-        const selected = currentDate.some((dateItem, index) => {
-          const equal = compareDay(dateItem, date) === 0;
-          if (equal) {
-            selectedIndex = index;
-          }
-          return equal;
-        });
-        if (selected) {
-          // @ts-ignore
-          const cancelDate = currentDate.splice(selectedIndex, 1);
-          this.setData({
-            currentDate
-          });
-          this.unselect(cancelDate);
-        } else {
-          // @ts-ignore
-          this.select([...currentDate, date]);
-        }
-      } else {
-        this.select(date, true);
-      }
+      this.emit(date);
     },
     unselect(dateArray) {
       const date = dateArray[0];
@@ -379,31 +331,12 @@ VantComponent({
         this.$emit('unselect', copyDates(date));
       }
     },
-    select(date, complete) {
-      if (complete && this.data.type === 'range') {
-        const valid = this.checkRange(date);
-        if (!valid) {
-          // auto selected to max range if showConfirm
-          if (this.data.showConfirm) {
-            this.emit([
-              date[0],
-              getDayByOffset(date[0], this.data.maxRange - 1),
-            ]);
-          } else {
-            this.emit(date);
-          }
-          return;
-        }
-      }
-      this.emit(date);
-      if (complete && !this.data.showConfirm) {
-        this.onConfirm();
-      }
-    },
     emit(date) {
       const getTime = (date) => (date instanceof Date ? date.getTime() : date);
+      var showToday = !isToday(new Date(date))
       this.setData({
         currentDate: Array.isArray(date) ? date.map(getTime) : getTime(date),
+        showToday,
       });
       this.$emit('select', copyDates(date));
     },
