@@ -149,13 +149,12 @@ VantComponent({
   },
   methods: {
     switch2Today(e) {
-      console.log('switch2Today called')
       var currentDate = new Date(e.detail)
       var curIndex = this.data.curIndex
       console.log(currentDate)
       console.log('current frame=' + curIndex)
 
-      this.switch2day(new Date());
+      this.navigateToDay(new Date());
     },
     changeFrame(e) {
       const {
@@ -164,69 +163,65 @@ VantComponent({
         currentItemId
       } = e.detail;
 
+      if (source !== 'touch') {
+        // 如因手工切换也走到这里，直接返回，否则会死循环
+        return
+      }
+
       const {
-        curIndex,   // 上一次的frameIndex
-        cDatas
+        curIndex, // 上一次的frameIndex
       } = this.data;
       var eventType = changeType(curIndex, current);
       var targetDate = getTargetMonthFirstDate(new Date(this.data.cFrameDate), eventType);
-      cDatas[current] = targetDate.getTime();
-
-      var currentDate = targetDate.getTime()
-      var today = new Date();
-      if (today.getFullYear() == targetDate.getFullYear() &&
-        today.getMonth() == targetDate.getMonth()) {
-        currentDate = today.getTime() // 处理当月的今天
-      }
-      var showToday = !isToday(new Date(currentDate))
-
-      if (source !== "touch") {
-        return;
-      }
-
-      console.log('frame chnaged. current=' + current + ", cource=" + source +
-        ", currentItemId=" + currentItemId + ", preId=" + curIndex + ", changeType=" + eventType);
-      
-      this.setData({
-        subtitle: targetDate.getFullYear() + "年" + (targetDate.getMonth() + 1) + "月",
-        curIndex: current,
-        cDatas, // 刷新当前月的数据
-        cFrameDate: targetDate, // 当前月份所在frame的第一天日期
-        currentDate,            // 选中的具体哪一天
-        showToday,
-      })
-
-      this.$emit('select', copyDates(currentDate));
+      this.navigateToDay(targetDate, source);
     },
-    switch2day(targetDate) {  // 切换到具体某一天
+    navigateToDay(targetDate, source) { // 切换到具体某一天
       const {
-        curIndex,   // 上一次的frameIndex
+        curIndex, // 上一次的frameIndex
         cDatas,
         currentDate
       } = this.data;
 
       var eventType = getChangeType(currentDate, targetDate);
-      if ("cur" === eventType) { // 不需要滑动
-        return
-      }
-      var targetIndex = getTargetFrameIndex(curIndex, eventType);
       var targetDateD = getDate(targetDate);
-      var targetDateMonthFirstDay = new Date(targetDateD.getFullYear(), targetDateD.getMonth(), 1);
-      cDatas[targetIndex] = targetDateMonthFirstDay.getTime();
       var showToday = !isToday(new Date(targetDateD))
 
-      console.log('switch2day chnaged. current=' + curIndex + ", targetIndex=" + targetIndex +
-        ", changeType=" + eventType);
-      
-      this.setData({
-        frameIndex: targetIndex,
-        subtitle: targetDateD.getFullYear() + "年" + (targetDateD.getMonth() + 1) + "月",
-        curIndex: targetIndex,
-        cDatas, // 刷新当前月的数据
-        cFrameDate: targetDateD, // 当前月份所在frame的第一天日期
-        currentDate: targetDateD.getTime(),            // 选中的具体哪一天
-        showToday,
-      })
+      if ("cur" === eventType) { // 如果是当月，不需要滑动，只需要切换到那一日即可
+        this.setData({
+          showToday,
+        })
+        this.$emit('select', copyDates(targetDateD.getTime()));
+        return
+      }
+
+      var targetIndex = getTargetFrameIndex(curIndex, eventType);
+      var targetDateMonthFirstDay = new Date(targetDateD.getFullYear(), targetDateD.getMonth(), 1);
+      cDatas[targetIndex] = targetDateMonthFirstDay.getTime();
+
+      //console.log('navigateToDay called. current=' + curIndex + ", targetIndex=" + targetIndex +
+      //  ", changeType=" + eventType);
+
+      if (source === 'autoplay' || source === 'touch') {        
+        this.setData({
+          subtitle: targetDateD.getFullYear() + "年" + (targetDateD.getMonth() + 1) + "月",
+          curIndex: targetIndex,
+          cDatas, // 刷新当前月的数据
+          cFrameDate: targetDateD, // 当前月份所在frame的第一天日期
+          currentDate: targetDateD.getTime(), // 选中的具体哪一天
+          showToday,
+        })
+      } else {
+        // 表示不是来自滑动，需要切换frame        
+        this.setData({
+          frameIndex: targetIndex,
+          subtitle: targetDateD.getFullYear() + "年" + (targetDateD.getMonth() + 1) + "月",
+          curIndex: targetIndex,
+          cDatas,                    // 刷新当前月的数据
+          cFrameDate: targetDateD,   // 当前月份所在frame的第一天日期
+          currentDate: targetDateD.getTime(), // 选中的具体哪一天
+          showToday,
+        })
+      }
 
       this.$emit('select', copyDates(targetDateD.getTime()));
     },
