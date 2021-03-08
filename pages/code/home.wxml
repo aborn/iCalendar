@@ -13,7 +13,7 @@
 
 	<van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
 		<van-grid-item bind:click="hcellClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
-			text="{{ item.stepValue }}" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}" wx:key="*this">
+			text="{{ item.stepValue }}" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}" wx:key="index">
 		</van-grid-item>
 	</van-grid>
 
