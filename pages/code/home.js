@@ -10,16 +10,6 @@ Component({
   data: {
     codeDayColor: "#07c160",
     frameIndex: 1,
-    minDate: new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      1
-    ).getTime(),
-    maxDate: new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      new Date().getDate()
-    ).getTime(),
     defaultDate: new Date().getTime(), // 默认选中为今天
     dayStaticByHour: [{
         value: 0,
