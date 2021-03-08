@@ -232,6 +232,8 @@ VantComponent({
         })
       }
       this.emit(targetDateD.getTime())
+
+      this.$emit('changeframe', copyDates(targetDateD));
     },
     reset() {
       this.setData({

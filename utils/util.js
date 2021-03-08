@@ -148,5 +148,6 @@ module.exports = {
   isToday: isToday,
   getDayFullValue: getDayFullValue,
   getCodeDayColor: getCodeDayColor,
-  getUserToken: getUserToken
+  getUserToken: getUserToken,
+  getDate: getDate
 }

@@ -151,9 +151,7 @@ Component({
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
     },
-    tips:{
-      1:1
-    }
+    tips:{}
   },
   methods: {
     hcellClickEvent(e) {
@@ -167,6 +165,8 @@ Component({
       var self = this;
       var isToday = util.isToday(date);
       var dayInfo = util.getDayFullValue(date);
+      // var tips = this.data.tips;
+      // var day = util.getDate(date).getDate();
       var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
       console.log('url=' + url);
 
@@ -177,12 +177,12 @@ Component({
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
-            var codeTimeSecond = res.data.data.codeTime;
+            var codeTimeSecond = res.data.data.codeTime;            
             self.setData({
               codeTimeDesc: res.data.data.desc,
               dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, isToday),
               codeTime: util.readTimeDesc(codeTimeSecond),
-              codeDayColor: util.getCodeDayColor(codeTimeSecond)
+              codeDayColor: util.getCodeDayColor(codeTimeSecond),
             })
             // 接入来获取最新列表
           } else if (res.data.code === 201) {
@@ -216,8 +216,8 @@ Component({
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
+            var tips = {};
             var dayStatic = res.data.data.dayStatic;
-            var tips = {}
             dayStatic.map((item, index) => {
               tips[index] = item;
             })
@@ -239,9 +239,9 @@ Component({
       this.showCodingTime(date);
     },
     changeMonth(e) {
-      const {
-        type
-      } = e.currentTarget.dataset
+      var date = new Date(e.detail);
+      var month = util.getDayFullValue(date, true)
+      this.showTips(month)
     }
   },
 
