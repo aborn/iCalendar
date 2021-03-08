@@ -2,14 +2,14 @@ const timeutil = require('timeutil.js')
 
 // https://flaviocopes.com/rgb-color-codes/
 const DayCicleColor = {
-  '0h' : "#E0FFFF", // 0h
+  '0h': "#E0FFFF", // 0h
   'p0h': "#98FB98", // 0~1h
-  '1h': "#90EE90",  // 1~2h
+  '1h': "#90EE90", // 1~2h
   '2h': "#32CD32",
   '3h': "#00FF00",
   '5h': "#228B22",
   '8h': "#008000",
-  '12h':"#006400"
+  '12h': "#006400"
 }
 
 const getStoregeLastDayInfo = () => {
@@ -84,7 +84,7 @@ const transToLevel = (dayStaticByHour, isToday) => {
 const getCodeDayColor = (second) => {
   var level = 0
   var hour = Math.floor(second / 3600);
-  if (hour >= 12) {   // 1 2 3 5 8 12
+  if (hour >= 12) { // 1 2 3 5 8 12
     level = 12
   } else if (hour >= 8) {
     level = 8
@@ -94,7 +94,7 @@ const getCodeDayColor = (second) => {
     level = 3
   } else if (hour >= 2) {
     level = 2
-  } else if (hour >=1 ) {
+  } else if (hour >= 1) {
     level = 1
   } else if (second > 0) {
     level = "p0"
@@ -116,7 +116,7 @@ const isToday = (date) => {
     dateInput.getDate() === today.getDate())
 }
 
-const getDayFullValue = (date) => {
+const getDayFullValue = (date, isMonth) => {
   date = getDate(date);
 
   var year = date.getFullYear();
@@ -129,12 +129,16 @@ const getDayFullValue = (date) => {
   if (day < 10) {
     day = '0' + day;
   }
-  return year + '-' + month + '-' + day;
+  return isMonth ? year + '-' + month : year + '-' + month + '-' + day;
 }
 
 const getTime = (date) => (date instanceof Date ? date.getTime() : date);
 
 const getDate = (date) => (date instanceof Date ? date : new Date(date));
+
+const getUserToken = () => {
+  return "8ba394513f8420e";
+}
 
 module.exports = {
   getStoregeLastDayInfo: getStoregeLastDayInfo,
@@ -143,5 +147,6 @@ module.exports = {
   initCellData: initCellData,
   isToday: isToday,
   getDayFullValue: getDayFullValue,
-  getCodeDayColor: getCodeDayColor
+  getCodeDayColor: getCodeDayColor,
+  getUserToken: getUserToken
 }

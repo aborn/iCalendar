@@ -205,40 +205,30 @@ Component({
     },
     showTips(month) {
       var self = this;
-      var isToday = util.isToday(date);
-      var dayInfo = util.getDayFullValue(date);
-      var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
+      var token = util.getUserToken();
+      var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + token + '&month=' + month
       console.log('url=' + url);
 
-      // 获取写代码的时间信息
+      // 获取每个月的代码提示信息
       wx.request({
         url: url,
         data: {},
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
-            var codeTimeSecond = res.data.data.codeTime;
+            var dayStatic = res.data.data.dayStatic;
+            var tips = {}
+            dayStatic.map((item, index) => {
+              tips[index] = item;
+            })
             self.setData({
-              codeTimeDesc: res.data.data.desc,
-              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, isToday),
-              codeTime: util.readTimeDesc(codeTimeSecond),
-              codeDayColor: util.getCodeDayColor(codeTimeSecond)
+              tips
             })
             // 接入来获取最新列表
           } else if (res.data.code === 201) {
-            self.setData({
-              codeTime: '0分钟',
-              dayStaticByHour: util.transToLevel(util.initCellData()),
-              codeDayColor: util.getCodeDayColor(0)
-            })
-            console.log('暂无编程数据。')
-          } else {
-            self.setData({
-              codeTime: '未知-501',
-              dayStaticByHour: util.transToLevel(util.initCellData()),
-              codeDayColor: util.getCodeDayColor(0)
-            })
-            console.log('获取数据失败。')
+            console.log('暂无本月提示数据。')
+          } else {            
+            console.log('获取月度提示数据失败。')
           }
         }
       })
@@ -252,36 +242,6 @@ Component({
       const {
         type
       } = e.currentTarget.dataset
-      console.log('切换到上个月' + type)
-
-      var currentDate = new Date(this.data.defaultDate);
-      var lastDayOfMonth = timeUtil.getMonthEndDay(currentDate.getFullYear(), currentDate.getMonth());
-      console.log("当前日期：" + timeUtil.formatTime(currentDate) + '最后一天' + lastDayOfMonth)
-      var currentDateInfo = {
-        year: currentDate.getFullYear(),
-        month: currentDate.getMonth()
-      }
-      var targetMonthInfo = "next_month" === type ?
-        timeUtil.getNextMonthInfo(currentDateInfo) : timeUtil.getPrevMonthInfo(currentDateInfo);
-      //console.log(targetMonthInfo)
-
-      var targetMonthDate = new Date(targetMonthInfo.year, targetMonthInfo.month, 1)
-      var targetMonthLastDate = new Date(targetMonthInfo.year, targetMonthInfo.month,
-        timeUtil.getMonthEndDay(targetMonthInfo.year, targetMonthInfo.month))
-
-      //console.log(targetMonthDate)
-      this.setData({
-        minDate: targetMonthDate.getTime(),
-        maxDate: targetMonthLastDate.getTime(),
-        subtitle: targetMonthInfo.year + "年" + (targetMonthInfo.month + 1) + "月",
-        defaultDate: targetMonthDate
-      })
-      var currentDate = new Date(this.data.defaultDate);
-      var lastDayOfMonth = timeUtil.getMonthEndDay(currentDate.getFullYear(), currentDate.getMonth());
-      console.log("当前日期after：" + timeUtil.formatTime(currentDate) + ", lastday" + lastDayOfMonth)
-
-      const calender = this.selectComponent('.calendar');
-      calender.reset();
     }
   },
 
@@ -296,7 +256,9 @@ Component({
       this.setData({
         subtitle: year + "年" + month + "月"
       })
+      var month = util.getDayFullValue(date, true);
       this.showCodingTime(date);
+      this.showTips(month);
     }
   },
   attached() {
