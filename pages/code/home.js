@@ -219,7 +219,14 @@ Component({
             var tips = {};
             var dayStatic = res.data.data.dayStatic;
             dayStatic.map((item, index) => {
-              tips[index].dot = item;
+              tips[index] = item;
+              if (item.type === 1) {
+                tips[index].text = '休'
+                tips[index].class = 'van-calendar_text-holidays'
+              } else if (item.type === 2) {
+                tips[index].text = '班'
+                tips[index].class = 'van-calendar_text-workdays'
+              }
             })
             self.setData({
               tips
