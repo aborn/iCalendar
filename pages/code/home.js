@@ -219,7 +219,7 @@ Component({
             var tips = {};
             var dayStatic = res.data.data.dayStatic;
             dayStatic.map((item, index) => {
-              tips[index] = item;
+              tips[index].dot = item;
             })
             self.setData({
               tips
