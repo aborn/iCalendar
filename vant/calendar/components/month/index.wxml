@@ -26,6 +26,7 @@
 
       <view wx:else>
         <view wx:if="{{ item.topInfo }}" class="van-calendar__top-info">{{ item.topInfo }}</view>
+        <view class="van-calendar_workdays">班</view>
         {{ item.text }} <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index] === 1}}"></view>
         <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info {{ item.bottomStyle }}">
           {{ item.bottomInfo }}
