@@ -34,6 +34,13 @@ export const festival = {
         label: '龙抬头'
       }
     },
+    5: {
+      5: {
+        type: 'festival',
+        name: '端午节',
+        label: '端午节'
+      }
+    },
     7: {
       7: {
         type: 'festival',
@@ -71,6 +78,11 @@ export const festival = {
       }
     },
     3: {
+      8: {
+        type: 'festival',
+        name: '女神节',
+        label: '女神节'
+      },
       12: {
         type: 'festival',
         name: '植树节',
