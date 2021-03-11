@@ -2,6 +2,7 @@
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
 import convertSolarLunar from '../../utils/lunar'
+const app = getApp()
 
 Component({
   options: {
@@ -10,6 +11,7 @@ Component({
   data: {
     codeDayColor: "#07c160",
     frameIndex: 1,
+    token: app.globalData.config.token,
     defaultDate: new Date().getTime(), // 默认选中为今天
     dayStaticByHour: [{
         value: 0,
@@ -162,12 +164,12 @@ Component({
       console.log('hour:' + hour + "，编程时间:" + (value * 0.5) + "分钟");
     },
     showCodingTime(date) {
-      var self = this;
+      var self = this;      
       var isToday = util.isToday(date);
       var dayInfo = util.getDayFullValue(date);
       // var tips = this.data.tips;
       // var day = util.getDate(date).getDate();
-      var url = 'https://aborn.me/webx/getUserAction?token=8ba394513f8420e&day=' + dayInfo
+      var url = 'https://aborn.me/webx/getUserAction?token=' + this.data.token + '&day=' + dayInfo
       console.log('url=' + url);
 
       // 获取写代码的时间信息
@@ -204,8 +206,7 @@ Component({
     },
     showTips(month) {
       var self = this;
-      var token = util.getUserToken();
-      var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + token + '&month=' + month
+      var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + this.data.token + '&month=' + month
       console.log('url=' + url);
 
       // 获取每个月的代码提示信息

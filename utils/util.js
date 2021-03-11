@@ -136,10 +136,6 @@ const getTime = (date) => (date instanceof Date ? date.getTime() : date);
 
 const getDate = (date) => (date instanceof Date ? date : new Date(date));
 
-const getUserToken = () => {
-  return "8ba394513f8420e";
-}
-
 module.exports = {
   getStoregeLastDayInfo: getStoregeLastDayInfo,
   readTimeDesc: readTimeDesc,
@@ -148,6 +144,5 @@ module.exports = {
   isToday: isToday,
   getDayFullValue: getDayFullValue,
   getCodeDayColor: getCodeDayColor,
-  getUserToken: getUserToken,
   getDate: getDate
 }
