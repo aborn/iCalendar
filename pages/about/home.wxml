@@ -2,8 +2,8 @@
 <view class='margin-xl bg-white padding-xl radius shadow-lg'>
   <view class='text-center margin-bottom text-lg  text-grey'>关于「WebX」</view>
   <view class='text-content'>
-    <view>欢迎使用「WebX」小程序！</view>
-    <view class='margin-top-sm'>通过本小程序可以查看自己的编程日历，注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
+    <view>欢迎使用「i极客日历」小程序！</view>
+    <view class='margin-top-sm'>通过本小程序可以查看自己的编程足迹，注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
     <view class='margin-top-sm'>https://github.com/aborn/webx</view>
     <view class='margin-top-sm'>同时，欢迎关注「极客作家」公众号：</view>
     <view class='margin-top-sm'>
