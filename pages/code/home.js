@@ -246,6 +246,9 @@ Component({
       this.showCodingTime(date);
     },
     changeMonth(e) {
+      this.setData({
+        tips:{}
+      })
       var date = new Date(e.detail);
       var month = util.getDayFullValue(date, true)
       this.showTips(month)

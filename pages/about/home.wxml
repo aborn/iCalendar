@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-gradual-green" isBack="{{false}}"><view slot="backText">返回</view><view slot="content">关于</view></cu-custom>
 <view class='margin-xl bg-white padding-xl radius shadow-lg'>
-  <view class='text-center margin-bottom text-lg  text-grey'>关于「WebX」</view>
+  <view class='text-center margin-bottom text-lg  text-grey'>关于「i极客日历」</view>
   <view class='text-content'>
     <view>欢迎使用「i极客日历」小程序！</view>
     <view class='margin-top-sm'>通过本小程序可以查看自己的编程足迹，注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
