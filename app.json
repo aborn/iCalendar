@@ -9,6 +9,10 @@
     "navigationBarTextStyle": "white"
   },
   "style": "v2",
+  "networkTimeout": {
+    "request": 5000,
+    "downloadFile": 10000
+  },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "van-grid": "/vant/grid/index",

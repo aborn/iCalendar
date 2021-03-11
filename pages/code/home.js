@@ -184,7 +184,6 @@ Component({
               codeTime: util.readTimeDesc(codeTimeSecond),
               codeDayColor: util.getCodeDayColor(codeTimeSecond),
             })
-            // 接入来获取最新列表
           } else if (res.data.code === 201) {
             self.setData({
               codeTime: '0分钟',
