@@ -3,7 +3,8 @@
 <van-cell-group>
   <van-cell title="id" value="{{id}}" />
   <van-cell title="token" value="{{token}}"/>
-  <van-cell title="设置" is-link/>
+  <van-cell title="设置" is-link link-type="navigateTo"
+  url="/pages/setting/index"/>
 </van-cell-group>
 <view class="about-block__title">{{desc}}</view>
 
