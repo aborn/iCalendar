@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/setting/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
