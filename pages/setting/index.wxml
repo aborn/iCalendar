@@ -1,5 +1,12 @@
 <!--pages/setting/index.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">设置个人信息</view>
+</cu-custom>
+
+<!--
 <van-nav-bar title="设置个人信息" left-text="返回" left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" />
+-->
 
 <view class="icalander-block__title">设置</view>
 <van-cell-group>
