@@ -1,20 +1,20 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{false}}"><view slot="backText">返回</view><view slot="content">关于</view></cu-custom>
+<cu-custom bgColor="bg-gradual-green" isBack="{{false}}">
+  <view slot="backText">返回</view>
+  <view slot="content">我的</view>
+</cu-custom>
 <view class="icalander-block__title">配置信息</view>
 <van-cell-group>
   <van-cell title="id" value="{{id}}" />
-  <van-cell title="token" value="{{token}}"/>
-  <van-cell title="设置" is-link link-type="navigateTo"
-  url="/pages/setting/index"/>
+  <van-cell title="token" value="{{token}}" />
+  <van-cell title="设置" is-link link-type="navigateTo" url="/pages/setting/index" />
 </van-cell-group>
 <view class="icalander-block__title">{{desc}}</view>
 
-<view class='margin-xl bg-white padding-xl radius shadow-lg'>
-  <view class='text-center margin-bottom text-lg  text-grey'>关于「i极客日历」</view>
-  <view class='text-content'>
-    <view>欢迎使用「i极客日历」小程序！</view>
-    <view class='margin-top-sm'>通过本小程序可以查看自己的编程足迹，注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
-    <view class='margin-top-sm'>https://github.com/aborn/webx</view>
-    <view class='margin-top-sm'>当前版本V1.0，更多功能敬请期待！</view>
+<view class="icalander-about__title">关于「i极客日历」</view>
+<view class="demo-preview">
+  <view class="demo-content">
+    <view class="domo-content-p">通过本小程序可以查看自己的编程足迹，注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
+    <view class='domo-content-p'>https://github.com/aborn/webx</view>
+    <view class='domo-content-p'>当前版本V1.0，更多功能敬请期待！</view>
   </view>
 </view>
-

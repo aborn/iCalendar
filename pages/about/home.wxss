@@ -7,3 +7,33 @@
   font-weight: 400;
   font-size: 14px;
 }
+
+.icalander-about__title {
+  margin: 0;
+  padding: 10px 15px 15px;
+  color: rgba(69, 90, 100, 0.6);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.demo-preview {
+  display: flex;
+  padding: 0 16px;
+}
+
+.demo-content {
+  color:rgba(69, 90, 100, 0.6);
+  font-size: 13px;
+}
+
+.demo-content-h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.demo-content-p {
+  margin: 13px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+}
