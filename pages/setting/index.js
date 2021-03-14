@@ -54,11 +54,39 @@ Page({
 
     console.log('token=' + token + ', id=' + id +
       ', 当前表单值：ctoken=' + ctoken + ', cid=' + cid)
-    wx.showToast({
-      title: '提交信息',
-      icon: 'none'
-    });
+
+    var url = 'https://aborn.me/webx/postUserConfig'
+    console.log('url=' + url);
+
+    // 获取写代码的时间信息
+    wx.request({
+      url: url,
+      method: "POST",
+      data: {
+        token: ctoken,
+        id: cid
+      },
+      success: function (res) {
+        console.log(res);
+        var data = res.data.data;
+        var message = res.data.msg;
+        console.log('data=' + data + ", message=" + message)
+
+        if (res.data.code === 200) {
+          wx.showToast({
+            title: '配置提交成功！',
+            icon: 'none'
+          });
+        } else {
+          wx.showToast({
+            title: '配置提交失败！',
+            icon: 'none'
+          });
+        }
+      }
+    })
   },
+
   /**
    * Lifecycle function--Called when page load
    */
