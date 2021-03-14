@@ -30,7 +30,9 @@
     "van-cell-group": "/vant/cell-group/index",
     "van-row": "/vant/row/index",
     "van-col": "/vant/col/index",
-    "van-nav-bar": "/vant/nav-bar/index"
+    "van-nav-bar": "/vant/nav-bar/index",
+    "van-field": "/vant/field/index",
+    "van-button": "/vant/button/index"
   },
   "sitemapLocation": "sitemap.json"
 }

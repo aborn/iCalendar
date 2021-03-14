@@ -1,6 +1,14 @@
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
 
+.icalander-block__title {
+  margin: 0;
+  padding: 20px 15px 15px;
+  color: rgba(69, 90, 100, 0.6);
+  font-weight: 400;
+  font-size: 14px;
+}
+
 .scrollPage {
   height: 100vh;
 }
@@ -107,5 +115,5 @@
 }
 
 .lunar-term {
-  color: rgb(255,127,80);
+  color: rgb(255, 127, 80);
 }

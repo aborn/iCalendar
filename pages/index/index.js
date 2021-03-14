@@ -5,14 +5,16 @@ const timeutil = require('../../utils/timeutil.js')
 
 Page({
   data: {
-    pageCur: 'code', // 首次打开时进入的page页
+    pageCur: 'about', // 首次打开时进入的page页
     active: 0, // 激活的tab
   },
   onTabChange(e) {
     var tabIndex = e.detail;
-    var pageCur = 'code';
+    var pageCur = this.data.pageCur;
     if (tabIndex === 1) {
       pageCur = 'about';
+    } else {
+      pageCur = 'code';
     }
 
     this.setData({

@@ -1,10 +1,11 @@
 <!--pages/setting/index.wxml-->
-<van-nav-bar
-  title="标题"
-  left-text="返回"
-  left-arrow
-  bind:click-left="onClickLeft"
-  bind:click-right="onClickRight"
-/>
+<van-nav-bar title="设置个人信息" left-text="返回" left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" />
 
-<text>pages/setting/index.wxml</text>
+<view class="icalander-block__title">设置</view>
+<van-cell-group>
+  <van-field label="id" value="{{ id }}" placeholder="请输入github的id" border="{{ true }}" bind:change="onChange"
+    required />
+  <van-field label="token" value="{{ token }}" placeholder="请输id对应的token" border="{{ false }}" bind:change="onChange"
+    required />
+</van-cell-group>
+<van-button type="warning" round>提交</van-button>

@@ -1,6 +1,6 @@
 /* pages/about/home/home.wxss */
 
-.about-block__title {
+.icalander-block__title {
   margin: 0;
   padding: 20px 15px 15px;
   color: rgba(69, 90, 100, 0.6);
