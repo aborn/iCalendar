@@ -42,7 +42,7 @@ Page({
         buttonDisabledStatus: false
       })
     }
-    
+
     if (field === 'id') {
       this.setData({
         cid: cvalue
@@ -80,10 +80,27 @@ Page({
         console.log('data=' + data + ", message=" + message)
 
         if (res.data.code === 200) {
-          wx.showToast({
-            title: '配置提交成功！',
-            icon: 'none'
-          });
+          // 有可能这个config还有其他信息
+          var config = wx.getStorageSync('config') || {}
+          config.token = ctoken
+          config.id = cid
+
+          wx.setStorage({
+            key: "config",
+            data: config,
+            success: (data) => {              
+              wx.showToast({
+                title: '配置提交成功！',
+                icon: 'none'
+              });
+            },
+            fail: (data) => {
+              wx.showToast({
+                title: '配置提交失败！原因：本地存储失败。',
+                icon: 'none'
+              });
+            }
+          })
         } else {
           wx.showToast({
             title: '配置提交失败！',
