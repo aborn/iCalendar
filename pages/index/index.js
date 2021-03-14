@@ -4,8 +4,11 @@ const app = getApp()
 const timeutil = require('../../utils/timeutil.js')
 
 Page({
+  props: {
+    tab:null
+  },
   data: {
-    pageCur: 'about', // 首次打开时进入的page页
+    pageCur: 'code', // 首次打开时进入的page页
     active: 0, // 激活的tab
   },
   onTabChange(e) {
@@ -24,6 +27,8 @@ Page({
   },
   onLoad: function () {
     var thatThat = this;
+    var tab = this.data.tab;
+    console.log('tab=' + tab)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
