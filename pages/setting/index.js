@@ -11,6 +11,7 @@ Page({
     id: app.globalData.config.id,
     ctoken: app.globalData.config.token,
     cid: app.globalData.config.id,
+    buttonDisabledStatus: true,
   },
 
   methods: {
@@ -36,6 +37,12 @@ Page({
       value
     } = e.currentTarget.dataset
     // console.log('当前值为：' + cvalue + ", field=" + field + ", value=" + value)
+    if (cvalue !== value) {
+      this.setData({
+        buttonDisabledStatus: false
+      })
+    }
+    
     if (field === 'id') {
       this.setData({
         cid: cvalue
