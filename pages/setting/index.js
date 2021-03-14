@@ -53,6 +53,7 @@ Page({
     }
   },
   onSubmit(e) {
+    var that = this;
     var token = this.data.token;
     var id = this.data.id;
     var ctoken = this.data.ctoken;
@@ -87,7 +88,9 @@ Page({
           wx.setStorage({
             key: "config",
             data: config,
-            success: (data) => {              
+            success: (data) => {                          
+              wx.navigateBack({
+              })              
               wx.showToast({
                 title: '配置提交成功！',
                 icon: 'none'
