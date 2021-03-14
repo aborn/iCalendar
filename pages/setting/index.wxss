@@ -1,1 +1,6 @@
 /* pages/setting/index.wxss */
+
+.icalander-setting__sub-button {
+  margin: 0;
+  padding: 20px 15px 15px;
+}

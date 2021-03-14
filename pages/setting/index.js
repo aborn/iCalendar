@@ -9,6 +9,8 @@ Page({
   data: {
     token: app.globalData.config.token,
     id: app.globalData.config.id,
+    ctoken: app.globalData.config.token,
+    cid: app.globalData.config.id,
   },
 
   methods: {
@@ -27,7 +29,36 @@ Page({
       icon: 'none'
     });
   },
+  onChange(e) {
+    var cvalue = e.detail;
+    const {
+      field,
+      value
+    } = e.currentTarget.dataset
+    // console.log('当前值为：' + cvalue + ", field=" + field + ", value=" + value)
+    if (field === 'id') {
+      this.setData({
+        cid: cvalue
+      })
+    } else if (field === 'token') {
+      this.setData({
+        ctoken: cvalue
+      })
+    }
+  },
+  onSubmit(e) {
+    var token = this.data.token;
+    var id = this.data.id;
+    var ctoken = this.data.ctoken;
+    var cid = this.data.cid;
 
+    console.log('token=' + token + ', id=' + id +
+      ', 当前表单值：ctoken=' + ctoken + ', cid=' + cid)
+    wx.showToast({
+      title: '提交信息',
+      icon: 'none'
+    });
+  },
   /**
    * Lifecycle function--Called when page load
    */
@@ -36,7 +67,7 @@ Page({
     var token = this.data.token;
     var testConfig = app.globalData.TestConfig;
     if (id === testConfig.id && token === testConfig.token) {
-      console.log('测试账号')      
+      console.log('当前账号为测试账号')
     }
   },
 
