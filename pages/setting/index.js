@@ -19,8 +19,7 @@ Page({
   },
 
   onClickLeft() {
-    wx.navigateTo({
-      url: "/pages/index/index?tab=about"
+    wx.navigateBack({
     })
     //wx.showToast({ title: '点击返回', icon: 'none' });
   },
