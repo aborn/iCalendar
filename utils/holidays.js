@@ -70,6 +70,13 @@ export const festival = {
   },
   // 阳历固定日期节日
   solar: {
+    1: {
+      1: {
+        type: 'festival',
+        name: '元旦节',
+        label: '元旦节'
+      }
+    },
     2: {
       14: {
         type: 'festival',
