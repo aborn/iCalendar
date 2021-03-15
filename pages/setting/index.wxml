@@ -1,5 +1,5 @@
 <!--pages/setting/index.wxml-->
-<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">设置个人信息</view>
 </cu-custom>

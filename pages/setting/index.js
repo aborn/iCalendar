@@ -7,20 +7,18 @@ Page({
    * Page initial data
    */
   data: {
-    token: app.globalData.config.token,
-    id: app.globalData.config.id,
-    ctoken: app.globalData.config.token,
-    cid: app.globalData.config.id,
+    token: '',
+    id: '',
+    ctoken: '',
+    cid: '',
     buttonDisabledStatus: true,
   },
 
   methods: {
-
   },
 
   onClickLeft() {
-    wx.navigateBack({
-    })
+    wx.navigateBack({})
     //wx.showToast({ title: '点击返回', icon: 'none' });
   },
   onClickRight() {
@@ -65,7 +63,7 @@ Page({
     var url = 'https://aborn.me/webx/postUserConfig'
     console.log('url=' + url);
 
-    // 获取写代码的时间信息
+    // 提交token与id的配置信息
     wx.request({
       url: url,
       method: "POST",
@@ -85,11 +83,18 @@ Page({
           config.token = ctoken
           config.id = cid
 
+          // 更新下全局信息
+          app.globalData.config = config;
+          // 数据保存起来
           wx.setStorage({
             key: "config",
             data: config,
             success: (data) => {
-              // 成功以后，直接返回上一级                          
+              // 成功以后，直接返回上一级    
+              wx.navigateTo({
+                url:'/pages/index/index'
+              })
+              /**                 
               wx.navigateBack({
                 success: () => {
                   wx.showToast({
@@ -97,7 +102,8 @@ Page({
                     icon: 'none'
                   });
                 }
-              })              
+              })
+              */
             },
             fail: (data) => {
               wx.showToast({
@@ -120,9 +126,14 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    var id = this.data.id;
-    var token = this.data.token;
+    var token = app.globalData.config.token
+    var id =app.globalData.config.id
+    var ctoken = app.globalData.config.token
+    var cid = app.globalData.config.id
+    this.setData({token,id,ctoken,cid})
+
     var testConfig = app.globalData.TestConfig;
+    console.log("on Load");
     if (id === testConfig.id && token === testConfig.token) {
       console.log('当前账号为测试账号')
     }
