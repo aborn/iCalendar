@@ -4,12 +4,10 @@ const app = getApp()
 const timeutil = require('../../utils/timeutil.js')
 
 Page({
-  props: {
-    tab:null
-  },
   data: {
     pageCur: 'code', // 首次打开时进入的page页
     active: 0, // 激活的tab
+    tab: 'code',
   },
   onTabChange(e) {
     var tabIndex = e.detail;
@@ -21,6 +19,7 @@ Page({
     }
 
     this.setData({
+      tab: pageCur,
       active: e.detail,
       pageCur
     })
@@ -37,7 +36,9 @@ Page({
     }
   },
   onShow: function () {
+    let config = app.globalData.config;
     console.log('on show on show index...')
+    console.log(config)
   },
   getUserInfo: function (e) {
     console.log(e)

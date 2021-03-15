@@ -2,7 +2,12 @@
 const app = getApp()
 
 Component({
-
+  props: {
+    tab: {
+      type: String,
+      default: 'null'
+    }
+  },
   data: {
     token: '',
     id: '',
@@ -10,6 +15,7 @@ Component({
   },
   attached() {
     console.log('about is attached.')
+    console.log('tab===' + this.tab)
   },
   lifetimes: {
     ready() {

@@ -90,11 +90,13 @@ Page({
             key: "config",
             data: config,
             success: (data) => {
-              // 成功以后，直接返回上一级    
+              // 成功以后，直接返回上一级   
+              /**
               wx.navigateTo({
-                url:'/pages/index/index'
+                url:'/pages/index/index?tab=about'
               })
-              /**                 
+              */
+
               wx.navigateBack({
                 success: () => {
                   wx.showToast({
@@ -103,7 +105,7 @@ Page({
                   });
                 }
               })
-              */
+
             },
             fail: (data) => {
               wx.showToast({
