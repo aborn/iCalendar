@@ -88,13 +88,16 @@ Page({
           wx.setStorage({
             key: "config",
             data: config,
-            success: (data) => {                          
+            success: (data) => {
+              // 成功以后，直接返回上一级                          
               wx.navigateBack({
+                success: () => {
+                  wx.showToast({
+                    title: '配置信息更新成功！',
+                    icon: 'none'
+                  });
+                }
               })              
-              wx.showToast({
-                title: '配置提交成功！',
-                icon: 'none'
-              });
             },
             fail: (data) => {
               wx.showToast({
