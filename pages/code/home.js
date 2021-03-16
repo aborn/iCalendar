@@ -169,7 +169,7 @@ Component({
       var dayInfo = util.getDayFullValue(date);
       // var tips = this.data.tips;
       // var day = util.getDate(date).getDate();
-      var url = 'https://aborn.me/webx/getUserAction?token=' + this.data.token + '&day=' + dayInfo
+      var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
       console.log('url=' + url);
 
       // 获取写代码的时间信息
@@ -206,7 +206,7 @@ Component({
     },
     showTips(month) {
       var self = this;
-      var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + this.data.token + '&month=' + month
+      var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + app.getToken() + '&month=' + month
       console.log('url=' + url);
 
       // 获取每个月的代码提示信息

@@ -60,7 +60,7 @@ Page({
     console.log('token=' + token + ', id=' + id +
       ', 当前表单值：ctoken=' + ctoken + ', cid=' + cid)
 
-    var url = 'https://aborn.me/webx/postUserConfig'
+    var url = 'https://aborn.me/webx/user/postUserConfig'
     console.log('url=' + url);
 
     // 提交token与id的配置信息

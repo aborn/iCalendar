@@ -18,6 +18,9 @@ App({
       }
     })
   },
+  getToken() {
+    return this.globalData.config.token;
+  },
   globalData: {
     userInfo: null,
     openid: null,
