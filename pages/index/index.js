@@ -36,9 +36,6 @@ Page({
     }
   },
   onShow: function () {
-    let config = app.globalData.config;
-    console.log('on show on show index...')
-    console.log(config)
   },
   getUserInfo: function (e) {
     console.log(e)
