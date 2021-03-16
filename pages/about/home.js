@@ -2,12 +2,6 @@
 const app = getApp()
 
 Component({
-  props: {
-    tab: {
-      type: String,
-      default: 'null'
-    }
-  },
   data: {
     token: '',
     id: '',
@@ -17,25 +11,26 @@ Component({
     console.log('about is attached.')
     console.log('tab===' + this.tab)
   },
-  lifetimes: {
-    ready() {
+  methods: {
+    updateConfigInfo() {
       var id = app.globalData.config.id;
       var token = app.globalData.config.token;
-      this.setData({id,token})
+      var desc = '';
       var testConfig = app.globalData.TestConfig;
       if (id === testConfig.id && token === testConfig.token) {
-        this.setData({
-          desc: "当前账号为测试账号，请设置自己的账号！"
-        })
+        desc = "当前账号为测试账号，请设置自己的账号！";
       }
+      this.setData({id, token, desc})
+    }
+  },
+  lifetimes: {
+    ready() {
+      this.updateConfigInfo()
     }
   },
   pageLifetimes: {
     show() {
-      let config = app.globalData.config;
-      var id = config.id;
-      var token = config.token;
-      this.setData({id,token})
+      this.updateConfigInfo()
     }
   }
 })
