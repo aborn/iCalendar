@@ -89,14 +89,7 @@ Page({
           wx.setStorage({
             key: "config",
             data: config,
-            success: (data) => {
-              // 成功以后，直接返回上一级   
-              /**
-              wx.navigateTo({
-                url:'/pages/index/index?tab=about'
-              })
-              */
-
+            success: () => {
               wx.navigateBack({
                 success: () => {
                   wx.showToast({
@@ -107,7 +100,7 @@ Page({
               })
 
             },
-            fail: (data) => {
+            fail: () => {
               wx.showToast({
                 title: '配置提交失败！原因：本地存储失败。',
                 icon: 'none'

@@ -8,8 +8,6 @@ Component({
     desc: '',
   },
   attached() {
-    console.log('about is attached.')
-    console.log('tab===' + this.tab)
   },
   methods: {
     updateConfigInfo() {
