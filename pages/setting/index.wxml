@@ -10,9 +10,9 @@
 
 <view class="icalander-block__title">设置帐号信息</view>
 <van-cell-group>
-  <van-field label="用户id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id"
+  <van-field label="帐号id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id"
     border="{{ true }}" bind:change="onChange" required />
-  <van-field label="用户token" value="{{ token }}" data-field='token' data-value="{{ token }}" placeholder="请输id对应的token"
+  <van-field label="帐号token" value="{{ token }}" data-field='token' data-value="{{ token }}" placeholder="请输id对应的token"
     border="{{ false }}" bind:change="onChange" required />
 </van-cell-group>
 
