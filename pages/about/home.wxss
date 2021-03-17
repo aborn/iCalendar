@@ -8,31 +8,41 @@
   font-size: 14px;
 }
 
-.icalander-about__title {
+.icalander-about__tips {
   margin: 0;
-  padding: 10px 15px 15px;
+  padding: 20px 15px 15px;
+  color: #F73131;
+  font-size: 12px;  
+}
+
+.icalander-about__title {
+  padding: 15px 15px 10px;
   color: rgba(69, 90, 100, 0.6);
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
+  text-align: center;
+  background-color: white;
 }
 
-.demo-preview {
+.icalander-about_preview {
   display: flex;
   padding: 0 16px;
+  background-color: white;
+  padding: 0px 15px 15px;
 }
 
-.demo-content {
+.icalander-about_content {
   color:rgba(69, 90, 100, 0.6);
   font-size: 13px;
 }
 
-.demo-content-h3 {
-  margin: 0;
+.icalander-about_content-h3 {
   font-size: 18px;
   line-height: 20px;
+  margin: 10px 0 0;
 }
 
-.demo-content-p {
+.icalander-about_content-p {
   margin: 13px 0 0;
   font-size: 13px;
   line-height: 20px;

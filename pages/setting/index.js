@@ -80,8 +80,10 @@ Page({
         if (res.data.code === 200) {
           // 有可能这个config还有其他信息
           var config = wx.getStorageSync('config') || {}
-          config.token = ctoken
-          config.id = cid
+          config.token = data.token
+          config.id = data.id
+          config.regDate = data.createDate
+          config.type = data.type;
 
           // 更新下全局信息
           app.globalData.config = config;

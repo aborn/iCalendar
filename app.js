@@ -28,6 +28,8 @@ App({
     TestConfig: {
       token: "8ba394513f8420e",
       id: "webx",
+      type: "TEST",
+      regDate: "2021-03-18"
     },
     ColorList: [{
         title: '嫣红',

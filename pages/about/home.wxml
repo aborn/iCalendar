@@ -1,20 +1,26 @@
 <cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
   <view slot="backText">返回</view>
-  <view slot="content">我的</view>
+  <view slot="content">个人中心</view>
 </cu-custom>
-<view class="icalander-block__title">配置信息</view>
-<van-cell-group>
-  <van-cell title="id" value="{{id}}" />
-  <van-cell title="token" value="{{token}}" />
-  <van-cell title="设置" is-link link-type="navigateTo" url="/pages/setting/index" />
-</van-cell-group>
-<view class="icalander-block__title">{{desc}}</view>
-
 <view class="icalander-about__title">关于「i极客日历」</view>
-<view class="demo-preview">
-  <view class="demo-content">
-    <view class="domo-content-p">通过本小程序可以查看自己的编程足迹，注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
-    <view class='domo-content-p'>https://github.com/aborn/webx</view>
-    <view class='domo-content-p'>当前版本V1.0，更多功能敬请期待！</view>
+<view class="icalander-about_preview">
+  <view class="icalander-about_content">
+    <view class="icalander-about_content-p">通过本小程序可以查看自己的编程足迹。注意需要在IDEA中安装WebX插件，具体使用说明见：</view>
+    <view class='icalander-about_content-h3'>https://github.com/aborn/webx</view>
+    <view class='icalander-about_content-p'>当前版本V1.0，更多功能敬请期待！</view>
   </view>
 </view>
+
+<view class="icalander-block__title">帐号信息</view>
+<van-cell-group>
+  <van-cell title="帐号id" value="{{id}}" />
+  <van-cell title="帐号token" value="{{token}}" />
+  <van-cell title="帐号类型" value="{{type}}" />
+  <van-cell title="注册时间" value="{{regDate}}" />
+</van-cell-group>
+<view class="icalander-about__tips" wx:if="{{desc}}"><van-icon name="info-o" /> {{desc}}</view>
+<van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />
+<van-cell-group>
+  <van-cell title="设置" is-link link-type="navigateTo" url="/pages/setting/index" />
+</van-cell-group>
+
