@@ -3,6 +3,5 @@
 .icalander-setting__sub-button {
   margin: 0;
   padding: 20px 15px 15px;
-  margin-right: 10px;
   text-align: right;
 }

@@ -7,7 +7,6 @@ Page({
   data: {
     pageCur: 'code', // 首次打开时进入的page页
     active: 0, // 激活的tab
-    tab: 'code',
   },
   onTabChange(e) {
     var tabIndex = e.detail;
@@ -19,15 +18,12 @@ Page({
     }
 
     this.setData({
-      tab: pageCur,
       active: e.detail,
       pageCur
     })
   },
   onLoad: function () {
     var thatThat = this;
-    var tab = this.data.tab;
-    console.log('tab=' + tab)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

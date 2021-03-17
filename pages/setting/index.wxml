@@ -1,21 +1,21 @@
 <!--pages/setting/index.wxml-->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content">设置个人信息</view>
+  <view slot="content">帐号设置</view>
 </cu-custom>
 
 <!--
 <van-nav-bar title="设置个人信息" left-text="返回" left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" />
 -->
 
-<view class="icalander-block__title">设置</view>
+<view class="icalander-block__title">设置帐号信息</view>
 <van-cell-group>
-  <van-field label="id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id"
+  <van-field label="用户id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id"
     border="{{ true }}" bind:change="onChange" required />
-  <van-field label="token" value="{{ token }}" data-field='token' data-value="{{ token }}" placeholder="请输id对应的token"
+  <van-field label="用户token" value="{{ token }}" data-field='token' data-value="{{ token }}" placeholder="请输id对应的token"
     border="{{ false }}" bind:change="onChange" required />
 </van-cell-group>
 
 <view class="icalander-setting__sub-button">
-  <van-button type="warning" disabled="{{buttonDisabledStatus}}" round bind:click="onSubmit">提交</van-button>
+  <van-button type="primary" disabled="{{buttonDisabledStatus}}" bind:click="onSubmit">提交修改</van-button>
 </view>
