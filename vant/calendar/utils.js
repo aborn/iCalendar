@@ -1,4 +1,5 @@
-export const ROW_HEIGHT = 64;
+export const ROW_HEIGHT = 64;      // 默认每个有的高（默认为5排）
+export const ROW_HEIGHT_6ROW = 53; // 当一个月的date有6排时，每行的高
 export function formatMonthTitle(date) {
   if (!(date instanceof Date)) {
     date = new Date(date);
@@ -149,3 +150,18 @@ export function isToday(date) {
 export function getDate(date) {
   return (date instanceof Date ? date : new Date(date))
 };
+
+// 获取一个月有几排，传入为当月的任何一天
+export function getMonthWeek(d) {
+  let date = new Date(getDate(d));
+  let currentDate = date.getDate();
+  if (currentDate !== 1) {
+    date.setDate(1)
+  }
+
+  let offset = date.getDay();
+  date.setMonth(date.getMonth() + 1)
+  date.setDate(0)
+  let countOfMonthDays = date.getDate();
+  return Math.ceil((countOfMonthDays + offset) /7)
+}

@@ -3,6 +3,7 @@ import {
 } from '../common/component';
 import {
   ROW_HEIGHT,
+  ROW_HEIGHT_6ROW,
   getNextDay,
   compareDay,
   copyDates,
@@ -17,6 +18,7 @@ import {
   getDate,
   getChangeType,
   getTargetFrameIndex,
+  getMonthWeek,
 } from './utils';
 import Toast from '../toast/toast';
 import {
@@ -142,7 +144,8 @@ VantComponent({
       cDatas: this.initCalenderDatas(),
       preIndex: this.frameIndex || 1,
       curIndex: this.frameIndex || 1,
-      cFrameDate: new Date(this.data.currentDate)
+      cFrameDate: new Date(this.data.currentDate),
+      rowHeight: this.recalRowHeight(),
     });
   },
   mounted() {
@@ -184,6 +187,11 @@ VantComponent({
       }
       this.navigateToDay(targetDate, source);
     },
+    recalRowHeight(d) {
+      var date = d || new Date();
+      let num = getMonthWeek(date)
+      return num > 5 ? ROW_HEIGHT_6ROW : ROW_HEIGHT;
+    },
     navigateToDay(targetDate, source) { // 切换到具体某一天
       const {
         curIndex, // 上一次的frameIndex
@@ -194,6 +202,9 @@ VantComponent({
       var eventType = getChangeType(currentDate, targetDate);
       var targetDateD = getDate(targetDate);
       var showToday = !isToday(new Date(targetDateD))
+      this.setData({
+        rowHeight: this.recalRowHeight(targetDateD)
+      })
 
       if ("cur" === eventType) { // 如果是当月，不需要滑动，只需要切换到那一日即可
         this.setData({
@@ -281,7 +292,7 @@ VantComponent({
         type,
         defaultDate,
         minDate
-      } = this.data;      
+      } = this.data;
       return defaultDate || minDate;
     },
     scrollIntoView() {
