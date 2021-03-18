@@ -7,7 +7,7 @@
   <view class="icalander-about_content">
     <view class="icalander-about_content-p">通过本小程序可以查看自己的编程足迹。</view>
     <view class="icalander-about_content-p"><van-icon name="warning" />注意：需要在你的IDE中安装WebX插件，使用详情见：</view>
-    <view class='icalander-about_content-h3'>https://github.com/aborn/webx</view>
+    <view class='icalander-about_content-h3'>https://github.com/aborn/iCalendar</view>
     <view class='icalander-about_content-p'>当前版本V1.0，更多功能敬请期待！</view>
   </view>
 </view>
