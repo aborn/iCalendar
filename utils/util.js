@@ -60,23 +60,25 @@ const transToLevelValue = (value) => {
     return 4;
   }
 }
-const stepValue = (value, isToday) => {
+const stepValue = (value, type) => {
   var time = new Date();
   var hour = time.getHours();
-  if (!isToday) {
+  if (!type || type === 0) {
     return value;
-  } else if (value <= hour) {
+  } else if (type === 1 && value <= hour) {
     return value;
   } else {
     return undefined;
   }
 }
-const transToLevel = (dayStaticByHour, isToday) => {
+
+// type 不传值或者传0 表示过去, type = 1表示今天, type = 2表示未来
+const transToLevel = (dayStaticByHour, type) => {
   return dayStaticByHour.map((item, index) => {
     return {
       value: item,
       level: transToLevelValue(item),
-      stepValue: stepValue(index, isToday)
+      stepValue: stepValue(index, type)
     }
   })
 }
@@ -116,6 +118,12 @@ const isToday = (date) => {
     dateInput.getDate() === today.getDate())
 }
 
+const isFuture = (date) => {
+  var today = new Date();
+  var dateInput = getDate(date);
+  return dateInput > today;
+}
+
 const getDayFullValue = (date, isMonth) => {
   date = getDate(date);
 
@@ -144,5 +152,6 @@ module.exports = {
   isToday: isToday,
   getDayFullValue: getDayFullValue,
   getCodeDayColor: getCodeDayColor,
-  getDate: getDate
+  getDate: getDate,
+  isFuture: isFuture,
 }

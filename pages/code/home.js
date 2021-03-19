@@ -167,6 +167,18 @@ Component({
       var self = this;      
       var isToday = util.isToday(date);
       var dayInfo = util.getDayFullValue(date);
+      var isFuture = util.isFuture(date);
+      var type = isToday ? 1 : (isFuture ? 2 : 0);
+      if (isFuture) {
+        self.setData({
+          codeTime: '',
+          dayStaticByHour: util.transToLevel(util.initCellData(), type),
+          codeDayColor: util.getCodeDayColor(0)
+        })
+        return
+      }
+
+      console.log('isFuture=' + isFuture + ', type=' + type)
       // var tips = this.data.tips;
       // var day = util.getDate(date).getDate();
       var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
@@ -182,21 +194,21 @@ Component({
             var codeTimeSecond = res.data.data.codeTime;            
             self.setData({
               codeTimeDesc: res.data.data.desc,
-              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, isToday),
+              dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, type),
               codeTime: util.readTimeDesc(codeTimeSecond),
               codeDayColor: util.getCodeDayColor(codeTimeSecond),
             })
           } else if (res.data.code === 201) {
             self.setData({
               codeTime: '0分钟',
-              dayStaticByHour: util.transToLevel(util.initCellData()),
+              dayStaticByHour: util.transToLevel(util.initCellData(), type),
               codeDayColor: util.getCodeDayColor(0)
             })
             console.log('暂无编程数据。')
           } else {
             self.setData({
               codeTime: '未知-501',
-              dayStaticByHour: util.transToLevel(util.initCellData()),
+              dayStaticByHour: util.transToLevel(util.initCellData(), type),
               codeDayColor: util.getCodeDayColor(0)
             })
             console.log('获取数据失败。')
