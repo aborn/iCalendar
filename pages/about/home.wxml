@@ -9,8 +9,8 @@
     <view class="icalander-about_content-p">使用说明（按以下3步）：</view>
     <view class="icalander-about_content-p">1、在IDE中安装WebX插件</view>
     <view class="icalander-about_content-p">2、发邮件到aborn#aborn.me注册用户信息</view>
-    <view class="icalander-about_content-p">3、在IDE及小程序中配置用户id和token信息</view>
-    <view class="icalander-about_content-p"><van-icon name="info" />详情见：</view>
+    <view class="icalander-about_content-p">3、在IDE及小程序中配置用户id（GitHub id）和token（见邮件回复）信息</view>
+    <view class="icalander-about_content-p"><van-icon name="info" />具体操作详情见：</view>
     <view class='icalander-about_content-h3'>https://github.com/aborn/iCalendar</view>
   </view>
 </view>
