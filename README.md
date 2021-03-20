@@ -4,3 +4,11 @@ iCalendar--i极客日历 小程序。
 ## 效果图
 
 ![](images/demo.png)
+
+## 使用说明  
+
+1. 在IDE中安装WebX插件，如何安装见[WebX](https://github.com/aborn/WebX)  
+2. 发邮件到aborn#aborn.me注册用户id和token信息    
+> **i) 申请邮件标题为：注册极客日历用户+GitHub ID**
+> **ii)前期开放100个免费注册名额**
+3. 在IDE及小程序中配置用户id和token信息  
