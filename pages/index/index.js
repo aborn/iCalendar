@@ -7,6 +7,7 @@ Page({
   data: {
     pageCur: 'code', // 首次打开时进入的page页
     active: 0, // 激活的tab
+    dot: false
   },
   onTabChange(e) {
     var tabIndex = e.detail;
@@ -32,6 +33,9 @@ Page({
     }
   },
   onShow: function () {
+    this.setData({
+      dot: app.globalData.TestConfig.token===app.getToken()
+    })
   },
   getUserInfo: function (e) {
     console.log(e)
