@@ -153,7 +153,7 @@ Component({
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
     },
-    tips:{}
+    tips: {}
   },
   methods: {
     hcellClickEvent(e) {
@@ -161,10 +161,16 @@ Component({
         value,
         hour
       } = e.currentTarget.dataset
-      console.log('hour:' + hour + "，编程时间:" + (value * 0.5) + "分钟");
+      var title = "编程时间" + (value * 0.5) + "分钟";
+      if (value > 0) {
+        wx.showToast({
+          title,
+          icon: 'none'
+        });
+      }
     },
     showCodingTime(date) {
-      var self = this;      
+      var self = this;
       var isToday = util.isToday(date);
       var dayInfo = util.getDayFullValue(date);
       var isFuture = util.isFuture(date);
@@ -191,7 +197,7 @@ Component({
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
-            var codeTimeSecond = res.data.data.codeTime;            
+            var codeTimeSecond = res.data.data.codeTime;
             self.setData({
               codeTimeDesc: res.data.data.desc,
               dayStaticByHour: util.transToLevel(res.data.data.dayStaticByHour, type),
@@ -246,7 +252,7 @@ Component({
             // 接入来获取最新列表
           } else if (res.data.code === 201) {
             console.log('暂无本月提示数据。')
-          } else {            
+          } else {
             console.log('获取月度提示数据失败。')
           }
         }
@@ -259,7 +265,7 @@ Component({
     },
     changeMonth(e) {
       this.setData({
-        tips:{}
+        tips: {}
       })
       var date = new Date(e.detail);
       var month = util.getDayFullValue(date, true)
