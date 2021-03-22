@@ -183,10 +183,7 @@ Component({
         })
         return
       }
-
-      console.log('isFuture=' + isFuture + ', type=' + type)
-      // var tips = this.data.tips;
-      // var day = util.getDate(date).getDate();
+      
       var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
       console.log('url=' + url);
 
@@ -249,7 +246,6 @@ Component({
             self.setData({
               tips
             })
-            // 接入来获取最新列表
           } else if (res.data.code === 201) {
             console.log('暂无本月提示数据。')
           } else {
