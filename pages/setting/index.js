@@ -109,9 +109,14 @@ Page({
               });
             }
           })
+        } else if (res.data.code === 201) {
+          wx.showModal({
+            title: "帐号token或id不正确！",
+            showCancel: false
+          })
         } else {
           wx.showToast({
-            title: '配置提交失败！',
+            title: '服务器忙，请稍后重试！',
             icon: 'none'
           });
         }
@@ -129,11 +134,12 @@ Page({
     var cid = app.globalData.config.id
     this.setData({token,id,ctoken,cid})
 
-    var testConfig = app.globalData.TestConfig;
-    console.log("on Load");
+    /**
+    var testConfig = app.globalData.TestConfig;    
     if (id === testConfig.id && token === testConfig.token) {
       console.log('当前账号为测试账号')
     }
+     */
   },
 
   /**
