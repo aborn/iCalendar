@@ -101,11 +101,6 @@ export const festival = {
         type: 'festival',
         name: '愚人节',
         label: '愚人节'
-      },
-      5: {
-        type: 'festival',
-        name: '清明节',
-        label: '清明节'
       }
     },
     5: {
@@ -113,11 +108,6 @@ export const festival = {
         type: 'festival',
         name: '劳动节',
         label: '劳动节'
-      },
-      6: {
-        type: 'festival',
-        name: '立夏',
-        label: '立夏'
       }
     },
     6: {
@@ -161,6 +151,11 @@ export const festival = {
       }
     },
     12: {
+      4: {
+        type: 'festival',
+        name: '宪法日',
+        label: '宪法日'
+      },
       25: {
         type: 'festival',
         name: '圣诞节',
