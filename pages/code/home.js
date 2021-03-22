@@ -183,7 +183,7 @@ Component({
         })
         return
       }
-      
+
       var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
       console.log('url=' + url);
 
@@ -254,6 +254,49 @@ Component({
         }
       })
     },
+    loadYearHolidays(year) {
+      // 获取这一年的假日信息并缓存下来 （每次页面加载的时候请求一次，每天请求一次）
+      var self = this;
+      var url = 'https://aborn.me/webx/conf/loadYearHolidays?token=' + app.getToken() + '&year=' + year
+      console.log('url=' + url);
+
+      const key = "year-" + year;
+      var dataCache = wx.getStorageSync(key);
+      if (dataCache) {
+        var today = new Date();
+        const todayStr = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
+        const cacheTime = util.getDate(dataCache.time)
+        const cacheDayStr = cacheTime.getFullYear() + "-" + cacheTime.getMonth() + "-" + cacheTime.getDate()
+        if (cacheDayStr === todayStr) {
+          // 同一天不需要重得请求
+          console.log('这天已经有缓存的日历数据，无需要再请求!')
+          return;
+        }
+      }
+
+      wx.request({
+        url: url,
+        data: {},
+        success: function (res) {
+          console.log(res);
+          if (res.data.code === 200) {
+            console.log('有数据')
+            var data = res.data.data;
+            data.time = new Date();
+
+            wx.setStorage({
+              key: key,
+              data: data,
+            })
+            // 数据缓存起来，记录数据缓存的时间
+          } else if (res.data.code === 201) {
+            console.log('暂无这年的假期数据。')
+          } else {
+            console.log('服务器异常。')
+          }
+        }
+      })
+    },
     afterSelectDate(e) {
       // 详情数据对象
       var date = e.detail;
@@ -283,6 +326,7 @@ Component({
       var month = util.getDayFullValue(date, true);
       this.showCodingTime(date);
       this.showTips(month);
+      this.loadYearHolidays(year);
     }
   },
   attached() {
