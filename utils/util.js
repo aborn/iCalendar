@@ -118,7 +118,7 @@ const getDayFullValue = (date, isMonth) => {
 
 const getTime = (date) => (date instanceof Date ? date.getTime() : date);
 
-const getDate = (date) => (date instanceof Date ? date : new Date(date));
+export function getDate(date) {return (date instanceof Date ? date : new Date(date))};
 
 const formatHoliday = (holidays) => {
   var holidaysFormatData = {};

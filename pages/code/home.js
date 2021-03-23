@@ -1,6 +1,7 @@
 // pages/read/home/home.js
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
+import { holidays } from '../../utils/holidays'
 import convertSolarLunar from '../../utils/lunar'
 const app = getApp()
 
@@ -13,7 +14,7 @@ Component({
     frameIndex: 1,
     token: app.globalData.config.token,
     defaultDate: new Date().getTime(), // 默认选中为今天
-    holidays:{},
+    holidaysType:{},
     dayStaticByHour: [{
         value: 0,
         level: 0
@@ -220,10 +221,42 @@ Component({
         }
       })
     },
+    showHolidays(month) {
+      // TODO
+    },
     showTips(month) {
       var self = this;
       var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + app.getToken() + '&month=' + month
       console.log('url=' + url);
+
+      var holidaysType = this.data.holidaysType;      
+      var tips = {};
+
+      if (holidaysType) {
+        for (var i=0; i<31; i++) {
+          var j = i + 1;
+          var dayinfo = month + '-'+ (j < 10 ? '0' + j : j );
+          var type = holidaysType[dayinfo];
+          if (!type) {continue;}
+
+          if (type > 0) {
+            console.log(dayinfo + ', type=' + type);
+          }
+          tips[i] = {};
+          tips[i].type = type;
+          if (type === 1) {
+            tips[i].text = '休'
+            tips[i].class = 'van-calendar_text-holidays'
+          } else if (type === 2) {
+            tips[i].text = '班'
+            tips[i].class = 'van-calendar_text-workdays'
+          }
+        }
+        self.setData({
+          tips
+        })
+        return;
+      }
 
       // 获取每个月的代码提示信息
       wx.request({
@@ -256,11 +289,9 @@ Component({
       })
     },
     loadYearHolidays(year) {
-      // 获取这一年的假日信息并缓存下来 （每次页面加载的时候请求一次，每天请求一次）
-      var self = this;
+      // 获取这一年的假日信息并缓存下来 （每次页面加载的时候请求一次，每天请求一次）      
       var url = 'https://aborn.me/webx/conf/loadYearHolidays?token=' + app.getToken() + '&year=' + year
       console.log('url=' + url);
-
       const key = "year-" + year;
       var dataCache = wx.getStorageSync(key);
       if (dataCache) {
@@ -328,9 +359,9 @@ Component({
       this.showTips(month);
       this.loadYearHolidays(year);
       
-      var holidays = util.formatHoliday(wx.getStorageSync("year-" + year))
+      var holidaysType = util.formatHoliday(wx.getStorageSync("year-" + year))
       this.setData({
-        holidays: holidays || {}
+        holidaysType: holidaysType || {}
       })
     }
   },
