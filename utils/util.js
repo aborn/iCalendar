@@ -12,30 +12,6 @@ const DayCicleColor = {
   '12h': "#006400"
 }
 
-const getStoregeLastDayInfo = () => {
-  var lastDayInfo = wx.getStorageSync('lastdayinfo');
-  if (lastDayInfo == null) {
-    return null;
-  } else {
-    var end = lastDayInfo.end;
-    if (end == null) {
-      return null;
-    } else {
-      var time = new Date(end);
-      var lastDate = new Date();
-      var now = new Date();
-      lastDate.setDate(now.getDate() - 1);
-      var lastDateInfo = timeutil.formatDay(lastDate);
-      var storeInfo = timeutil.formatDay(time);
-      if (lastDateInfo === storeInfo) {
-        return lastDayInfo;
-      } else {
-        return null;
-      }
-    }
-  }
-}
-
 const readTimeDesc = (second) => {
   var hour = Math.floor(second / 3600);
   var minute = second / 60.0;
@@ -157,7 +133,6 @@ const formatHoliday = (holidays) => {
 }
 
 module.exports = {
-  getStoregeLastDayInfo: getStoregeLastDayInfo,
   readTimeDesc: readTimeDesc,
   transToLevel: transToLevel,
   initCellData: initCellData,

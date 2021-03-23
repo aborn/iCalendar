@@ -2,14 +2,16 @@ import {
   holidays,
   festival
 } from './holidays'
+import { getDate } from './util'
 
-const formatDay = (date, joinCons) => {
+const formatDay = (d, joinCons) => {
+  const date = getDate(d);
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   var joinCons = joinCons;
   if (!joinCons) {
-    joinCons = '/'; // 默认值
+    joinCons = '-'; // 默认值
   }
   return [year, month, day].map(formatNumber).join(joinCons);
 }
