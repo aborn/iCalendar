@@ -144,6 +144,18 @@ const getTime = (date) => (date instanceof Date ? date.getTime() : date);
 
 const getDate = (date) => (date instanceof Date ? date : new Date(date));
 
+const formatHoliday = (holidays) => {
+  var holidaysFormatData = {};
+  const year = holidays.year;
+  holidays.holidays.map((item) => {
+    holidaysFormatData[year + "-" + item] = 1   // 工作日
+  })
+  holidays.workdays.map((item) => {
+    holidaysFormatData[year + "-" + item] = 2   // 休息日
+  })
+  return holidaysFormatData;
+}
+
 module.exports = {
   getStoregeLastDayInfo: getStoregeLastDayInfo,
   readTimeDesc: readTimeDesc,
@@ -154,4 +166,5 @@ module.exports = {
   getCodeDayColor: getCodeDayColor,
   getDate: getDate,
   isFuture: isFuture,
+  formatHoliday: formatHoliday,
 }

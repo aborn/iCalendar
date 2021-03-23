@@ -13,6 +13,7 @@ Component({
     frameIndex: 1,
     token: app.globalData.config.token,
     defaultDate: new Date().getTime(), // 默认选中为今天
+    holidays:{},
     dayStaticByHour: [{
         value: 0,
         level: 0
@@ -268,8 +269,7 @@ Component({
         const cacheTime = util.getDate(dataCache.time)
         const cacheDayStr = cacheTime.getFullYear() + "-" + cacheTime.getMonth() + "-" + cacheTime.getDate()
         if (cacheDayStr === todayStr) {
-          // 同一天不需要重得请求
-          console.log('这天已经有缓存的日历数据，无需要再请求!')
+          // 同一天不需要重新请求
           return;
         }
       }
@@ -327,63 +327,14 @@ Component({
       this.showCodingTime(date);
       this.showTips(month);
       this.loadYearHolidays(year);
+      
+      var holidays = util.formatHoliday(wx.getStorageSync("year-" + year))
+      this.setData({
+        holidays: holidays || {}
+      })
     }
   },
   attached() {
     // 第二种方式通过组件的生命周期函数执行代码
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {},
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
 })
