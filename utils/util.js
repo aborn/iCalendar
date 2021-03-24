@@ -23,16 +23,17 @@ const readTimeDesc = (second) => {
   }
 }
 
+// 每个小时的阶梯分布，css见webx-hcell
 const transToLevelValue = (value) => {
-  if (value <= 0) {
+  if (value == 0) {            
     return 0;
-  } else if (value <= 2 * 5) { // 5分钟
+  } else if (value <= 2 * 5) { // 0～5分钟
     return 1;
-  } else if (value <= 2 * 20) {
+  } else if (value <= 2 * 10) { // 5～10分钟
     return 2;
-  } else if (value <= 2 * 40) {
+  } else if (value <= 2 * 30) { // 10～30分钟
     return 3;
-  } else {
+  } else {      // 30分钟以上
     return 4;
   }
 }

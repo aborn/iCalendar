@@ -4,9 +4,8 @@
 		<view slot="content">极客日历</view>
 	</cu-custom>
 
-	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}"
-		bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" minDate="{{ minDate }}" maxDate="{{ maxDate }}"
-		subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}" changeFrame="{{ changeFrame }}" tips="{{tips}}" holidayTips="{{holidayTips}}"
+	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" color="{{color}}"
+		bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}" changeFrame="{{ changeFrame }}" tips="{{tips}}" holidayTips="{{holidayTips}}"
 		showSubtitle />
 
 	<van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />

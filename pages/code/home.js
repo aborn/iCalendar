@@ -10,6 +10,7 @@ Component({
   },
   data: {
     codeDayColor: "#07c160",
+    color:'#FFD400',
     frameIndex: 1,
     token: app.globalData.config.token,
     defaultDate: new Date().getTime(), // 默认选中为今天
