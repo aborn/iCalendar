@@ -234,7 +234,7 @@ Component({
           if (!type) {
             continue;
           }
-          
+
           holidayTips[i] = type;
         }
         this.setData({
@@ -244,6 +244,14 @@ Component({
     },
     showTips(month) {
       var self = this;
+      var date = new Date();
+      date.setFullYear(month.substring(0, 4))
+      date.setMonth(month.substring(5, 7) - 1)
+      date.setDate(1)
+
+      if (util.isFuture(date)) {
+        return;
+      }
       var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + app.getToken() + '&month=' + month
       console.log('url=' + url);
 
