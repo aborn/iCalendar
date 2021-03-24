@@ -8,7 +8,7 @@
       <scroll-view class="van-calendar__body" scroll-y style="height: auto">
         <month id="month{{index}}" class="month" data-date="{{ cDatas[index] }}" date="{{ cDatas[index] }}" type="{{ type }}"
           color="{{ color }}" showMark="{{ showMark }}" formatter="{{ formatter }}" rowHeight="{{ rowHeight }}"
-          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" tips="{{tips}}" />
+          currentDate="{{ currentDate }}" showSubtitle="{{ showSubtitle }}" bind:click="onClickDay" tips="{{tips}}" holidayTips="{{holidayTips}}"/>
       </scroll-view>
     </swiper-item>
   </swiper>

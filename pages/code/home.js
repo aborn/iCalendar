@@ -1,7 +1,6 @@
 // pages/read/home/home.js
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
-import { holidays } from '../../utils/holidays'
 import convertSolarLunar from '../../utils/lunar'
 const app = getApp()
 
@@ -14,7 +13,6 @@ Component({
     frameIndex: 1,
     token: app.globalData.config.token,
     defaultDate: new Date().getTime(), // 默认选中为今天
-    holidaysType:{},
     dayStaticByHour: [{
         value: 0,
         level: 0
@@ -155,7 +153,8 @@ Component({
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
     },
-    tips: {}
+    tips: {},
+    holidayTips: {}
   },
   methods: {
     hcellClickEvent(e) {
@@ -221,42 +220,32 @@ Component({
         }
       })
     },
-    showHolidays(month) {
-      // TODO
+    showMonthHolidays(month, yearCache) {
+      // month的格式为：2021-02
+      const holidaysTypeCache = yearCache || wx.getStorageSync("year-" + month.substring(0, 4))
+      var holidayTips = {};
+
+      if (holidaysTypeCache) {
+        const holidaysType = util.formatHoliday(holidaysTypeCache)
+        for (var i = 0; i < 31; i++) {
+          var j = i + 1;
+          var dayinfo = month + '-' + (j < 10 ? '0' + j : j);
+          var type = holidaysType[dayinfo];
+          if (!type) {
+            continue;
+          }
+          
+          holidayTips[i] = type;
+        }
+        this.setData({
+          holidayTips
+        })
+      }
     },
     showTips(month) {
       var self = this;
       var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + app.getToken() + '&month=' + month
       console.log('url=' + url);
-
-      var holidaysType = this.data.holidaysType;      
-      var tips = {};
-
-      if (holidaysType) {
-        for (var i=0; i<31; i++) {
-          var j = i + 1;
-          var dayinfo = month + '-'+ (j < 10 ? '0' + j : j );
-          var type = holidaysType[dayinfo];
-          if (!type) {continue;}
-
-          if (type > 0) {
-            console.log(dayinfo + ', type=' + type);
-          }
-          tips[i] = {};
-          tips[i].type = type;
-          if (type === 1) {
-            tips[i].text = '休'
-            tips[i].class = 'van-calendar_text-holidays'
-          } else if (type === 2) {
-            tips[i].text = '班'
-            tips[i].class = 'van-calendar_text-workdays'
-          }
-        }
-        self.setData({
-          tips
-        })
-        return;
-      }
 
       // 获取每个月的代码提示信息
       wx.request({
@@ -265,20 +254,8 @@ Component({
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
-            var tips = {};
-            var dayStatic = res.data.data.dayStatic;
-            dayStatic.map((item, index) => {
-              tips[index] = item;
-              if (item.type === 1) {
-                tips[index].text = '休'
-                tips[index].class = 'van-calendar_text-holidays'
-              } else if (item.type === 2) {
-                tips[index].text = '班'
-                tips[index].class = 'van-calendar_text-workdays'
-              }
-            })
             self.setData({
-              tips
+              tips : res.data.data.dayStatic
             })
           } else if (res.data.code === 201) {
             console.log('暂无本月提示数据。')
@@ -288,10 +265,8 @@ Component({
         }
       })
     },
-    loadYearHolidays(year) {
+    loadYearHolidays(year, month) {
       // 获取这一年的假日信息并缓存下来 （每次页面加载的时候请求一次，每天请求一次）      
-      var url = 'https://aborn.me/webx/conf/loadYearHolidays?token=' + app.getToken() + '&year=' + year
-      console.log('url=' + url);
       const key = "year-" + year;
       var dataCache = wx.getStorageSync(key);
       if (dataCache) {
@@ -299,19 +274,25 @@ Component({
         const todayStr = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
         const cacheTime = util.getDate(dataCache.time)
         const cacheDayStr = cacheTime.getFullYear() + "-" + cacheTime.getMonth() + "-" + cacheTime.getDate()
+        if (month) {
+          this.showMonthHolidays(month, dataCache)
+        }
+
         if (cacheDayStr === todayStr) {
           // 同一天不需要重新请求
           return;
         }
       }
 
+      var url = 'https://aborn.me/webx/conf/loadYearHolidays?token=' + app.getToken() + '&year=' + year
+      console.log('url=' + url);
       wx.request({
         url: url,
         data: {},
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
-            console.log('有数据')
+            console.log(year + '有假期数据。')
             var data = res.data.data;
             data.time = new Date();
 
@@ -319,7 +300,8 @@ Component({
               key: key,
               data: data,
             })
-            // 数据缓存起来，记录数据缓存的时间
+
+            this.showMonthHolidays(month, data)
           } else if (res.data.code === 201) {
             console.log('暂无这年的假期数据。')
           } else {
@@ -340,6 +322,7 @@ Component({
       var date = new Date(e.detail);
       var month = util.getDayFullValue(date, true)
       this.showTips(month)
+      this.showMonthHolidays(month)
     }
   },
 
@@ -354,15 +337,10 @@ Component({
       this.setData({
         subtitle: year + "年" + month + "月"
       })
-      var month = util.getDayFullValue(date, true);
+      var monthFormat = util.getDayFullValue(date, true);
       this.showCodingTime(date);
-      this.showTips(month);
-      this.loadYearHolidays(year);
-      
-      var holidaysType = util.formatHoliday(wx.getStorageSync("year-" + year))
-      this.setData({
-        holidaysType: holidaysType || {}
-      })
+      this.showTips(monthFormat);
+      this.loadYearHolidays(year, monthFormat);
     }
   },
   attached() {

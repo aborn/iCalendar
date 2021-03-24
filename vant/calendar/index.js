@@ -125,6 +125,10 @@ VantComponent({
     tips: {
       type: Object,
       value: null,
+    },
+    holidayTips: {
+      type: Object,
+      value: null,
     }
   },
   data: {
