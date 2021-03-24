@@ -2,14 +2,12 @@ const timeutil = require('timeutil.js')
 
 // https://flaviocopes.com/rgb-color-codes/
 const DayCicleColor = {
-  '0h': "#edf7ff", // 0h
-  'p0h': "#98FB98", // 0~1h
-  '1h': "#90EE90", // 1~2h
-  '2h': "#32CD32",
-  '3h': "#00FF00",
-  '5h': "#228B22",
-  '8h': "#008000",
-  '12h': "#006400"
+  '0': "#FAF5E6", // 0h
+  '1': "#FFD400", // 0~1h
+  '2': "#FBC900",  // 1~2h
+  '3': "#FAB32A",  // 2~4h
+  '4': "#262626", // 4~6h
+  '5': "#000000", // >6h
 }
 
 const readTimeDesc = (second) => {
@@ -63,24 +61,22 @@ const transToLevel = (dayStaticByHour, type) => {
 const getCodeDayColor = (second) => {
   var level = 0
   var hour = Math.floor(second / 3600);
-  if (hour >= 12) { // 1 2 3 5 8 12
-    level = 12
-  } else if (hour >= 8) {
-    level = 8
-  } else if (hour >= 5) {
-    level = 5
-  } else if (hour >= 3) {
+  if (second == 0) {
+    level = 0;
+  } else if (second > 0 && second < 3600) {
+    level = 1;
+  } else if (hour < 2) {
+    level = 2;
+  } else if (hour < 4) {
     level = 3
-  } else if (hour >= 2) {
-    level = 2
-  } else if (hour >= 1) {
-    level = 1
-  } else if (second > 0) {
-    level = "p0"
+  } else if (hour < 6) {
+    level = 4
+  } else if (hour >= 6) {
+    level = 5;
   } else {
     level = 0
-  }
-  return DayCicleColor[level + "h"];
+  }  
+  return DayCicleColor[level];
 }
 
 const initCellData = () => {

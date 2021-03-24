@@ -164,7 +164,7 @@
   width: 8rpx;
   height: 8rpx;
   border-radius: 50%;
-  background-color: green;
+  background-color: #2D2C2E;
   /*这四行是圆形红点*/
 }
 

@@ -9,7 +9,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
-    codeDayColor: "#07c160",
+    codeDayColor: "#FAF5E6",
     color:'#FFD400',
     frameIndex: 1,
     token: app.globalData.config.token,
