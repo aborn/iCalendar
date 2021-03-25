@@ -1,7 +1,8 @@
 <code wx:if="{{pageCur=='code'}}"></code>
 <about wx:if="{{pageCur=='about'}}"></about>
 
-<van-tabbar active="{{ active }}" placeholder bind:change="onTabChange">
-  <van-tabbar-item icon="home-o">极客日历</van-tabbar-item>
-  <van-tabbar-item icon="user-o" dot="{{ dot }}">我的</van-tabbar-item>
+<van-tabbar active="{{ active }}" placeholder bind:change="onTabChange" active-color="#FFD400"
+  inactive-color="#2D2C2E">
+  <van-tabbar-item icon="home-o"><view style="color:#2D2C2E">极客日历</view></van-tabbar-item>
+  <van-tabbar-item icon="user-o" dot="{{ dot }}"><view style="color:#2D2C2E">我的</view></van-tabbar-item>
 </van-tabbar>
