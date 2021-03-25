@@ -160,11 +160,12 @@ VantComponent({
   },
   methods: {
     switch2Today(e) {
+      /**
       var currentDate = new Date(e.detail)
       var curIndex = this.data.curIndex
       console.log(currentDate)
       console.log('current frame=' + curIndex)
-
+      */
       this.navigateToDay(new Date());
     },
     changeFrame(e) {
