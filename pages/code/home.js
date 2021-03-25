@@ -10,7 +10,7 @@ Component({
   },
   data: {
     codeDayColor: "#FAF5E6",
-    color:'#FFD400',
+    color: '#FFD400',
     frameIndex: 1,
     token: app.globalData.config.token,
     defaultDate: new Date().getTime(), // 默认选中为今天
@@ -232,16 +232,15 @@ Component({
           var j = i + 1;
           var dayinfo = month + '-' + (j < 10 ? '0' + j : j);
           var type = holidaysType[dayinfo];
-          if (!type) {
-            continue;
+          if (type && type > 0) {
+            holidayTips[i] = type;
           }
-
-          holidayTips[i] = type;
         }
-        this.setData({
-          holidayTips
-        })
       }
+
+      this.setData({
+        holidayTips
+      })
     },
     showTips(month) {
       var self = this;
@@ -264,7 +263,7 @@ Component({
           console.log(res);
           if (res.data.code === 200) {
             self.setData({
-              tips : res.data.data.dayStatic
+              tips: res.data.data.dayStatic
             })
           } else if (res.data.code === 201) {
             console.log('暂无本月提示数据。')
