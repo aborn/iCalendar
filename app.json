@@ -16,7 +16,6 @@
     "downloadFile": 10000
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom",
     "van-grid": "/vant/grid/index",
     "van-toast": "/vant/toast/index",
     "van-grid-item": "/vant/grid-item/index",
