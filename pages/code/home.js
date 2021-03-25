@@ -274,6 +274,7 @@ Component({
       })
     },
     loadYearHolidays(year, month) {
+      var self = this;
       // 获取这一年的假日信息并缓存下来 （每次页面加载的时候请求一次，每天请求一次）      
       const key = "year-" + year;
       var dataCache = wx.getStorageSync(key);
@@ -283,7 +284,7 @@ Component({
         const cacheTime = util.getDate(dataCache.time)
         const cacheDayStr = cacheTime.getFullYear() + "-" + cacheTime.getMonth() + "-" + cacheTime.getDate()
         if (month) {
-          this.showMonthHolidays(month, dataCache)
+          self.showMonthHolidays(month, dataCache)
         }
 
         if (cacheDayStr === todayStr) {
@@ -309,7 +310,7 @@ Component({
               data: data,
             })
 
-            this.showMonthHolidays(month, data)
+            self.showMonthHolidays(month, data)
           } else if (res.data.code === 201) {
             console.log('暂无这年的假期数据。')
           } else {
