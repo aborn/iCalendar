@@ -1,9 +1,5 @@
 <!--pages/read/home/home.wxml-->
 <scroll-view scroll-y class="scrollPage">
-	<cu-custom bgColor="bg-gradual-blue" isBack="{{fasle}}">
-		<view slot="content">极客日历</view>
-	</cu-custom>
-
 	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" color="{{color}}"
 		bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}" changeFrame="{{ changeFrame }}" tips="{{tips}}" holidayTips="{{holidayTips}}"
 		showSubtitle />

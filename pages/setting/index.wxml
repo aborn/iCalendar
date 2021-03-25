@@ -1,12 +1,4 @@
 <!--pages/setting/index.wxml-->
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">帐号设置</view>
-</cu-custom>
-
-<!--
-<van-nav-bar title="设置个人信息" left-text="返回" left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" />
--->
 
 <view class="icalander-block__title">设置帐号信息</view>
 <van-cell-group>

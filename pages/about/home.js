@@ -31,6 +31,9 @@ Component({
   lifetimes: {
     ready() {
       this.updateConfigInfo()
+      wx.setNavigationBarTitle({
+        title: '个人中心',
+      })
     }
   },
   pageLifetimes: {

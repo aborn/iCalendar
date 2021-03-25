@@ -350,6 +350,9 @@ Component({
       this.showCodingTime(date);
       this.showTips(monthFormat);
       this.loadYearHolidays(year, monthFormat);
+      wx.setNavigationBarTitle({
+        title: '极客日历',
+      })
     }
   },
   attached() {

@@ -4,10 +4,11 @@
     "pages/setting/index"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#39b54a",
+    "navigationBarBackgroundColor": "#FBC900",
     "navigationBarTitleText": "极客日历",
-    "navigationStyle": "custom",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#FBC900"
   },
   "style": "v2",
   "networkTimeout": {
