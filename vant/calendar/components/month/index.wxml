@@ -29,7 +29,7 @@
 
         <view class="{{ holidayTips[index]===1 ? 'van-calendar_text-holidays' : 'van-calendar_text-workdays' }}"
           wx:if="{{ holidayTips && holidayTips[index] > 0}}">{{ holidayTips[index] === 1 ? '休' : '班' }}</view>
-        <view class="{{ holidayTips[index]===1 ? 'icalendar_daytext-holiday' : (holidayTips[index]===2 ? 'icalendar_daytext-workday' : (item.dayType === 'holiday' ? 'icalendar_daytext-holiday' : 'icalendar_daytext-workday' ))}}">
+        <view class="{{ item.type === 'disabled' ? '' : (holidayTips[index]===1 ? 'icalendar_daytext-holiday' : (holidayTips[index]===2 ? 'icalendar_daytext-workday' : (item.dayType === 'holiday' ? 'icalendar_daytext-holiday' : 'icalendar_daytext-workday' )))}}">
           {{ item.text }}
         </view>
         <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index].dot === 1}}"></view>

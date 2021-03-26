@@ -18,3 +18,7 @@
 .lunar-term {
   color: rgb(255, 127, 80);
 }
+
+.normal-term {
+  color: #858585
+}

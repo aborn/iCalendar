@@ -145,16 +145,22 @@ Component({
       const date = day.date.getDate();
       var dateInfo = convertSolarLunar.solar2lunar(year, month, date);
       var lunaDetail = timeUtil.lunarToReadable(dateInfo);
-      if (dateInfo.Term) {
-        day.bottomStyle = 'lunar-term'
-      }
+      
       if (day.date.getTime() > new Date().getTime()) {
         day.type = 'disabled'
       }
+
       const dayInWeek = util.getDate(day.date).getDay();
       if (dayInWeek == 6 || dayInWeek == 0) {
         day.dayType = 'holiday'
       }
+
+      if (dateInfo.Term) {
+        day.bottomStyle = 'lunar-term'
+      } else if (day.type !== 'disabled') {
+        day.bottomStyle = 'normal-term'
+      }
+      
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
     },
