@@ -33,7 +33,7 @@ function getDayStyle(type, index, date, rowHeight, color) {
   }
 
   return style
-    .map(function(item) {
+    .map(function (item) {
       return item.join(':');
     })
     .join(';');
@@ -56,6 +56,20 @@ function getMonthStyle(visible, date, rowHeight) {
     var padding = Math.ceil((totalDay + offset) / 7) * rowHeight;
 
     return 'padding-bottom:' + padding + 'px';
+  }
+}
+
+function getDayTextStyle(dayType, holidayTips) {
+  if (holidayTips === 1) { //  表示放假
+    return 'icalendar_daytext-holiday'
+  } else if (holidayTips === 2) { // 表示补班
+      return 'icalendar_daytext-workday'
+  } else { // 平日
+    if (dayType === 'holiday') {
+      return 'icalendar_daytext-holiday'
+    } else {
+      return 'icalendar_daytext-workday'
+    }
   }
 }
 

@@ -151,6 +151,10 @@ Component({
       if (day.date.getTime() > new Date().getTime()) {
         day.type = 'disabled'
       }
+      const dayInWeek = util.getDate(day.date).getDay();
+      if (dayInWeek == 6 || dayInWeek == 0) {
+        day.dayType = 'holiday'
+      }
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
     },

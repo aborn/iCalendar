@@ -148,12 +148,20 @@
   width: var(--calendar-selected-day-size, 54px);
   height: 54px;
   height: var(--calendar-selected-day-size, 54px);
-  color: #fff;
-  color: var(--calendar-selected-day-color, #fff);
+  color: #2D2C2E;
+  color: var(--calendar-selected-day-color, #2D2C2E);
   background-color: #ee0a24;
   background-color: var(--calendar-selected-day-background-color, #ee0a24);
   border-radius: 4px;
   border-radius: var(--border-radius-md, 4px)
+}
+
+.icalendar_daytext-holiday {
+  color:#FF1111
+}
+
+.icalendar_daytext-workday {
+  color:#2D2C2E
 }
 
 .van-calendar_dot-circle {
