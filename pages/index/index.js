@@ -41,9 +41,7 @@ Page({
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
 
-      console.log("gggggg")
       this.getTabBar().setData({
-        selected: 0,
         callback: (tabIndex) => {
           console.log('callbak called.' + tabIndex)
           var pageCur = 'code';
