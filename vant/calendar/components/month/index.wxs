@@ -58,8 +58,23 @@ function getMonthStyle(visible, date, rowHeight) {
     return 'padding-bottom:' + padding + 'px';
   }
 }
+function getDayTagTextStyle(holidayTips) {
+  if (holidayTips === 1) {
+    return 'van-calendar_text-holidays'
+  } else if (holidayTips === 2) {
+    return 'van-calendar_text-workdays';
+  } else {
+    return ''
+  }
+}
 
-function getDayTextStyle(dayType, holidayTips) {
+function getDayTextStyle(item, holidayTips) {
+  var type = item.type;
+  var dayType = item.dayType;
+  if (type === 'disabled') {
+    return '';
+  }
+
   if (holidayTips === 1) { //  表示放假
     return 'icalendar_daytext-holiday'
   } else if (holidayTips === 2) { // 表示补班
@@ -77,5 +92,7 @@ module.exports = {
   getMark: getMark,
   getDayStyle: getDayStyle,
   formatMonthTitle: formatMonthTitle,
-  getMonthStyle: getMonthStyle
+  getMonthStyle: getMonthStyle,
+  getDayTextStyle: getDayTextStyle,
+  getDayTagTextStyle: getDayTagTextStyle
 };

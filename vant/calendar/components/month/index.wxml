@@ -15,21 +15,29 @@
 
       <view wx:if="{{ item.type === 'selected' }}" class="van-calendar__selected-day" style="background: {{ color }}">
         <view wx:if="{{ item.topInfo }}" class="van-calendar__top-info">{{ item.topInfo }}</view>
-        <view class="{{ holidayTips[index]===1 ? 'icalendar_daytext-holiday' : (holidayTips[index]===2 ? 'icalendar_daytext-workday' : (item.dayType === 'holiday' ? 'icalendar_daytext-holiday' : 'icalendar_daytext-workday' ))}}">
+
+        <view class="{{ computed.getDayTagTextStyle(holidayTips[index]) }}"
+          wx:if="{{ holidayTips && holidayTips[index] > 0}}">{{ holidayTips[index] === 1 ? '休' : '班' }}</view>
+
+        <view class="{{ computed.getDayTextStyle(item, holidayTips[index]) }}">
           {{ item.text }}
         </view>
+
         <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info {{ item.bottomStyle }}">
           {{ item.bottomInfo }}
         </view>
+
       </view>
 
       <view wx:else
         class="{{holidayTips && holidayTips[index] > 0 ? (holidayTips[index] === 1 ? 'van-calendar__cell-holidays' : 'van-calendar__cell-workdays') : ''}}">
+        
         <view wx:if="{{ item.topInfo }}" class="van-calendar__top-info">{{ item.topInfo }}</view>
 
-        <view class="{{ holidayTips[index]===1 ? 'van-calendar_text-holidays' : 'van-calendar_text-workdays' }}"
+        <view class="{{ computed.getDayTagTextStyle(holidayTips[index]) }}"
           wx:if="{{ holidayTips && holidayTips[index] > 0}}">{{ holidayTips[index] === 1 ? '休' : '班' }}</view>
-        <view class="{{ item.type === 'disabled' ? '' : (holidayTips[index]===1 ? 'icalendar_daytext-holiday' : (holidayTips[index]===2 ? 'icalendar_daytext-workday' : (item.dayType === 'holiday' ? 'icalendar_daytext-holiday' : 'icalendar_daytext-workday' )))}}">
+
+        <view class="{{ computed.getDayTextStyle(item, holidayTips[index]) }}">
           {{ item.text }}
         </view>
         <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index].dot === 1}}"></view>
