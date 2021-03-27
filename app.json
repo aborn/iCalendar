@@ -3,6 +3,27 @@
     "pages/index/index",
     "pages/setting/index"
   ],
+  "tabBar": {
+    "custom": true,
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/basics.png",
+        "selectedIconPath": "images/tabbar/basics_cur.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/about.png",
+        "selectedIconPath": "images/tabbar/about_cur.png",
+        "text": "接口"
+      }
+    ]
+  },
   "window": {
     "navigationBarBackgroundColor": "#FBC900",
     "navigationBarTitleText": "极客日历",

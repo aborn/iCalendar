@@ -34,8 +34,32 @@ Page({
   },
   onShow: function () {
     this.setData({
-      dot: app.globalData.TestConfig.token===app.getToken()
+      dot: app.globalData.TestConfig.token === app.getToken()
     })
+
+    var that = this;
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+
+      console.log("gggggg")
+      this.getTabBar().setData({
+        selected: 0,
+        callback: (tabIndex) => {
+          console.log('callbak called.' + tabIndex)
+          var pageCur = 'code';
+          if (tabIndex === 1) {
+            pageCur = 'about';
+          } else {
+            pageCur = 'code';
+          }
+      
+          that.setData({
+            pageCur
+          })
+        }
+      })
+
+    }
   },
   getUserInfo: function (e) {
     console.log(e)
