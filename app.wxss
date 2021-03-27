@@ -22,3 +22,7 @@
 .normal-term {
   color: #858585
 }
+
+.icalendar_default-font-color {
+  color: #2D2C2E
+}

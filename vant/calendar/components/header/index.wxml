@@ -1,7 +1,9 @@
 <view class="van-calendar__header">
 
   <view wx:if="{{ showSubtitle }}" class="van-calendar__header-subtitle">
-    {{ subtitle }} <van-button wx:if="{{ showToday }}" color="#FFD400" custom-style="width:0px;" round type="danger" size="mini" bind:click="onClick" data-date="{{currentDate}}">今</van-button>
+    {{ subtitle }} <van-button wx:if="{{ showToday }}" color="#FFD400" custom-style="width:0px;" round type="danger" size="mini" bind:click="onClick" data-date="{{currentDate}}">
+      <view class="icalendar_default-font-color">今</view>
+    </van-button>
   </view>
 
   <view class="van-calendar__weekdays">
