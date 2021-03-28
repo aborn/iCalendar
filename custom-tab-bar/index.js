@@ -9,14 +9,14 @@ Component({
     list: [
       {
         "pagePath": "/pages/index/index",
-        "iconPath": "../images/tabbar/basics.png",
-        "selectedIconPath": "../images/tabbar/basics_cur.png",
+        "iconPath": "../images/tabbar/home.png",
+        "selectedIconPath": "../images/tabbar/home-filling.png",
         "text": "极客日历"
       },
       {
         "pagePath": "/pages/index/index",
-        "iconPath": "../images/tabbar/about.png",
-        "selectedIconPath": "../images/tabbar/about_cur.png",
+        "iconPath": "../images/tabbar/user.png",
+        "selectedIconPath": "../images/tabbar/user-filling.png",
         "text": "我的"
       }
     ]
