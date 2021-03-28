@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const timeutil = require('../../utils/timeutil.js')
 
 Page({
   data: {
@@ -24,7 +23,6 @@ Page({
     })
   },
   onLoad: function () {
-    var thatThat = this;
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
