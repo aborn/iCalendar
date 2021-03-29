@@ -1,13 +1,6 @@
 <code wx:if="{{pageCur=='code'}}"></code>
 <about wx:if="{{pageCur=='about'}}"></about>
 
-<cover-view class="tab-bar">
-  <cover-view class="tab-bar-border"></cover-view>
-  <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
-    <cover-image src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
-    <cover-view style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
-  </cover-view>
-</cover-view>
 <!--
 <van-tabbar active="{{ active }}" placeholder bind:change="onTabChange" active-color="#FAB32A"
   inactive-color="#2D2C2E">

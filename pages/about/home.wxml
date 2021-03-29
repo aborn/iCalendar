@@ -2,26 +2,45 @@
 <view class="icalander-about_preview">
   <view class="icalander-about_content">
     <view class="icalander-about_content-p">通过本小程序可以查看自己的编程足迹。</view>
-    <view class="icalander-about_content-p">使用说明（按以下3步）：</view>
-    <view class="icalander-about_content-p">1、在IDE中安装WebX插件</view>
-    <view class="icalander-about_content-p">2、发邮件到aborn#aborn.me注册用户信息</view>
-    <view class="icalander-about_content-p">3、在IDE及小程序中配置用户id（GitHub id）和token（见邮件回复）信息</view>
-    <view class="icalander-about_content-p"><van-icon name="info" />具体操作详情见：</view>
+    <van-divider hairline />
+    <view class="icalander-about_content-p">使用说明（按以下3步）：
+      <van-icon name="{{arrow}}" data-name="{{arrow}}" bind:click="onShowDetail" />
+    </view>
+    <view wx:if="{{arrowShow}}">
+      <view class="icalander-about_content-p">1、在IDE中安装WebX插件</view>
+      <view class="icalander-about_content-p">2、发邮件到aborn#aborn.me注册用户信息</view>
+      <view class="icalander-about_content-p">3、在IDE及小程序中配置用户id（GitHub id）和token（见邮件回复）信息</view>
+    </view>
+    <view class="icalander-about_content-p">
+      <van-icon name="info" />具体操作详情见：</view>
     <view class='icalander-about_content-h3'>https://github.com/aborn/iCalendar</view>
   </view>
 </view>
-
+<view class="icalander-block__empty"></view>
 <view class="icalander-block__title">帐号信息</view>
 <van-cell-group>
   <van-cell title="帐号id" value="{{id}}" />
-  <van-cell title="帐号token" value="{{token}}" />
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse-item name="2" title="帐号token">
+      <view class="icalander-text_right">{{token}}</view>
+    </van-collapse-item>
+  </van-collapse>
   <van-cell title="帐号类型" value="{{type}}" />
   <van-cell title="注册时间" value="{{regDate}}" />
 </van-cell-group>
-<view class="icalander-about__tips" wx:if="{{desc}}"><van-icon name="info-o" /> {{desc}}</view>
-<van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />
+<view class="icalander-about__tips" wx:if="{{desc}}">
+  <van-icon name="info-o" /> {{desc}}</view>
+<view class="icalander-block__empty"></view>
 <van-cell-group>
   <van-cell title="设置" is-link link-type="navigateTo" url="/pages/setting/index" />
-  <van-cell title="版本" value="V1.0" />
 </van-cell-group>
 
+<view class="icalander-block__empty"></view>
+
+<van-collapse value="{{ activeNames }}" bind:change="onChange">
+  <van-collapse-item name="3" title="版本" value="V1.0">
+    <view class="icalander-about_content-p">V1.0版本特性：</view>
+    <view class="icalander-about_content-p">1、支持IDE：Intellij IDEA</view>
+    <view class="icalander-about_content-p">2、日历显示</view>
+  </van-collapse-item>
+</van-collapse>

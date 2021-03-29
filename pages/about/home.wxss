@@ -8,6 +8,18 @@
   font-size: 14px;
 }
 
+.icalander-block__empty {
+  margin: 0;
+  padding: 5px 15px 5px;
+  background-color: #ebedf0;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.icalander-text_right {
+  text-align: right;
+}
+
 .icalander-about__tips {
   margin: 0;
   padding: 20px 15px 15px;
