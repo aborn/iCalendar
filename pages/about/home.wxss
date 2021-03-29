@@ -1,4 +1,7 @@
 /* pages/about/home/home.wxss */
+.icalander-about_page {
+  height: 100%;  
+}
 
 .icalander-block__title {
   margin: 0;
