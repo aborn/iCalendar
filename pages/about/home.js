@@ -47,7 +47,7 @@ Component({
       var desc = '';
       var testConfig = app.globalData.TestConfig;
       if (id === testConfig.id && token === testConfig.token) {
-        desc = "当前账号为测试账号，请设置自己的账号！";
+        desc = "当前账号为测试帐号，请设置自己的帐号！";
       }
       this.setData({
         id,
