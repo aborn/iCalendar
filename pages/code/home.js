@@ -171,14 +171,13 @@ Component({
       var dayInfo = util.getDayFullValue(date);
       var isFuture = util.isFuture(date);
       var type = isToday ? 1 : (isFuture ? 2 : 0);
-      if (isFuture) {
-        self.setData({
-          codeTime: '',
-          dayStaticByHour: util.transToLevel(util.initCellData(), type),
-          codeDayColor: util.getCodeDayColor(0)
-        })
-        return
-      }
+      self.setData({
+        codeTime: isFuture ? '' : '加载中...',
+        dayStaticByHour: util.transToLevel(util.initCellData(), type),
+        codeDayColor: util.getCodeDayColor(0)
+      })
+
+      if (isFuture) { return }
 
       var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
       console.log('url=' + url);
@@ -187,6 +186,7 @@ Component({
       wx.request({
         url: url,
         data: {},
+        timeout: 5000,
         success: function (res) {
           console.log(res);
           if (res.data.code === 200) {
@@ -203,15 +203,27 @@ Component({
               dayStaticByHour: util.transToLevel(util.initCellData(), type),
               codeDayColor: util.getCodeDayColor(0)
             })
-            console.log('暂无编程数据。')
+          } else if (res.data.code === 204 || res.data.code === 205) {
+            self.setData({
+              codeTime: res.data.code === 204 ? 'token非法!' : 'token已过期!',
+              dayStaticByHour: util.transToLevel(util.initCellData(), type),
+              codeDayColor: util.getCodeDayColor(0)
+            })
           } else {
             self.setData({
-              codeTime: '未知-501',
+              codeTime: '请求出错-501',
               dayStaticByHour: util.transToLevel(util.initCellData(), type),
               codeDayColor: util.getCodeDayColor(0)
             })
             console.log('获取数据失败。')
           }
+        },
+        fail: function() {
+          self.setData({
+            codeTime: '无网络服务！',
+            dayStaticByHour: util.transToLevel(util.initCellData(), type),
+            codeDayColor: util.getCodeDayColor(0)
+          })
         }
       })
     },
