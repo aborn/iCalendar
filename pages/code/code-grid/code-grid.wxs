@@ -1,0 +1,21 @@
+function getCodeGridStyle(index, hourData) {
+  
+  if (hourData && hourData[index]) {
+    return "code-level-" + hourData[index].level
+  } else {
+    return ""
+  }
+}
+
+function getCodeGridValue(index, hourData) {
+  if (hourData && hourData[index]) {
+    return hourData[index].value
+  } else {
+    return 0
+  }
+}
+
+module.exports = {
+  getCodeGridStyle: getCodeGridStyle,
+  getCodeGridValue: getCodeGridValue
+};

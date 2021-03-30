@@ -10,17 +10,35 @@
 .webx-hcell0 {
   background-color: #FFFFFF;
 }
+
 .webx-hcell1 {
   background-color: #FAF5E6;
 }
+
 .webx-hcell2 {
   background-color: #FFD400;
 }
+
 .webx-hcell3 {
   background-color: #FBC900;
 }
+
 .webx-hcell4 {
   background-color: #FAB32A;
+}
+
+.box-cell {
+  text-align: center;
+  background-color: #ebedf0;
+  border: 1px solid #ebedf0;
+}
+
+.box-cell-default {
+  text-align: center;
+  border: 1px solid #ebedf0;
+  word-wrap: break-word;
+  color: #646566;
+  font-size: 12px;
 }
 
 .webx-text-m {

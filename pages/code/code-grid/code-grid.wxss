@@ -1,0 +1,29 @@
+/* pages/code/code-grid/code-grid.wxss */
+
+.code-grid-item-default {
+  text-align: center;
+  border: 1px solid #ebedf0;
+  word-wrap: break-word;
+  color: #646566;
+  font-size: 12px;
+}
+
+.code-level-0 {
+  background-color: #FFFFFF;
+}
+
+.code-level-1 {
+  background-color: #FAF5E6;
+}
+
+.code-level-2 {
+  background-color: #FFD400;
+}
+
+.code-level-3 {
+  background-color: #FBC900;
+}
+
+.code-level-4 {
+  background-color: #FAB32A;
+}

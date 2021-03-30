@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "极客日历",
-  "usingComponents": {}
+  "usingComponents": {
+    "code-grid": "./code-grid/code-grid"
+  }
 }

@@ -5,9 +5,6 @@ import convertSolarLunar from '../../utils/lunar'
 const app = getApp()
 
 Component({
-  options: {
-    addGlobalClass: true,
-  },
   data: {
     codeDayColor: "#FAF5E6",
     color: '#FFD400',
@@ -359,10 +356,7 @@ Component({
       var monthFormat = util.getDayFullValue(date, true);
       this.showCodingTime(date);
       this.showTips(monthFormat);
-      this.loadYearHolidays(year, monthFormat);
-      wx.setNavigationBarTitle({
-        title: '极客日历',
-      })
+      this.loadYearHolidays(year, monthFormat);      
     }
   },
   attached() {
