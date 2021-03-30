@@ -1,5 +1,5 @@
 function getCodeGridStyle(index, hourData) {
-  
+
   if (hourData && hourData[index]) {
     return "code-level-" + hourData[index].level
   } else {
@@ -15,7 +15,24 @@ function getCodeGridValue(index, hourData) {
   }
 }
 
+function getCodeGridColor(index, hourData) {
+  var color = {
+    "0": "#FFFFFF",
+    "1": "#FAF5E6",
+    "2": "#FFD400",
+    "3": "#FBC900",
+    "4": "#FAB32A"
+  }
+
+  if (hourData && hourData[index]) {
+    return color[""+ hourData[index].level]
+  } else {
+    return color["0"]
+  }
+}
+
 module.exports = {
   getCodeGridStyle: getCodeGridStyle,
-  getCodeGridValue: getCodeGridValue
+  getCodeGridValue: getCodeGridValue,
+  getCodeGridColor: getCodeGridColor
 };

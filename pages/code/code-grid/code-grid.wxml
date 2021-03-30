@@ -8,8 +8,8 @@
 </van-row>
 
 <van-row gutter="1" clickable>
-  <van-col clickable span="2" wx:for="{{12}}" wx:key="index" data-value="{{computed.getCodeGridValue(index, hourData)}}"
+  <van-col clickable span="2" wx:for="{{12}}" wx:key="index" data-value="{{computed.getCodeGridValue(index + 12, hourData)}}"
     custom-class="code-grid-item-default {{ computed.getCodeGridStyle(index + 12, hourData)}} ">
-    <view bindtap="boxTapEvent">{{index + 12}}</view>
+    <view bindtap="boxTapEvent" clickable>{{index + 12}}</view>
   </van-col>
 </van-row>
