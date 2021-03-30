@@ -9,12 +9,12 @@
 
 <van-divider custom-style="margin-top: 0px;margin-bottom: 5px;" />
 
-<van-row custom-class="webx-bg-white">
-	<van-col span="24" class="webx-text-m">编程时间</van-col>
+<van-row custom-class="icalendar-bg-white">
+	<van-col span="24" class="icalendar-text-m">编程时间</van-col>
 </van-row>
 
-<van-row custom-class="webx-bg-white">
-	<van-col span="24" class="webx-text-m">
+<van-row custom-class="icalendar-bg-white">
+	<van-col span="24" class="icalendar-text-m">
 		<van-circle value="{{ 100 }}" color="{{ codeDayColor }}" text="{{ codeTime }}" stroke-width="15" size="150"
 			fill="#FFFFFF" />
 	</van-col>

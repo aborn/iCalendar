@@ -17,16 +17,16 @@
   font-size: 12px;
 }
 
-.webx-text-m {
+.icalendar-text-m {
   text-align: center;
   background-color: #fff;
 }
 
-.webx-bg-white {
+.icalendar-bg-white {
   background-color: #fff;
 }
 
-.webx-bg-white-cicle {
+.icalendar-bg-white-cicle {
   background-color: #fff;
   margin-top: 10px;
   margin-bottom: 10px;
