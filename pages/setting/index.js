@@ -14,8 +14,7 @@ Page({
     buttonDisabledStatus: true,
   },
 
-  methods: {
-  },
+  methods: {},
 
   onClickLeft() {
     wx.navigateBack({})
@@ -120,6 +119,12 @@ Page({
             icon: 'none'
           });
         }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '网络异常，请查检手机是否连网！',
+          icon: 'none'
+        });
       }
     })
   },
@@ -129,10 +134,15 @@ Page({
    */
   onLoad: function (options) {
     var token = app.globalData.config.token
-    var id =app.globalData.config.id
+    var id = app.globalData.config.id
     var ctoken = app.globalData.config.token
     var cid = app.globalData.config.id
-    this.setData({token,id,ctoken,cid})
+    this.setData({
+      token,
+      id,
+      ctoken,
+      cid
+    })
 
     /**
     var testConfig = app.globalData.TestConfig;    
