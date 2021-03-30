@@ -1,0 +1,51 @@
+function getCodeGridStyle(index, hourData) {
+
+  if (hourData && hourData[index]) {
+    return "code-level-" + hourData[index].level
+  } else {
+    return ""
+  }
+}
+
+function getCodeGridValue(index, hourData) {
+  if (hourData && hourData[index]) {
+    return hourData[index].value
+  } else {
+    return 0
+  }
+}
+
+function getCodeGridColor(index, hourData) {
+  var color = {
+    "0": "#FFFFFF",
+    "1": "#FAF5E6",
+    "2": "#FFD400",
+    "3": "#FBC900",
+    "4": "#FAB32A"
+  }
+
+  if (hourData && hourData[index]) {
+    return color[""+ hourData[index].level]
+  } else {
+    return color["0"]
+  }
+}
+
+function getBGColor(level) {
+  var color = {
+    "0": "#FFFFFF",
+    "1": "#FAF5E6",
+    "2": "#FFD400",
+    "3": "#FBC900",
+    "4": "#FAB32A"
+  }
+
+  return color["" + level]
+}
+
+module.exports = {
+  getCodeGridStyle: getCodeGridStyle,
+  getCodeGridValue: getCodeGridValue,
+  getCodeGridColor: getCodeGridColor,
+  getBGColor: getBGColor
+};

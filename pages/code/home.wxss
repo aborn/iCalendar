@@ -3,36 +3,30 @@
   --calendar-height: 400px;
 }
 
-.webx-hcell {
-  background-color: rgb(255, 255, 255);
+.box-cell {
+  text-align: center;
+  background-color: #ebedf0;
+  border: 1px solid #ebedf0;
 }
 
-.webx-hcell0 {
-  background-color: #FFFFFF;
-}
-.webx-hcell1 {
-  background-color: #FAF5E6;
-}
-.webx-hcell2 {
-  background-color: #FFD400;
-}
-.webx-hcell3 {
-  background-color: #FBC900;
-}
-.webx-hcell4 {
-  background-color: #FAB32A;
+.box-cell-default {
+  text-align: center;
+  border: 1px solid #ebedf0;
+  word-wrap: break-word;
+  color: #646566;
+  font-size: 12px;
 }
 
-.webx-text-m {
+.icalendar-text-m {
   text-align: center;
   background-color: #fff;
 }
 
-.webx-bg-white {
+.icalendar-bg-white {
   background-color: #fff;
 }
 
-.webx-bg-white-cicle {
+.icalendar-bg-white-cicle {
   background-color: #fff;
   margin-top: 10px;
   margin-bottom: 10px;
