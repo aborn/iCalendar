@@ -22,6 +22,7 @@ function contentStyle(data) {
         right: addUnit(data.gutter),
         bottom: addUnit(data.gutter),
         height: 'auto',
+        "background-color": data.bgColor || '',
       })
     : '';
 }

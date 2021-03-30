@@ -8,6 +8,12 @@
   font-size: 12px;
 }
 
+.code-grid-item-content {
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+}
+
 .code-level-0 {
   background-color: #FFFFFF;
 }

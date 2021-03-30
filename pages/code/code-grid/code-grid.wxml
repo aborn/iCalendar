@@ -1,15 +1,28 @@
 <!--pages/code/code-grid/code-grid.wxml-->
 <wxs src="./code-grid.wxs" module="computed" />
 
-<van-row gutter="1" clickable>
-  <van-col clickable span="2" wx:for="{{12}}" wx:key="index" data-value="{{computed.getCodeGridValue(index, hourData)}}"
-    bindtap="boxClickEvent" custom-class="code-grid-item-default {{ computed.getCodeGridStyle(index, hourData)}}">
-    {{index}}</van-col>
-</van-row>
+<view wx:if="{{ type === 1 }}">
+  <van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
+    <van-grid-item bind:click="gridItemClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
+      bgColor="{{computed.getBGColor(item.level)}}" text="{{ item.stepValue }}" content-class="code-level-{{item.level}}"
+      wx:for="{{hourData}}" wx:key="index">
+    </van-grid-item>
+  </van-grid>
+</view>
 
-<van-row gutter="1" clickable>
-  <van-col clickable span="2" wx:for="{{12}}" wx:key="index" data-value="{{computed.getCodeGridValue(index + 12, hourData)}}"
-    custom-class="code-grid-item-default {{ computed.getCodeGridStyle(index + 12, hourData)}} ">
-    <view bindtap="boxTapEvent" clickable>{{index + 12}}</view>
-  </van-col>
-</van-row>
+<view wx:else>
+  <van-row gutter="1" clickable>
+    <van-col clickable span="2" wx:for="{{12}}" wx:key="index"
+      data-value="{{computed.getCodeGridValue(index, hourData)}}" bindtap="boxClickEvent"
+      custom-class="code-grid-item-default {{ computed.getCodeGridStyle(index, hourData)}}">
+      {{index}}</van-col>
+  </van-row>
+
+  <van-row gutter="1" clickable>
+    <van-col clickable span="2" wx:for="{{12}}" wx:key="index"
+      data-value="{{computed.getCodeGridValue(index + 12, hourData)}}"
+      custom-class="code-grid-item-default {{ computed.getCodeGridStyle(index + 12, hourData)}} ">
+      <block class="code-grid-item-content" bindtap="boxTapEvent" clickable>{{index + 12}}</block>
+    </van-col>
+  </van-row>
+</view>

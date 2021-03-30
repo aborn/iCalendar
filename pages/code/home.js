@@ -165,19 +165,6 @@ Component({
     holidayTips: {}
   },
   methods: {
-    hcellClickEvent(e) {
-      const {
-        value,
-        hour
-      } = e.currentTarget.dataset
-      var title = "编程时间" + (value * 0.5) + "分钟";
-      if (value > 0) {
-        wx.showToast({
-          title,
-          icon: 'none'
-        });
-      }
-    },
     showCodingTime(date) {
       var self = this;
       var isToday = util.isToday(date);

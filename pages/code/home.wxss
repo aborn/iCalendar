@@ -3,30 +3,6 @@
   --calendar-height: 400px;
 }
 
-.webx-hcell {
-  background-color: rgb(255, 255, 255);
-}
-
-.webx-hcell0 {
-  background-color: #FFFFFF;
-}
-
-.webx-hcell1 {
-  background-color: #FAF5E6;
-}
-
-.webx-hcell2 {
-  background-color: #FFD400;
-}
-
-.webx-hcell3 {
-  background-color: #FBC900;
-}
-
-.webx-hcell4 {
-  background-color: #FAB32A;
-}
-
 .box-cell {
   text-align: center;
   background-color: #ebedf0;
