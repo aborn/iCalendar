@@ -20,4 +20,8 @@ iCalendar --「i极客日历」微信小程序，查看自己的编程足迹（�
 3. 用户id和token设置。  
 
 ## 支持该项目
-![](images/donate.png)
+该项目需要服务器支持，你的捐赠将用于支付服务器费用。
+
+![](images/donate.png)  
+
+
