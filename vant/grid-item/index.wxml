@@ -8,7 +8,7 @@
 >
   <view
     class="content-class {{ utils.bem('grid-item__content', [direction, { center, square, clickable, surround: border && gutter }]) }} {{ border ? 'van-hairline--surround' : '' }}"
-    style="{{ computed.contentStyle({ square, gutter, bgColor}) }}"
+    style="{{ computed.contentStyle({ square, gutter }) }}"
   >
     <block wx:if="{{ useSlot }}">
       <slot />
