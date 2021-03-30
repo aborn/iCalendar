@@ -1,28 +1,26 @@
 <!--pages/read/home/home.wxml-->
-<scroll-view scroll-y class="scrollPage">
-	<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" color="{{color}}"
-		bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}" changeFrame="{{ changeFrame }}" tips="{{tips}}" holidayTips="{{holidayTips}}"
-		showSubtitle />
 
-	<van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />
+<van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" color="{{color}}"
+	bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}"
+	changeFrame="{{ changeFrame }}" tips="{{tips}}" holidayTips="{{holidayTips}}" showSubtitle />
 
-	<van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
-		<van-grid-item bind:click="hcellClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
-			text="{{ item.stepValue }}" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}" wx:key="index">
-		</van-grid-item>
-	</van-grid>
+<van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />
 
-	<van-divider custom-style="margin-top: 0px;margin-bottom: 5px;" />
+<van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
+	<van-grid-item bind:click="hcellClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
+		text="{{ item.stepValue }}" content-class="webx-hcell{{item.level}}" wx:for="{{dayStaticByHour}}" wx:key="index">
+	</van-grid-item>
+</van-grid>
 
-	<van-row custom-class="webx-bg-white">
-		<van-col span="24" class="webx-text-m">编程时间</van-col>
-	</van-row>
+<van-divider custom-style="margin-top: 0px;margin-bottom: 5px;" />
 
-	<van-row custom-class="webx-bg-white">
-		<van-col span="24" class="webx-text-m">
-			<van-circle value="{{ 100 }}" color="{{ codeDayColor }}" text="{{ codeTime }}" stroke-width="15" size="150"
-				fill="#FFFFFF" />
-		</van-col>
-	</van-row>
+<van-row custom-class="webx-bg-white">
+	<van-col span="24" class="webx-text-m">编程时间</van-col>
+</van-row>
 
-</scroll-view>
+<van-row custom-class="webx-bg-white">
+	<van-col span="24" class="webx-text-m">
+		<van-circle value="{{ 100 }}" color="{{ codeDayColor }}" text="{{ codeTime }}" stroke-width="15" size="150"
+			fill="#FFFFFF" />
+	</van-col>
+</van-row>
