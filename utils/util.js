@@ -1,11 +1,12 @@
 const timeutil = require('timeutil.js')
+const app = getApp()
 
 // https://flaviocopes.com/rgb-color-codes/
 const DayCicleColor = {
   '0': "#FAF5E6", // 0h
   '1': "#FFD400", // 0~1h
-  '2': "#FBC900",  // 1~2h
-  '3': "#FAB32A",  // 2~4h
+  '2': "#FBC900", // 1~2h
+  '3': "#FAB32A", // 2~4h
   '4': "#262626", // 4~6h
   '5': "#000000", // >6h
 }
@@ -23,7 +24,7 @@ const readTimeDesc = (second) => {
 
 // 每个小时的阶梯分布，css见webx-hcell
 const transToLevelValue = (value) => {
-  if (value == 0) {            
+  if (value == 0) {
     return 0;
   } else if (value <= 2 * 5) { // 0～5分钟
     return 1;
@@ -31,7 +32,7 @@ const transToLevelValue = (value) => {
     return 2;
   } else if (value <= 2 * 30) { // 10～30分钟
     return 3;
-  } else {      // 30分钟以上
+  } else { // 30分钟以上
     return 4;
   }
 }
@@ -75,7 +76,7 @@ const getCodeDayColor = (second) => {
     level = 5;
   } else {
     level = 0
-  }  
+  }
   return DayCicleColor[level];
 }
 
@@ -115,18 +116,37 @@ const getDayFullValue = (date, isMonth) => {
 
 const getTime = (date) => (date instanceof Date ? date.getTime() : date);
 
-export function getDate(date) {return (date instanceof Date ? date : new Date(date))};
+export function getDate(date) {
+  return (date instanceof Date ? date : new Date(date))
+};
 
 const formatHoliday = (holidays) => {
   var holidaysFormatData = {};
   const year = holidays.year;
   holidays.holidays.map((item) => {
-    holidaysFormatData[year + "-" + item] = 1   // 工作日
+    holidaysFormatData[year + "-" + item] = 1 // 工作日
   })
   holidays.workdays.map((item) => {
-    holidaysFormatData[year + "-" + item] = 2   // 休息日
+    holidaysFormatData[year + "-" + item] = 2 // 休息日
   })
   return holidaysFormatData;
+}
+
+const updateTabBarTipsInfo = () => {
+  var id = app.globalData.config.id;
+  var token = app.globalData.config.token;
+  var testConfig = app.globalData.TestConfig;
+  if (id === testConfig.id && token === testConfig.token) {
+    console.log('is test account, show dot...')
+    wx.showTabBarRedDot({
+      index: 1
+    })
+  } else {
+    console.log('not test account, hide dot...')
+    wx.hideTabBarRedDot({
+      index: 1
+    })
+  }
 }
 
 module.exports = {
@@ -139,4 +159,5 @@ module.exports = {
   getDate: getDate,
   isFuture: isFuture,
   formatHoliday: formatHoliday,
+  updateTabBarTipsInfo: updateTabBarTipsInfo
 }

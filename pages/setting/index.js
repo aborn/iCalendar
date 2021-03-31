@@ -1,5 +1,6 @@
 // pages/setting/index.js
 const app = getApp()
+const util = require('../../utils/util.js')
 
 Page({
 
@@ -101,6 +102,7 @@ Page({
                     title: '配置信息更新成功！',
                     icon: 'none'
                   });
+                  util.updateTabBarTipsInfo();
                 }
               })
 

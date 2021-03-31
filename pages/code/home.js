@@ -142,7 +142,7 @@ Component({
       const date = day.date.getDate();
       var dateInfo = convertSolarLunar.solar2lunar(year, month, date);
       var lunaDetail = timeUtil.lunarToReadable(dateInfo);
-      
+
       if (day.date.getTime() > new Date().getTime()) {
         day.type = 'disabled'
       }
@@ -157,7 +157,7 @@ Component({
       } else if (day.type !== 'disabled') {
         day.bottomStyle = 'normal-term'
       }
-      
+
       day.bottomInfo = dateInfo.Term ? dateInfo.Term : lunaDetail; // term为24节气
       return day;
     },
@@ -177,7 +177,9 @@ Component({
         codeDayColor: util.getCodeDayColor(0)
       })
 
-      if (isFuture) { return }
+      if (isFuture) {
+        return
+      }
 
       var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
       console.log('url=' + url);
@@ -218,7 +220,7 @@ Component({
             console.log('获取数据失败。')
           }
         },
-        fail: function() {
+        fail: function () {
           self.setData({
             codeTime: '无网络服务！',
             dayStaticByHour: util.transToLevel(util.initCellData(), type),
@@ -355,7 +357,8 @@ Component({
       var monthFormat = util.getDayFullValue(date, true);
       this.showCodingTime(date);
       this.showTips(monthFormat);
-      this.loadYearHolidays(year, monthFormat);      
+      this.loadYearHolidays(year, monthFormat);
+      util.updateTabBarTipsInfo();
     }
   },
   attached() {

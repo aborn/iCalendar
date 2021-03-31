@@ -8,6 +8,9 @@ App({
   getToken() {
     return this.globalData.config.token;
   },
+  gTabBarTipsInfo() {
+    console.log('gTabBarTipsInfo called.')
+  },
   globalData: {
     userInfo: null,
     openid: null,

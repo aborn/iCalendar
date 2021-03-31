@@ -1,5 +1,6 @@
 // pages/about/home/home.js
 const app = getApp()
+const util = require('../../utils/util.js')
 
 Component({
   data: {
@@ -47,7 +48,7 @@ Component({
       var desc = '';
       var testConfig = app.globalData.TestConfig;
       if (id === testConfig.id && token === testConfig.token) {
-        desc = "当前账号为测试帐号，请设置自己的帐号！";
+        desc = "当前为测试帐号，请设置自己的帐号！";
       }
       this.setData({
         id,
@@ -61,6 +62,7 @@ Component({
   lifetimes: {
     ready() {
       this.updateConfigInfo()
+      util.updateTabBarTipsInfo()
       wx.setNavigationBarTitle({
         title: '个人中心',
       })
