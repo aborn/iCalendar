@@ -11,7 +11,8 @@ Page({
     id: '',
     ctoken: '',
     cid: '',
-    buttonDisabledStatus: true,
+    disabled: true,
+    loading: false
   },
 
   methods: {},
@@ -33,11 +34,10 @@ Page({
       value
     } = e.currentTarget.dataset
     // console.log('当前值为：' + cvalue + ", field=" + field + ", value=" + value)
-    if (cvalue !== value) {
-      this.setData({
-        buttonDisabledStatus: false
-      })
-    }
+
+    this.setData({
+      disabled: cvalue === value
+    })
 
     if (field === 'id') {
       this.setData({
@@ -61,6 +61,10 @@ Page({
 
     var url = 'https://aborn.me/webx/user/postUserConfig'
     console.log('url=' + url);
+    that.setData({
+      loading: true,
+      disabled: true
+    })
 
     // 提交token与id的配置信息
     wx.request({
@@ -125,6 +129,12 @@ Page({
           title: '网络异常，请查检手机是否连网！',
           icon: 'none'
         });
+      },
+      complete(e) {
+        that.setData({
+          loading: false,
+          disabled: false
+        })
       }
     })
   },

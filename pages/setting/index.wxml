@@ -9,6 +9,6 @@
 </van-cell-group>
 
 <view class="icalander-setting__sub-button">
-  <van-button type="primary" disabled="{{buttonDisabledStatus}}" color="#FFD400" bind:click="onSubmit">
+  <van-button type="primary" disabled="{{disabled}}" color="#FFD400" bind:click="onSubmit" loading="{{loading}}" loading-text="处理中...">
     <view class="icalendar_default-font-color">提交修改</view></van-button>
 </view>
