@@ -348,11 +348,8 @@ Component({
       var date = new Date();
       var year = date.getFullYear();
       var monthFormat = util.getDayFullValue(date, true);
-      //this.showCodingTime(date);
-      //this.showTips(monthFormat);
       this.loadYearHolidays(year, monthFormat);
       util.updateTabBarTipsInfo();
-      console.log('ready called finished.')
     },
     attached() {
       // 第二种方式通过组件的生命周期函数执行代码
@@ -364,7 +361,6 @@ Component({
       var monthFormat = util.getDayFullValue(date, true);
       this.showCodingTime(date);
       this.showTips(monthFormat);
-      console.log('showed.')
     }
   }
 })
