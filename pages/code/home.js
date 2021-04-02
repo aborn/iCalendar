@@ -340,6 +340,13 @@ Component({
       var month = util.getDayFullValue(date, true)
       this.showTips(month)
       this.showMonthHolidays(month)
+    },
+    onChangeYear(e) {
+      const {
+        current,
+        target
+      } = e.detail;
+      console.log('changeYear event. current=' + current + ', target=' + target)
     }
   },
   lifetimes: {

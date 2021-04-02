@@ -42,10 +42,6 @@ VantComponent({
       },
     },
     formatter: null,
-    confirmText: {
-      type: String,
-      value: '确定',
-    },
     rangePrompt: String,
     frameIndex: {
       type: Number,
@@ -62,11 +58,6 @@ VantComponent({
       },
     },
     confirmDisabledText: String,
-    type: {
-      type: String,
-      value: 'single',
-      observer: 'reset',
-    },
     position: {
       type: String,
       value: 'bottom',
@@ -187,6 +178,7 @@ VantComponent({
 
       var eventType = getChangeType(currentDate, targetDate);
       var targetDateD = getDate(targetDate);
+      var currentDateD = getDate(currentDate);
       var showToday = !isToday(new Date(targetDateD))
       this.setData({
         rowHeight: this.recalRowHeight(targetDateD)
@@ -206,6 +198,13 @@ VantComponent({
 
       //console.log('navigateToDay called. current=' + curIndex + ", targetIndex=" + targetIndex +
       //  ", changeType=" + eventType);
+
+      if (targetDateD.getFullYear() !== currentDateD.getFullYear()) {
+        this.$emit('onChangeYear', {
+          "current": currentDateD.getFullYear(),
+          "target": targetDateD.getFullYear()
+        });
+      }
 
       if (source === 'autoplay' || source === 'touch') {
         this.setData({

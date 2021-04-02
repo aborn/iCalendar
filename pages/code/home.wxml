@@ -1,7 +1,6 @@
 <!--pages/read/home/home.wxml-->
 <van-calendar class="calendar" bind:select="afterSelectDate" formatter="{{ formatter }}" color="{{color}}"
-	bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}"
-	changeFrame="{{ changeFrame }}" tips="{{tips}}" holidayTips="{{holidayTips}}" showSubtitle />
+ bind:onChangeYear="onChangeYear" bind:changeframe="changeMonth" defaultDate="{{ defaultDate }}" subtitle="{{ subtitle }}" frameIndex="{{frameIndex}}" tips="{{tips}}" holidayTips="{{holidayTips}}" showSubtitle />
 
 <van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />
 
