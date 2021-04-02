@@ -343,25 +343,24 @@ Component({
     }
   },
 
-  /**
-   * 页面加载完成执行
-   */
   lifetimes: {
     ready() {
       var date = new Date();
       var year = date.getFullYear();
-      var month = date.getMonth() + 1;
-      this.setData({
-        subtitle: year + "年" + month + "月"
-      })
+      var monthFormat = util.getDayFullValue(date, true);
+      this.loadYearHolidays(year, monthFormat);
+      util.updateTabBarTipsInfo();
+    },
+    attached() {
+      // 第二种方式通过组件的生命周期函数执行代码
+    }
+  },
+  pageLifetimes: {
+    show() {
+      var date = new Date();
       var monthFormat = util.getDayFullValue(date, true);
       this.showCodingTime(date);
       this.showTips(monthFormat);
-      this.loadYearHolidays(year, monthFormat);
-      util.updateTabBarTipsInfo();
     }
-  },
-  attached() {
-    // 第二种方式通过组件的生命周期函数执行代码
-  },
+  }
 })

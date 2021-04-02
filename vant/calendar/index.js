@@ -58,7 +58,8 @@ VantComponent({
       type: null,
       observer(val) {
         this.setData({
-          currentDate: val
+          currentDate: val,
+          subtitle: getDate(val).getFullYear() + "年" + (getDate(val).getMonth() + 1) + "月"
         });
         this.scrollIntoView();
       },
@@ -69,22 +70,6 @@ VantComponent({
       type: String,
       value: 'single',
       observer: 'reset',
-    },
-    minDate: {
-      type: null,
-      value: new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        1
-      ).getTime(),
-    },
-    maxDate: {
-      type: null,
-      value: new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate()
-      ).getTime(),
     },
     position: {
       type: String,
