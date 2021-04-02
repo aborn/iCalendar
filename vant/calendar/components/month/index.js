@@ -1,9 +1,6 @@
 import { VantComponent } from '../../../common/component';
 import {
-  getMonthEndDay,
-  compareDay,
-  getPrevDay,
-  getNextDay,
+  getMonthEndDay,  
 } from '../../utils';
 VantComponent({
   props: {
@@ -11,15 +8,7 @@ VantComponent({
       type: null,
       observer: 'setDays',
     },
-    type: {
-      type: String,
-      observer: 'setDays',
-    },
-    color: String,
-    minDate: {
-      type: null,
-      observer: 'setDays',
-    },
+    color: String,    
     showMark: Boolean,
     rowHeight: null,
     formatter: {
@@ -59,12 +48,11 @@ VantComponent({
       );
       for (let day = 1; day <= totalDay; day++) {
         const date = new Date(year, month, day);
-        const type = this.getDayType(date);
+        const type = 'single';
         let config = {
           date,
           type,
           text: day,
-          bottomInfo: this.getBottomInfo(type),
         };
         if (this.data.formatter) {
           config = this.data.formatter(config);
@@ -72,84 +60,6 @@ VantComponent({
         days.push(config);
       }
       this.setData({ days });
-    },
-    getMultipleDayType(day) {
-      const { currentDate } = this.data;
-      if (!Array.isArray(currentDate)) {
-        return '';
-      }
-      const isSelected = (date) =>
-        currentDate.some((item) => compareDay(item, date) === 0);
-      if (isSelected(day)) {
-        const prevDay = getPrevDay(day);
-        const nextDay = getNextDay(day);
-        const prevSelected = isSelected(prevDay);
-        const nextSelected = isSelected(nextDay);
-        if (prevSelected && nextSelected) {
-          return 'multiple-middle';
-        }
-        if (prevSelected) {
-          return 'end';
-        }
-        return nextSelected ? 'start' : 'multiple-selected';
-      }
-      return '';
-    },
-    getRangeDayType(day) {
-      const { currentDate, allowSameDay } = this.data;
-      if (!Array.isArray(currentDate)) {
-        return;
-      }
-      const [startDay, endDay] = currentDate;
-      if (!startDay) {
-        return;
-      }
-      const compareToStart = compareDay(day, startDay);
-      if (!endDay) {
-        return compareToStart === 0 ? 'start' : '';
-      }
-      const compareToEnd = compareDay(day, endDay);
-      if (compareToStart === 0 && compareToEnd === 0 && allowSameDay) {
-        return 'start-end';
-      }
-      if (compareToStart === 0) {
-        return 'start';
-      }
-      if (compareToEnd === 0) {
-        return 'end';
-      }
-      if (compareToStart > 0 && compareToEnd < 0) {
-        return 'middle';
-      }
-    },
-    getDayType(day) {
-      const { type, minDate, maxDate, currentDate } = this.data;
-      /**if (compareDay(day, minDate) < 0 || compareDay(day, maxDate) > 0) {
-        return 'disabled';
-      }**/
-      if (type === 'single') {
-        return compareDay(day, currentDate) === 0 ? 'selected' : '';
-      }
-      if (type === 'multiple') {
-        return this.getMultipleDayType(day);
-      }
-      /* istanbul ignore else */
-      if (type === 'range') {
-        return this.getRangeDayType(day);
-      }
-    },
-    getBottomInfo(type) {
-      if (this.data.type === 'range') {
-        if (type === 'start') {
-          return '开始';
-        }
-        if (type === 'end') {
-          return '结束';
-        }
-        if (type === 'start-end') {
-          return '开始/结束';
-        }
-      }
     },
   },
 });

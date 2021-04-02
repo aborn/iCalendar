@@ -4,14 +4,11 @@ import {
 import {
   ROW_HEIGHT,
   ROW_HEIGHT_6ROW,
-  getNextDay,
-  compareDay,
   copyDates,
   calcDateNum,
   formatMonthTitle,
   compareMonth,
   getMonths,
-  getDayByOffset,
   changeType,
   getTargetMonthFirstDate,
   isToday,
@@ -64,7 +61,6 @@ VantComponent({
         this.scrollIntoView();
       },
     },
-    allowSameDay: Boolean,
     confirmDisabledText: String,
     type: {
       type: String,
