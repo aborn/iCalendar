@@ -342,7 +342,6 @@ Component({
       this.showMonthHolidays(month)
     }
   },
-
   lifetimes: {
     ready() {
       var date = new Date();
@@ -350,9 +349,6 @@ Component({
       var monthFormat = util.getDayFullValue(date, true);
       this.loadYearHolidays(year, monthFormat);
       util.updateTabBarTipsInfo();
-    },
-    attached() {
-      // 第二种方式通过组件的生命周期函数执行代码
     }
   },
   pageLifetimes: {
