@@ -1,5 +1,6 @@
 import { VantComponent } from '../../../common/component';
 import {
+  compareDay,
   getMonthEndDay,  
 } from '../../utils';
 VantComponent({
@@ -48,7 +49,7 @@ VantComponent({
       );
       for (let day = 1; day <= totalDay; day++) {
         const date = new Date(year, month, day);
-        const type = 'single';
+        const type = this.getDayType(date);;
         let config = {
           date,
           type,
@@ -61,5 +62,9 @@ VantComponent({
       }
       this.setData({ days });
     },
+    getDayType(day) {
+      const { currentDate } = this.data;
+      return compareDay(day, currentDate) === 0 ? 'selected' : '';
+    }
   },
 });
