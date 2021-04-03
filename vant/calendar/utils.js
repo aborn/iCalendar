@@ -140,8 +140,9 @@ export function getTargetMonthFirstDate(cDate, eventType) {
   return new Date(targetDateInfo.year, targetDateInfo.month, 1);
 }
 
-export function isToday(date) {
+export function isToday(d) {
   var today = new Date();
+  var date = getDate(d);
   return today.getFullYear() === date.getFullYear() &&
     today.getMonth() === date.getMonth() &&
     today.getDate() === date.getDate()

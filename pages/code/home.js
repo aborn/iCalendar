@@ -2,6 +2,9 @@
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
 import convertSolarLunar from '../../utils/lunar'
+import {
+  isToday
+} from '../../vant/calendar/utils'
 const app = getApp()
 
 Component({
@@ -360,10 +363,18 @@ Component({
   },
   pageLifetimes: {
     show() {
-      var date = new Date();
-      var monthFormat = util.getDayFullValue(date, true);
-      this.showCodingTime(date);
-      this.showTips(monthFormat);
+      const calInstance = this.selectComponent('#calendarinstanace');
+      if (calInstance != null) {
+        const {
+          currentDate
+        } = calInstance.data;
+        if (isToday(currentDate)) {
+          var date = new Date();
+          var monthFormat = util.getDayFullValue(date, true);
+          this.showCodingTime(date);
+          this.showTips(monthFormat);
+        }
+      }
     }
   }
 })
