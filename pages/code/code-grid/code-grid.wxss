@@ -17,14 +17,14 @@
 .code-grid-item_current-hour {
   border-color: #ccc;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-radius: 5px;
 }
 
 .code-grid-item_selected {
   border-color: #262626;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-radius: 5px;
 }
 
