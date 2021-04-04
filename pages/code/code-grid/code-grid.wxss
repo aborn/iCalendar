@@ -21,6 +21,13 @@
   border-radius: 5px;
 }
 
+.code-grid-item_selected {
+  border-color: #262626;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
 .code-level-0 {
   background-color: #FFFFFF;
 }

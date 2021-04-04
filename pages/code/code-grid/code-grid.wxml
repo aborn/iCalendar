@@ -4,7 +4,7 @@
 <view wx:if="{{ type === 1 }}">
   <van-grid column-num="12" icon-size="0px" square clickable border="{{ true }}">
     <van-grid-item bind:click="gridItemClickEvent" data-value="{{item.value}}" data-hour="{{ index }}"
-      text="{{ item.stepValue }}" content-class="code-level-{{item.level}}"
+      text="{{ item.stepValue }}" content-class="code-level-{{item.level}} {{item.type === 'selected' ? 'code-grid-item_selected' : ''}}"
       wx:for="{{hourData}}" wx:key="index">
     </van-grid-item>
   </van-grid>
