@@ -4,14 +4,14 @@ Component({
    * Component properties
    */
   properties: {
-    hourData : {
+    hourData: {
       type: Array,
     },
-    type : {
+    type: {
       type: null,
       value: 1
     },
-    isToday : {
+    isToday: {
       type: Boolean,
       value: true
     }
@@ -20,25 +20,26 @@ Component({
   /**
    * Component initial data
    */
-  data: {    
-  },
+  data: {},
 
   /**
    * Component methods
    */
   methods: {
     gridItemClickEvent(e) {
-      const {value, hour} = e.currentTarget.dataset
+      const {
+        value,
+        hour
+      } = e.currentTarget.dataset
       var hourData = this.data.hourData;
 
       hourData.map((item, index) => {
-        if (index === hour) {
-          item.type = 'selected';
-        } else {
-          item.type = undefined;
-        }
+        item.type = (index === hour && value > 0) ? 'selected' : undefined;
       })
-      this.setData({hourData})
+
+      this.setData({
+        hourData
+      })
 
       var title = "编程时间" + (value * 0.5) + "分钟";
       if (value > 0) {
@@ -48,7 +49,7 @@ Component({
         });
       }
     },
-    boxTapEvent: function(event) {
+    boxTapEvent: function (event) {
       console.log('evvveeet', event)
     },
     boxClickEvent(e) {
