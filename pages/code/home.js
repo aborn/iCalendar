@@ -165,7 +165,8 @@ Component({
       return day;
     },
     tips: {},
-    holidayTips: {}
+    holidayTips: {},
+    isToday: true,
   },
   methods: {
     showCodingTime(date) {
@@ -177,13 +178,14 @@ Component({
       self.setData({
         codeTime: isFuture ? '' : '加载中...',
         dayStaticByHour: util.transToLevel(util.initCellData(), type),
-        codeDayColor: util.getCodeDayColor(0)
+        codeDayColor: util.getCodeDayColor(0),
+        isToday
       })
 
       if (isFuture) {
         return
       }
-
+      
       var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
       console.log('url=' + url);
 

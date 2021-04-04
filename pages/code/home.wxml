@@ -4,7 +4,7 @@
 
 <van-divider custom-style="margin-top: 5px;margin-bottom: 0px;" />
 
-<code-grid hourData="{{ dayStaticByHour }}" type="{{ 1 }}"></code-grid>
+<code-grid hourData="{{ dayStaticByHour }}" type="{{ 1 }}" isToday="{{ isToday }}"></code-grid>
 
 <van-divider custom-style="margin-top: 0px;margin-bottom: 5px;" />
 

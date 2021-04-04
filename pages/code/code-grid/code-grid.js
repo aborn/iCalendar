@@ -10,6 +10,10 @@ Component({
     type : {
       type: null,
       value: 1
+    },
+    isToday : {
+      type: Boolean,
+      value: true
     }
   },
 
@@ -53,7 +57,18 @@ Component({
   },
   lifetimes: {
     // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
-    attached: function () {
+    ready: function () {
+      const {hourData, isToday} = this.data;
+      console.log(hourData)
+      console.log(isToday)
     },
   },
+  pageLifetimes: {
+    show() {
+      console.log('show code-grid')
+      const {hourData, isToday} = this.data;
+      console.log(hourData)
+      console.log(isToday)
+    }
+  }
 })
