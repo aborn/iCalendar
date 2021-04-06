@@ -31,8 +31,17 @@
 <view class="icalander-about__tips" wx:if="{{desc}}">
   <van-icon name="info-o" /> {{desc}}</view>
 <van-cell-group>
-  <van-cell title="设置" is-link link-type="navigateTo" url="/pages/setting/index" />
+  <van-cell wx:if="{{ !isTest }}" title="设置" is-link link-type="navigateTo" url="/pages/setting/index" />
+  <van-button round type="info" size="small" bind:click="applyAccount">申请帐号</van-button>
 </van-cell-group>
+
+<van-dialog use-slot title="帐号申请" show="{{ show }}" show-cancel-button 
+  bind:close="onClose" bind:confirm="onSubmit" beforeClose="{{ beforeClose }}">
+  <van-cell-group>
+    <van-field label="帐号id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id"
+      border="{{ true }}" bind:change="onChange" required />
+  </van-cell-group>
+</van-dialog>
 
 <view class="icalander-block__empty"></view>
 
