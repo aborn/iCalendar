@@ -37,8 +37,13 @@
 <view class="icalander-block__empty"></view>
 
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
-  <van-collapse-item name="3" title="版本历史" value="V1.0">
-    <view class="icalander-about_content-p">V1.0版本特性：</view>
+  <van-collapse-item name="3" title="版本历史" value="V1.1">
+    <view class="icalander-about_content-p">V1.1版本特性：</view>
+    <view class="icalander-about_content-p">1、功能：支持在小程序里申请用户token；</view>
+    <view class="icalander-about_content-p">2、修复tab切换时不请求数据问题；</view>
+    <view class="icalander-about_content-p">3、修复假期情况下提示点飘移的样式问题。</view>
+    <van-divider />
+    <view class="icalander-about_content-p">V1.0版本特性（发版时间：2021/04/02）：</view>
     <view class="icalander-about_content-p">1、支持IDE：Intellij IDEA；</view>
     <view class="icalander-about_content-p">2、日历基础功能；</view>
     <view class="icalander-about_content-p">3、用户id和token设置。</view>

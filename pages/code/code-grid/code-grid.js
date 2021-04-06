@@ -33,9 +33,9 @@ Component({
       } = e.currentTarget.dataset
       var hourData = this.data.hourData;
 
-      hourData.map((item, index) => {
-        item.type = (index === hour && value > 0) ? 'selected' : undefined;
-      })
+      //hourData.map((item, index) => {
+      //  item.type = (index === hour && value > 0) ? 'selected' : undefined;
+      //})
 
       this.setData({
         hourData
