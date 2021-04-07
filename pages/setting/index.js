@@ -13,28 +13,19 @@ Page({
     ctoken: '',
     cid: '',
     disabled: true,
-    loading: false
+    loading: false,
+    isTest: false
   },
 
   methods: {},
-
-  onClickLeft() {
-    wx.navigateBack({})
-    //wx.showToast({ title: '点击返回', icon: 'none' });
-  },
-  onClickRight() {
-    wx.showToast({
-      title: '点击按钮',
-      icon: 'none'
-    });
-  },
   onChange(e) {
     var cvalue = e.detail;
     const {
       field,
-      value
+      value,
+      actiontype
     } = e.currentTarget.dataset
-    // console.log('当前值为：' + cvalue + ", field=" + field + ", value=" + value)
+    console.log('当前值为：' + cvalue + ", field=" + field + ", value=" + value + ", actiontype=" + actiontype)
 
     this.setData({
       disabled: cvalue === value
@@ -56,6 +47,7 @@ Page({
     var id = this.data.id;
     var ctoken = this.data.ctoken;
     var cid = this.data.cid;
+    var actiontype = isTest ? 1 : 0;
 
     console.log('token=' + token + ', id=' + id +
       ', 当前表单值：ctoken=' + ctoken + ', cid=' + cid)
@@ -73,7 +65,8 @@ Page({
       method: "POST",
       data: {
         token: ctoken,
-        id: cid
+        id: cid,
+        actiontype: actiontype
       },
       success: function (res) {
         console.log(res);
@@ -156,12 +149,13 @@ Page({
       cid
     })
 
-    /**
     var testConfig = app.globalData.TestConfig;    
     if (id === testConfig.id && token === testConfig.token) {
-      console.log('当前账号为测试账号')
+      this.setData({
+        isTest: true,
+        id: ''
+      })
     }
-     */
   },
 
   /**
