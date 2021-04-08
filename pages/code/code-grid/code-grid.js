@@ -77,7 +77,7 @@ Component({
   },
   pageLifetimes: {
     show() {
-      console.log('show code-grid')
+      // console.log('show code-grid')
     }
   }
 })
