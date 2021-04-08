@@ -92,7 +92,7 @@ Page({
               wx.navigateBack({
                 success: () => {
                   wx.showToast({
-                    title: '配置信息更新成功！',
+                    title: actiontype ? '帐号申请成功！' : '配置信息更新成功！',
                     icon: 'none'
                   });
                   util.updateTabBarTipsInfo();
