@@ -70,6 +70,10 @@ Component({
         this.setData({
           isTest: true
         })
+      } else {
+        this.setData({
+          isTest: false
+        })
       }
       this.setData({
         id,
@@ -78,45 +82,6 @@ Component({
         regDate,
         type
       })
-    },
-    applyAccount(e) {
-      this.setData({
-        show: true
-      })
-    },
-    onChange(e) {
-      var cvalue = e.detail;
-      const {
-        field,
-        value
-      } = e.currentTarget.dataset
-      console.log('当前值为：' + cvalue + ", field=" + field + ", value=" + value)
-
-      if (field === 'id') {
-        this.setData({
-          cid: cvalue
-        })
-      } else if (field === 'token') {
-        this.setData({
-          ctoken: cvalue
-        })
-      }
-    },
-    onSubmit(event) {
-      var that = this;
-      var token = this.data.token;
-      var id = this.data.id;
-      var ctoken = this.data.ctoken;
-      var cid = this.data.cid;
-
-      console.log('token=' + token + ', id=' + id +
-        ', 当前表单值：ctoken=' + ctoken + ', cid=' + cid)
-      console.log(event.detail);
-    },
-    onClose() {
-      this.setData({
-        show: false
-      });
     },
   },
   lifetimes: {
