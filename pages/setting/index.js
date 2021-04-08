@@ -47,7 +47,7 @@ Page({
     var id = this.data.id;
     var ctoken = this.data.ctoken;
     var cid = this.data.cid;
-    var actiontype = isTest ? 1 : 0;
+    var actiontype = this.data.isTest ? 1 : 0;
 
     console.log('token=' + token + ', id=' + id +
       ', 当前表单值：ctoken=' + ctoken + ', cid=' + cid)
