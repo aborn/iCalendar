@@ -366,7 +366,11 @@ Page({
     }
   },
   onPullDownRefresh() {
+    console.log('onPullDownRefresh call')
     this.show();
+    setTimeout(()=>{
+      wx.stopPullDownRefresh();
+    }, 500)
   },
   show() {
     const calInstance = this.selectComponent('#calendarinstanace');

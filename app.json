@@ -28,7 +28,8 @@
     "navigationBarTitleText": "极客日历",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark",
-    "backgroundColor": "#FBC900"
+    "backgroundColor": "#FBC900",
+    "enablePullDownRefresh":true
   },
   "style": "v2",
   "networkTimeout": {
