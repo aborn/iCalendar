@@ -7,9 +7,9 @@
       <van-icon name="{{arrow}}" data-name="{{arrow}}" bind:click="onShowDetail" />
     </view>
     <view wx:if="{{arrowShow}}">
-      <view class="icalander-about_content-p">1、在IDE中安装WebX插件</view>
-      <view class="icalander-about_content-p">2、发邮件到aborn#aborn.me注册用户信息</view>
-      <view class="icalander-about_content-p">3、在IDE及小程序中配置用户id（GitHub id）和token（见邮件回复）信息</view>
+      <view class="icalander-about_content-p">1、在小程序中申请帐号</view>
+      <view class="icalander-about_content-p">2、在IDE中安装WebX插件</view>
+      <view class="icalander-about_content-p">3、在IDE配置用户id和token（见小程序帐号信息）</view>
     </view>
     <view class="icalander-about_content-p">
       <van-icon name="info" />具体操作详情见：</view>
