@@ -230,6 +230,9 @@ Page({
           dayStaticByHour: util.transToLevel(util.initCellData(), type),
           codeDayColor: util.getCodeDayColor(0)
         })
+      },
+      complete(e) {
+        wx.stopPullDownRefresh();
       }
     })
   },
