@@ -1,6 +1,6 @@
 import {
   VantComponent
-} from '../common/component';
+} from './common/component';
 import {
   ROW_HEIGHT,
   ROW_HEIGHT_6ROW,
@@ -17,10 +17,10 @@ import {
   getTargetFrameIndex,
   getMonthWeek,
 } from './utils';
-import Toast from '../toast/toast';
+import Toast from '../../vant/toast/toast';
 import {
   requestAnimationFrame
-} from '../common/utils';
+} from './common/utils';
 VantComponent({
   props: {
     title: {

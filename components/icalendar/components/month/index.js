@@ -1,4 +1,4 @@
-import { VantComponent } from '../../../common/component';
+import { VantComponent } from '../../common/component';
 import {
   compareDay,
   getMonthEndDay,  

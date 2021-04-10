@@ -4,7 +4,7 @@ const timeUtil = require('../../utils/timeutil.js')
 import convertSolarLunar from '../../utils/lunar'
 import {
   isToday
-} from '../../vant/calendar/utils'
+} from '../../components/icalendar/utils'
 const app = getApp()
 
 Page({

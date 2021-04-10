@@ -1,5 +1,5 @@
 <wxs src="./index.wxs" module="computed" />
-<wxs src="../wxs/utils.wxs" module="utils" />
+<wxs src="./wxs/utils.wxs" module="utils" />
 
 <import src="./calendar.wxml" />
 
