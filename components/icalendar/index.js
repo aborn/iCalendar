@@ -17,7 +17,6 @@ import {
   getTargetFrameIndex,
   getMonthWeek,
 } from './utils';
-import Toast from '../../vant/toast/toast';
 import {
   requestAnimationFrame
 } from './common/utils';
@@ -341,32 +340,6 @@ VantComponent({
         showToday,
       });
       this.$emit('select', copyDates(date));
-    },
-    checkRange(date) {
-      const {
-        maxRange,
-        rangePrompt
-      } = this.data;
-      if (maxRange && calcDateNum(date) > maxRange) {
-        Toast({
-          context: this,
-          message: rangePrompt || `选择天数不能超过 ${maxRange} 天`,
-        });
-        return false;
-      }
-      return true;
-    },
-    onConfirm() {
-      if (
-        this.data.type === 'range' &&
-        !this.checkRange(this.data.currentDate)
-      ) {
-        return;
-      }
-      wx.nextTick(() => {
-        // @ts-ignore
-        this.$emit('confirm', copyDates(this.data.currentDate));
-      });
-    },
+    },  
   },
 });
