@@ -26,21 +26,6 @@ export function addUnit(value) {
   value = String(value);
   return isNumber(value) ? `${value}px` : value;
 }
-export function requestAnimationFrame(cb) {
-  const systemInfo = getSystemInfoSync();
-  if (systemInfo.platform === 'devtools') {
-    return setTimeout(() => {
-      cb();
-    }, 1000 / 30);
-  }
-  return wx
-    .createSelectorQuery()
-    .selectViewport()
-    .boundingClientRect()
-    .exec(() => {
-      cb();
-    });
-}
 export function pickExclude(obj, keys) {
   if (!isPlainObject(obj)) {
     return {};

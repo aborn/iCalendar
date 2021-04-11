@@ -16,9 +16,6 @@ import {
   getTargetFrameIndex,
   getMonthWeek,
 } from './utils';
-import {
-  requestAnimationFrame
-} from './common/utils';
 VantComponent({
   props: {
     title: {
@@ -35,7 +32,6 @@ VantComponent({
       observer(val) {
         if (val) {
           this.initRect();
-          this.scrollIntoView();
         }
       },
     },
@@ -52,7 +48,6 @@ VantComponent({
           currentDate: val,
           subtitle: getDate(val).getFullYear() + "年" + (getDate(val).getMonth() + 1) + "月"
         });
-        this.scrollIntoView();
       },
     },
     confirmDisabledText: String,
@@ -104,7 +99,6 @@ VantComponent({
   data: {
     subtitle: '',
     currentDate: null,
-    scrollIntoView: '',
     preIndex: null, // 滑动的时候记录上一次的Index,初始化默认为当前的
     curIndex: null, // 当前的index
     cFrameDate: null,
@@ -125,7 +119,6 @@ VantComponent({
   mounted() {
     if (this.data.show || !this.data.poppable) {
       this.initRect();
-      this.scrollIntoView();
     }
   },
   methods: {
@@ -233,7 +226,6 @@ VantComponent({
       this.setData({
         currentDate: this.getInitialDate()
       });
-      this.scrollIntoView();
     },
     initRect() {
       if (this.contentObserver != null) {
@@ -277,34 +269,6 @@ VantComponent({
         minDate
       } = this.data;
       return defaultDate || minDate;
-    },
-    scrollIntoView() {
-      requestAnimationFrame(() => {
-        const {
-          currentDate,
-          type,
-          show,
-          poppable,
-          minDate,
-          maxDate,
-        } = this.data;
-        // @ts-ignore
-        const targetDate = type === 'single' ? currentDate : currentDate[0];
-        const displayed = show || !poppable;
-        if (!targetDate || !displayed) {
-          return;
-        }
-        const months = getMonths(minDate, maxDate);
-        months.some((month, index) => {
-          if (compareMonth(month, targetDate) === 0) {
-            this.setData({
-              scrollIntoView: `month${index}`
-            });
-            return true;
-          }
-          return false;
-        });
-      });
     },
     onOpen() {
       this.$emit('open');
