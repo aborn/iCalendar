@@ -5,7 +5,6 @@ import {
   ROW_HEIGHT,
   ROW_HEIGHT_6ROW,
   copyDates,
-  calcDateNum,
   formatMonthTitle,
   compareMonth,
   getMonths,
