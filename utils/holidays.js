@@ -101,6 +101,11 @@ export const festival = {
         type: 'festival',
         name: '愚人节',
         label: '愚人节'
+      },
+      23: {
+        type: 'festival',
+        name: '世界读书日',
+        label: '世界读书日'
       }
     },
     5: {
