@@ -5,6 +5,7 @@ import { UserConfig } from "./userconfig";
 
 var userconfig = new UserConfig();
 console.log('gettoken=' + userconfig.getToken());
+userconfig.print();
 
 console.log('start runing.');
 console.log('start time==>' + new Date().getTime());

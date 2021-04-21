@@ -27,7 +27,7 @@ export class UserConfig {
     }
 
     public print(): void {
-        console.log("[id = " + this.id + ", token = " + this.token);
+        console.log(`[id = ${this.id}, token = ${this.token}]`);
     }
 
     // TODO: User command setting for token config.
@@ -74,7 +74,7 @@ export class UserConfig {
 
             if (id !== null && token !== null) {
                 callback(id, token);
-                console.log('init id and token success. [id:' + id + ', token:' + token + ']');
+                console.log(`init id and token success. [id: ${id}, token: ${token}]`);
             } else {
                 console.log('init id and token failed.');
             }

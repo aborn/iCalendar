@@ -44,8 +44,7 @@ export class DayBitSet {
 
     public print(): void {
         var dayStaticByHour = this.getDayStaticByHour();
-        console.log("day:" + this.day + ", cardinality:"
-            + this.bitset.cardinality() + ", dayStaticByHour:" + this.array2string(dayStaticByHour));
+        console.log(`day: ${this.day}, cardinality:${this.bitset.cardinality()}, dayStaticByHour: ${this.array2string(dayStaticByHour)}`);
     }
 
     public getDayStaticByHour(): number[] {
