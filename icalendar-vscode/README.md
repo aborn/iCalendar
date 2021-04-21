@@ -1,6 +1,6 @@
 # webx README
 
-WebX is a powerful extension for recording your coding time.
+iCalendar is a powerful extension for recording your coding time.
 
 ## Features
 

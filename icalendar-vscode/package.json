@@ -1,13 +1,13 @@
 {
-  "name": "webx",
-  "displayName": "WebX",
-  "description": "WebX is a powerful extension for develop web services.",
+  "name": "icalendar",
+  "displayName": "iCalendar",
+  "description": "iCalendar is a powerful extension for develop web services.",
   "publisher": "aborn",
   "version": "0.0.1",
-  "homepage": "https://github.com/aborn/WebX/tree/main/webx-vscode",
+  "homepage": "https://github.com/aborn/iCalendar/tree/main/icalendar-vscode",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aborn/WebX"
+    "url": "https://github.com/aborn/iCalendar"
   },
   "engines": {
     "vscode": "^1.55.0"
@@ -22,7 +22,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "webx.helloWorld",
+        "command": "icalendar.helloWorld",
         "title": "Hello World"
       }
     ]
