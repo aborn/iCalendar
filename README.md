@@ -1,11 +1,15 @@
 # iCalendar
 iCalendar --「i极客日历」微信小程序，查看自己的编程足迹（通过WebX插件记录编程时间）。微信扫描二维码：
 
-![](images/iCalendar.jpg)
+![](icalendar-wechat/images/iCalendar.jpg)
+
+整体框架：
+
+![](images/iCalendarFramework.png)
 
 ## 效果图
 
-![](images/demo/demo.png)
+![](icalendar-wechat/images/demo/demo.png)
 
 ## 使用说明  
 
@@ -32,6 +36,6 @@ iCalendar --「i极客日历」微信小程序，查看自己的编程足迹（�
 ## 支持该项目
 该项目需要服务器支持，你的捐赠将用于支付服务器费用。
 
-![](images/donate.png)  
+![](icalendar-wechat/images/donate.png)  
 
 
