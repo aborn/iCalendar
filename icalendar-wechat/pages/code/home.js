@@ -184,7 +184,6 @@ Page({
     if (isFuture) {
       return
     }
-
     var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
     console.log('url=' + url);
 
@@ -264,6 +263,11 @@ Page({
     date.setMonth(month.substring(5, 7) - 1)
     date.setDate(1)
 
+    // 初始化
+    this.setData({
+      tips: {}
+    })
+
     if (util.isFuture(date)) {
       return;
     }
@@ -335,14 +339,11 @@ Page({
     })
   },
   afterSelectDate(e) {
-    // 详情数据对象
+    // 两种情况会触发：1. 手工选种一个日期时； 2. 切换月时
     var date = e.detail;
     this.showCodingTime(date);
   },
-  changeMonth(e) {
-    this.setData({
-      tips: {}
-    })
+  onChangeMonth(e) {
     var date = new Date(e.detail);
     var month = util.getDayFullValue(date, true)
     this.showTips(month)
@@ -388,6 +389,5 @@ Page({
         this.showTips(monthFormat);
       }
     }
-
   }
 })
