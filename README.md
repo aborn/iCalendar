@@ -4,6 +4,7 @@ iCalendar 中文名「i极客日历」，一个专门为**程度员**定制的�
 其主要有两大核心能力：  
 1）记录并追踪自己的编程时间；  
 2）日程安排及日历查看。  
+
 微信扫描二维码：
 
 ![](icalendar-wechat/images/iCalendar.jpg)
