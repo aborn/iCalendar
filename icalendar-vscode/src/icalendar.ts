@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as events from "./events";
 import { TimeTrace } from "./timetrace";
 
-export class iCalendar {
+export class ICalendar {
     private timetrace: TimeTrace;
 
     constructor(state: vscode.Memento) {
