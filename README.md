@@ -27,7 +27,7 @@ iCalendar 中文名「i极客日历」，一个专门为**程度员**定制的�
 ## 使用说明  
 
 1. 在「i极客日历」微信小程序中申请帐号：我的->帐号信息->申请帐号；   
-2. 在IDE中安装WebX插件，如何安装见[WebX](https://github.com/aborn/WebX)；  
+2. 在IDE中安装对应插件；  
 3. 在IDE中配置用户id和token信息。  
 
 ## IDE支持说明
