@@ -11,8 +11,8 @@ export class UserConfig {
     constructor() {
         this.token = null;
         this.id = null;
-        let homePath = this.getUserHomeDir();
-        this.configFile = path.join(homePath, '.webx.cfg');
+        // let homePath = this.getUserHomeDir();
+        this.configFile = UserConfig.getConfigFile();
         // this.logFile = path.join(homePath, '.webx.log');
 
         this.init((id, token) => {
@@ -37,7 +37,7 @@ export class UserConfig {
             contents.push("id = " + id);
             contents.push("token = " + token);
 
-            fs.writeFile(this.getConfigFile(), contents.join('\n'), err => {
+            fs.writeFile(UserConfig.getConfigFile(), contents.join('\n'), err => {
                 if (err) {
                     throw err;
                 };
@@ -46,7 +46,7 @@ export class UserConfig {
     }
 
     private init(callback: (id: string, token: string) => void): void {
-        fs.readFile(this.getConfigFile(), function (err, data) {
+        fs.readFile(UserConfig.getConfigFile(), function (err, data) {
             if (err) {
                 return console.error(err);
             }
@@ -81,12 +81,12 @@ export class UserConfig {
         });
     }
 
-    private isPortable(): boolean {
+    private static isPortable(): boolean {
         return !!process.env['VSCODE_PORTABLE'];
     }
 
-    public getUserHomeDir(): string {
-        if (this.isPortable()) {
+    private static getUserHomeDir(): string {
+        if (UserConfig.isPortable()) {
             return process.env['VSCODE_PORTABLE'] as string;
         }
 
@@ -97,7 +97,10 @@ export class UserConfig {
         return os.platform() === 'win32';
     }
 
-    public getConfigFile(): string {
-        return this.configFile;
+    public static getConfigFile(): string {
+        let homePath = this.getUserHomeDir();
+        let fileWebx = path.join(homePath, '.webx.cfg');
+        let fileICalendar = path.join(homePath, '.iCalendar.cfg');
+        return fileWebx;
     }
 }

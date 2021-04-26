@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as events from "./events";
 import { TimeTrace } from "./timetrace";
+import { UserConfig } from "./userconfig";
 
 export class ICalendar {
     private timetrace: TimeTrace;
@@ -12,7 +13,7 @@ export class ICalendar {
 
     private initEventListeners(): void {
         let events: vscode.Disposable[] = [];
-        
+
         vscode.window.onDidChangeWindowState(this.onFocus, this, events);
         vscode.window.onDidChangeTextEditorSelection(this.onTextEditorSelect, this, events);
         vscode.window.onDidChangeTextEditorViewColumn(this.onTextEditorViewChange, this, events);
@@ -23,12 +24,20 @@ export class ICalendar {
         vscode.workspace.onDidCreateFiles(this.onCreate, this, events);
     }
 
+    public openConfigFile(): void {
+        let path = UserConfig.getConfigFile();
+        if (path) {
+            let uri = vscode.Uri.file(path);
+            vscode.window.showTextDocument(uri);
+        }
+    }
+
     private onTextEditorActive() {
         this.onChange(events.TEXT_EDITOR_ACTIVE);
     }
 
     private onTextEditorViewChange() {
-        this.onChange(events.TEXT_EDITOR_VIEW_CHANGE);    
+        this.onChange(events.TEXT_EDITOR_VIEW_CHANGE);
     }
 
     private onTextEditorSelect() {
@@ -66,6 +75,6 @@ export class ICalendar {
 
     public dispose() {
         this.timetrace.dispose();
-        console.log('webx disposed.');
+        console.log('iCalendar disposed.');
     }
 }

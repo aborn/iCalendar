@@ -1,9 +1,9 @@
 {
   "name": "icalendar",
   "displayName": "iCalendar",
-  "description": "iCalendar is a powerful extension for develop web services.",
+  "description": "iCalendar is a powerful extension for tracing your code time.",
   "publisher": "aborn",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/aborn/iCalendar/tree/main/icalendar-vscode",
   "repository": {
     "type": "git",
@@ -22,8 +22,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "icalendar.helloWorld",
-        "title": "Hello World"
+        "command": "iCalendar.helloWorld",
+        "title": "iCalendar: Hello World"
+      },
+      {
+        "command": "iCalendar.config_file",
+        "title": "iCalendar: Open Config File..."
       }
     ]
   },
