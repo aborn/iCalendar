@@ -28,6 +28,10 @@
       {
         "command": "iCalendar.config_file",
         "title": "iCalendar: Open Config File..."
+      },
+      {
+        "command": "iCalendar.token",
+        "title": "iCalendar: config token"
       }
     ]
   },

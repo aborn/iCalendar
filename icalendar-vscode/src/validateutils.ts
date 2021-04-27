@@ -13,6 +13,7 @@ export class ValidateUtils {
             return err;
         }
 
+        // TODO: token check as webx.
         return '';
     }
 }

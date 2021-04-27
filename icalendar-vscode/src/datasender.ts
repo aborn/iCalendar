@@ -2,17 +2,17 @@ import axios from 'axios';
 import { DayBitSet } from "./daybitset";
 import { BitSet } from "./bitset";
 import * as servers from "./serverinfo";
-import { UserInfo } from "./userinfo";
+import { ConfigHelper } from "./confighelper";
 
 export class DataSender {
     private lastPostDate: Date | null;
     private lastPostData: BitSet;
-    private userConfig: UserInfo;
 
     constructor() {
         this.lastPostDate = null;
         this.lastPostData = new DayBitSet().getBitSet();
-        this.userConfig = new UserInfo();
+        // init it!
+        ConfigHelper.getInstance();
     }
 
     public postData(daybitset: DayBitSet): string {
@@ -46,7 +46,7 @@ export class DataSender {
 
     private doPostData(daybitset: DayBitSet): { status: boolean, msg: string } {
         var serverInfo = this.getServerInfo();
-        var token = this.userConfig.getToken();
+        var token = ConfigHelper.getInstance().getToken();
         if (token === null) {
             return {
                 status: false,

@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import * as events from "./events";
 import { TimeTrace } from "./timetrace";
-import { UserInfo } from "./userinfo";
 import { ValidateUtils } from "./validateutils";
 import { ConfigHelper } from "./confighelper";
 
@@ -11,6 +10,7 @@ export class ICalendar {
     constructor(state: vscode.Memento) {
         this.initEventListeners();
         this.timetrace = new TimeTrace();
+        ConfigHelper.getInstance();   // init it!
     }
 
     private initEventListeners(): void {
@@ -27,7 +27,7 @@ export class ICalendar {
     }
 
     public openConfigFile(): void {
-        let path = UserInfo.getConfigFile();
+        let path = ConfigHelper.getConfigFile();
         if (path) {
             let uri = vscode.Uri.file(path);
             vscode.window.showTextDocument(uri);
@@ -35,7 +35,7 @@ export class ICalendar {
     }
 
     public promptForToken(): void {
-        ConfigHelper.getInstance().get('token', (_err, defaultVal) => {
+        ConfigHelper.getInstance().getTokenAsync((_err, defaultVal) => {
 
             if (ValidateUtils.validateToken(defaultVal) !== '') {
                 defaultVal = '';
@@ -58,7 +58,7 @@ export class ICalendar {
                         vscode.window.setStatusBarMessage(validation);
                     }
                 } else {
-                    vscode.window.setStatusBarMessage('WakaTime api key not provided');
+                    vscode.window.setStatusBarMessage('iCalendar token not provided');
                 }
             });
         });
