@@ -2,17 +2,17 @@ import axios from 'axios';
 import { DayBitSet } from "./daybitset";
 import { BitSet } from "./bitset";
 import * as servers from "./serverinfo";
-import { UserConfig } from "./userconfig";
+import { UserInfo } from "./userinfo";
 
 export class DataSender {
     private lastPostDate: Date | null;
     private lastPostData: BitSet;
-    private userConfig: UserConfig;
+    private userConfig: UserInfo;
 
     constructor() {
         this.lastPostDate = null;
         this.lastPostData = new DayBitSet().getBitSet();
-        this.userConfig = new UserConfig();
+        this.userConfig = new UserInfo();
     }
 
     public postData(daybitset: DayBitSet): string {

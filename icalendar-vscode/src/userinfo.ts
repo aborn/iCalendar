@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as os from 'os';
 import * as path from 'path';
 
-export class UserConfig {
+export class UserInfo {
     private configFile: string;
     // private logFile: string;
     private token: string | null;
@@ -12,7 +12,7 @@ export class UserConfig {
         this.token = null;
         this.id = null;
         // let homePath = this.getUserHomeDir();
-        this.configFile = UserConfig.getConfigFile();
+        this.configFile = UserInfo.getConfigFile();
         // this.logFile = path.join(homePath, '.webx.log');
 
         this.init((id, token) => {
@@ -37,7 +37,7 @@ export class UserConfig {
             contents.push("id = " + id);
             contents.push("token = " + token);
 
-            fs.writeFile(UserConfig.getConfigFile(), contents.join('\n'), err => {
+            fs.writeFile(UserInfo.getConfigFile(), contents.join('\n'), err => {
                 if (err) {
                     throw err;
                 };
@@ -45,8 +45,13 @@ export class UserConfig {
         }
     }
 
+    public update(id: string, token: string): void {
+        this.id = id;
+        this.token = token;
+    }
+
     private init(callback: (id: string, token: string) => void): void {
-        fs.readFile(UserConfig.getConfigFile(), function (err, data) {
+        fs.readFile(UserInfo.getConfigFile(), function (err, data) {
             if (err) {
                 return console.error(err);
             }
@@ -86,11 +91,11 @@ export class UserConfig {
     }
 
     private static getUserHomeDir(): string {
-        if (UserConfig.isPortable()) {
+        if (UserInfo.isPortable()) {
             return process.env['VSCODE_PORTABLE'] as string;
         }
 
-        return process.env[UserConfig.isWindows() ? 'USERPROFILE' : 'HOME'] || '';
+        return process.env[UserInfo.isWindows() ? 'USERPROFILE' : 'HOME'] || '';
     }
 
     public static isWindows(): boolean {

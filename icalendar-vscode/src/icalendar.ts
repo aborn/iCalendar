@@ -1,7 +1,9 @@
 import * as vscode from "vscode";
 import * as events from "./events";
 import { TimeTrace } from "./timetrace";
-import { UserConfig } from "./userconfig";
+import { UserInfo } from "./userinfo";
+import { ValidateUtils } from "./validateutils";
+import { ConfigHelper } from "./confighelper";
 
 export class ICalendar {
     private timetrace: TimeTrace;
@@ -25,11 +27,41 @@ export class ICalendar {
     }
 
     public openConfigFile(): void {
-        let path = UserConfig.getConfigFile();
+        let path = UserInfo.getConfigFile();
         if (path) {
             let uri = vscode.Uri.file(path);
             vscode.window.showTextDocument(uri);
         }
+    }
+
+    public promptForToken(): void {
+        ConfigHelper.getInstance().get('token', (_err, defaultVal) => {
+
+            if (ValidateUtils.validateToken(defaultVal) !== '') {
+                defaultVal = '';
+            }
+
+            let promptOptions = {
+                prompt: 'iCalendar Token',
+                placeHolder: 'Enter your token from WeChat miniprogram [i极客日历]->我的/账号token',
+                value: defaultVal,
+                ignoreFocusOut: true,
+                validateInput: ValidateUtils.validateToken.bind(this),
+            };
+            vscode.window.showInputBox(promptOptions).then(val => {
+                if (val !== undefined) {
+                    let validation = ValidateUtils.validateToken(val);
+                    if (validation === '') {
+                        ConfigHelper.getInstance().set('token', val);
+                    }
+                    else {
+                        vscode.window.setStatusBarMessage(validation);
+                    }
+                } else {
+                    vscode.window.setStatusBarMessage('WakaTime api key not provided');
+                }
+            });
+        });
     }
 
     private onTextEditorActive() {

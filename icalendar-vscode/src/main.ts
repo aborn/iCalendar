@@ -1,9 +1,9 @@
 import { DayBitSet } from "./daybitset";
 import { DataSender } from "./datasender";
 import { BitSet } from "./bitset";
-import { UserConfig } from "./userconfig";
+import { UserInfo } from "./userinfo";
 
-var userconfig = new UserConfig();
+var userconfig = new UserInfo();
 console.log('gettoken=' + userconfig.getToken());
 userconfig.print();
 
