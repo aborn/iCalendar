@@ -1,15 +1,20 @@
 export class ValidateUtils {
     public static validateToken(token: string): string {
-        const err = 'Invalid token... check WeChat miniprogram [i极客日历] for your key';
+        const err = 'Invalid token... check WeChat miniprogram [i极客日历] for your token';
         if (!token) {
             return err;
         }
 
         const re = new RegExp(
-            '^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$',
-            'i',
-        );
+            // 字母、数字、下划线且长度为10
+            '^[a-zA-Z0-9]{10,10}$', 'i');
         if (!re.test(token)) {
+            return err;
+        }
+
+        // 以0x开头
+        const re2 = new RegExp('^0x', 'i');
+        if (!re2.test(token)) {
             return err;
         }
 

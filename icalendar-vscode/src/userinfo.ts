@@ -22,4 +22,12 @@ export class UserInfo {
         this.id = id;
         this.token = token;
     }
+
+    public setToken(token: string): void {
+        this.token = token;
+    }
+
+    public setId(id: string) :void {
+        this.id = id;
+    }
 }

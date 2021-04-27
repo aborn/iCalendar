@@ -31,7 +31,7 @@
       },
       {
         "command": "iCalendar.token",
-        "title": "iCalendar: config token"
+        "title": "iCalendar: Config Token"
       }
     ]
   },

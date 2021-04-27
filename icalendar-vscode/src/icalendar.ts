@@ -53,8 +53,7 @@ export class ICalendar {
                     let validation = ValidateUtils.validateToken(val);
                     if (validation === '') {
                         ConfigHelper.getInstance().set('token', val);
-                    }
-                    else {
+                    } else {
                         vscode.window.setStatusBarMessage(validation);
                     }
                 } else {

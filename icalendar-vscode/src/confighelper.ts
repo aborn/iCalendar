@@ -31,6 +31,15 @@ export class ConfigHelper {
 
     public set(key: string, value: string): void {
         console.log(`key = ${key}, value = ${value}`);
+
+        // update memo instance first.
+        if ('token' === key) {
+            this.userInfo.setToken(value);
+        } else if ('id' === key) {
+            this.userInfo.setId(value);
+        }
+
+        // TODO than update config file.
     }
 
     public getTokenAsync(callback: (_err: string, defaultVal: string) => void) {
@@ -42,7 +51,6 @@ export class ConfigHelper {
         callback('', token);
     }
 
-    // TODO: token need init when token is null.
     public getToken(): string | null {
         return this.userInfo.getToken();
     }

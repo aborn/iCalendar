@@ -2,6 +2,16 @@ import { DayBitSet } from "./daybitset";
 import { DataSender } from "./datasender";
 import { BitSet } from "./bitset";
 import { UserInfo } from "./userinfo";
+import { ValidateUtils } from "./validateutils";
+
+console.log('0xa232585b:' + ValidateUtils.validateToken('0xa232585b'));
+console.log('0xa232585C:' + ValidateUtils.validateToken('0xa232585C'));
+console.log('1xa2325852:' + ValidateUtils.validateToken('1xa2325852'));
+console.log('0a2325852:' + ValidateUtils.validateToken('0a2325852'));
+console.log('a2325852:' + ValidateUtils.validateToken('a2325852'));
+console.log('0a2325 852:' + ValidateUtils.validateToken('0a2325 852'));
+console.log('0xa2325@52:' + ValidateUtils.validateToken('0xa2325@52'));
+
 
 var userconfig = new UserInfo();
 console.log('gettoken=' + userconfig.getToken());
