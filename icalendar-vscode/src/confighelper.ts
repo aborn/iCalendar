@@ -55,6 +55,10 @@ export class ConfigHelper {
         return this.userInfo.getToken();
     }
 
+    public isLegal(): boolean {
+        return true;
+    }
+
     // TODO: User command setting for token config.
     public config(id: string, token: string): void {
         let contents: string[] = [];

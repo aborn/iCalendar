@@ -45,14 +45,16 @@ export class DataSender {
     }
 
     private doPostData(daybitset: DayBitSet): { status: boolean, msg: string } {
-        var serverInfo = this.getServerInfo();
-        var token = ConfigHelper.getInstance().getToken();
+        let serverInfo = this.getServerInfo();
+        let token = ConfigHelper.getInstance().getToken();
         if (token === null) {
             return {
                 status: false,
                 msg: "token is null, doPostData failed."
             };
         }
+
+        // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
 
         console.log(daybitset.getDay() + ":" + daybitset.countOfCodingSlot());
         
