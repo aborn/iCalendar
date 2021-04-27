@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { resolve } from "node:path";
 import * as os from 'os';
 import * as path from 'path';
 import { UserInfo } from "./userinfo";
@@ -74,39 +75,41 @@ export class ConfigHelper {
         }
     }
 
-    private read(callback: (id: string, token: string) => void): void {
-        fs.readFile(ConfigHelper.getConfigFile(), function (err, data) {
-            if (err) {
-                return console.error(err);
-            }
-            //console.log("Asynchronous read: " + data.toString());
-
-            var id = null;
-            var token = null;
-
-            let lines = data.toString().split('\n');
-            for (var i = 0; i < lines.length; i++) {
-                let line = lines[i];
-
-                if (line.indexOf('=') >= 0) {
-                    let parts = line.split('=');
-                    let key = parts[0].trim();
-                    let value = parts[1].trim();
-                    if (key === 'token') {
-                        token = value;
+    private readConfigFile(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            fs.readFile(ConfigHelper.getConfigFile(), function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    let result: any = {};
+                    let lines = data.toString().split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        let line = lines[i];
+                        if (line.indexOf('=') >= 0) {
+                            let parts = line.split('=');
+                            let key = parts[0].trim();
+                            let value = parts[1].trim();
+                            result[key] = value;
+                        }
                     }
-                    if (key === 'id') {
-                        id = value;
-                    }
+                    resolve(result);
                 }
-            }
+            });
+        });
+    }
 
+    private read(callback: (id: string, token: string) => void): void {
+        this.readConfigFile().then(result => {
+            let id = result['id'];
+            let token = result['token'];
             if (id !== null && token !== null) {
                 callback(id, token);
-                console.log(`init id and token success. [id: ${id}, token: ${token}]`);
+                console.log(`Promise init id and token success. [id: ${id}, token: ${token}]`);
             } else {
-                console.log('init id and token failed.');
+                console.log('Promise init id and token failed.');
             }
+        }).catch(error => {
+            console.log('Promise error, ', error);
         });
     }
 
