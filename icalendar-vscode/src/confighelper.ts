@@ -7,11 +7,9 @@ import { UserInfo } from "./userinfo";
 export class ConfigHelper {
     private static insance: ConfigHelper;
 
-    private configFile: string;
     private userInfo: UserInfo;
 
     private constructor() {
-        this.configFile = ConfigHelper.getConfigFile();
         this.userInfo = new UserInfo();
         this.updateIdAndTokenFromConfigFile();
     }
@@ -40,7 +38,34 @@ export class ConfigHelper {
             this.userInfo.setId(value);
         }
 
-        // TODO than update config file.
+        // update key/value to config file.
+        let contents: string[] = [];
+        this.readConfigFile().then(result => {
+            let found = false;
+            Object.keys(result).map(k => {
+                let val = result[k];
+                if (key === k) {
+                    found = true;
+                    contents.push(k + ' = ' + value);
+                } else {
+                    contents.push(k + ' = ' + val);
+                }
+            });
+
+            if (!found) {
+                contents.push(key + ' = ' + value);
+            }
+
+            fs.writeFile(ConfigHelper.getConfigFile(), contents.join('\n'), err => {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log(`set key=${key}, value=${value} success.`);
+                }
+            });
+        }).catch(err => {
+            console.log(`set key=${key}, value=${value} failed.`, err);
+        });
     }
 
     public getTokenAsync(callback: (_err: string, defaultVal: string) => void) {
@@ -58,21 +83,6 @@ export class ConfigHelper {
 
     public isLegal(): boolean {
         return true;
-    }
-
-    // TODO: User command setting for token config.
-    public config(id: string, token: string): void {
-        let contents: string[] = [];
-        if (id && id.trim.length > 0 && token && token.trim.length > 0) {
-            contents.push("id = " + id);
-            contents.push("token = " + token);
-
-            fs.writeFile(ConfigHelper.getConfigFile(), contents.join('\n'), err => {
-                if (err) {
-                    throw err;
-                };
-            });
-        }
     }
 
     private readConfigFile(): Promise<any> {
