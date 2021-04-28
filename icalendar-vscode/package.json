@@ -32,6 +32,10 @@
       {
         "command": "iCalendar.token",
         "title": "iCalendar: Config Token"
+      },
+      {
+        "command": "iCalendar.id",
+        "title": "iCalendar: Config ID"
       }
     ]
   },

@@ -33,7 +33,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('iCalendar.token', function () {
-			iCalendar.promptForToken();
+			iCalendar.promptConfig('token');
+		}),
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('iCalendar.id', function () {
+			iCalendar.promptConfig('id');
 		}),
 	);
 }

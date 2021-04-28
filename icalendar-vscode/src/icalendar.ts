@@ -34,7 +34,7 @@ export class ICalendar {
         }
     }
 
-    public promptForToken(): void {
+    public promptConfig(key: string): void {
         ConfigHelper.getInstance().getTokenAsync((_err, defaultVal) => {
 
             if (ValidateUtils.validateToken(defaultVal) !== '') {
@@ -42,17 +42,20 @@ export class ICalendar {
             }
 
             let promptOptions = {
-                prompt: 'iCalendar Token',
-                placeHolder: 'Enter your token from WeChat miniprogram [i极客日历]->我的/账号token',
+                prompt: `iCalendar ${key}`,
+                placeHolder: `Enter your ${key} from WeChat miniprogram [i极客日历]->我的/账号${key}`,
                 value: defaultVal,
                 ignoreFocusOut: true,
-                validateInput: ValidateUtils.validateToken.bind(this),
+                validateInput: 'token' === key ?
+                    ValidateUtils.validateToken.bind(this)
+                    : ValidateUtils.validateId.bind(this),
             };
             vscode.window.showInputBox(promptOptions).then(val => {
                 if (val !== undefined) {
-                    let validation = ValidateUtils.validateToken(val);
+                    let validation = 'token' === key ? ValidateUtils.validateToken(val)
+                        : ValidateUtils.validateId(val);
                     if (validation === '') {
-                        ConfigHelper.getInstance().set('token', val);
+                        ConfigHelper.getInstance().set(key, val);
                     } else {
                         vscode.window.setStatusBarMessage(validation);
                     }

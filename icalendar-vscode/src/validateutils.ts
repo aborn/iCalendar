@@ -1,4 +1,20 @@
 export class ValidateUtils {
+    public static validateId(id: string): string {
+        const err = 'Invalid id... check WeChat miniprogram [i极客日历] for your id';
+        if (!id) {
+            return err;
+        }
+
+        const re = new RegExp(
+            // 字母、数字、下划线且长度为10
+            '^[a-zA-Z0-9]{3,128}$', 'i');
+        if (!re.test(id)) {
+            return err;
+        }
+
+        return '';
+    }
+
     public static validateToken(token: string): string {
         const err = 'Invalid token... check WeChat miniprogram [i极客日历] for your token';
         if (!token) {
