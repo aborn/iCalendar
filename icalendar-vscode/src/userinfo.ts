@@ -14,6 +14,10 @@ export class UserInfo {
         return this.token;
     }
 
+    public getId(): string | null {
+        return this.id;
+    }
+
     public print(): void {
         console.log(`[id = ${this.id}, token = ${this.token}]`);
     }

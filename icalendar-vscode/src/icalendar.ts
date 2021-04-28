@@ -35,11 +35,13 @@ export class ICalendar {
     }
 
     public promptConfig(key: string): void {
-        ConfigHelper.getInstance().getTokenAsync((_err, defaultVal) => {
-
-            if (ValidateUtils.validateToken(defaultVal) !== '') {
+        ConfigHelper.getInstance().getConfigAsync(key, (_err, defaultVal) => {
+            
+            if (ValidateUtils.validate(key, defaultVal) !== '') {
                 defaultVal = '';
             }
+
+            console.log(`key=${key}, defaultvalue=${defaultVal}`);
 
             let promptOptions = {
                 prompt: `iCalendar ${key}`,
@@ -52,8 +54,7 @@ export class ICalendar {
             };
             vscode.window.showInputBox(promptOptions).then(val => {
                 if (val !== undefined) {
-                    let validation = 'token' === key ? ValidateUtils.validateToken(val)
-                        : ValidateUtils.validateId(val);
+                    let validation = ValidateUtils.validate(key, val);
                     if (validation === '') {
                         ConfigHelper.getInstance().set(key, val);
                     } else {

@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { resolve } from "node:path";
 import * as os from 'os';
 import * as path from 'path';
 import { UserInfo } from "./userinfo";
@@ -68,17 +67,25 @@ export class ConfigHelper {
         });
     }
 
-    public getTokenAsync(callback: (_err: string, defaultVal: string) => void) {
+    public getConfigAsync(key: string, callback: (_err: string, defaultVal: string) => void) {
         let token = this.getToken();
         if (token === null) {
             this.updateIdAndTokenFromConfigFile();
             token = '';
         }
-        callback('', token);
+        let id = this.getId();
+        if (id === null) {
+            id = '';
+        }
+        callback('', 'token' === key ? token : id);
     }
 
     public getToken(): string | null {
         return this.userInfo.getToken();
+    }
+
+    public getId(): string | null {
+        return this.userInfo.getId();
     }
 
     public isLegal(): boolean {
