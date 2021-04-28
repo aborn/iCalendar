@@ -28,8 +28,6 @@ export class ConfigHelper {
     }
 
     public set(key: string, value: string): void {
-        console.log(`key = ${key}, value = ${value}`);
-
         // update memo instance first.
         if ('token' === key) {
             this.userInfo.setToken(value);
