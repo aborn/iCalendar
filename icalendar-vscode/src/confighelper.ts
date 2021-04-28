@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { resolve } from "node:path";
 import * as os from 'os';
 import * as path from 'path';
 import { UserInfo } from "./userinfo";
@@ -53,13 +54,9 @@ export class ConfigHelper {
                 contents.push(key + ' = ' + value);
             }
 
-            fs.writeFile(ConfigHelper.getConfigFile(), contents.join('\n'), err => {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log(`set key=${key}, value=${value} success.`);
-                }
-            });
+            return contents;           
+        }).then(contents =>{
+            this.writeConfigFile(contents.join('\n'));
         }).catch(err => {
             console.log(`set key=${key}, value=${value} failed.`, err);
         });
@@ -88,6 +85,19 @@ export class ConfigHelper {
 
     public isLegal(): boolean {
         return true;
+    }
+
+    private writeConfigFile(contents:string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(ConfigHelper.getConfigFile(), contents, err => {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log('Promise writheConfigFile success.');
+                    resolve("success");                    
+                }
+            });
+        });
     }
 
     private readConfigFile(): Promise<any> {
