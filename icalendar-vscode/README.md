@@ -1,4 +1,4 @@
-# webx README
+# iCalendar README
 
 iCalendar is a powerful extension for recording your coding time.
 
