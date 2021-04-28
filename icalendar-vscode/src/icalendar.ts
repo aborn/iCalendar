@@ -41,8 +41,6 @@ export class ICalendar {
                 defaultVal = '';
             }
 
-            console.log(`key=${key}, defaultvalue=${defaultVal}`);
-
             let promptOptions = {
                 prompt: `iCalendar ${key}`,
                 placeHolder: `Enter your ${key} from WeChat miniprogram [i极客日历]->我的/账号${key}`,

@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { resolve } from "node:path";
 import * as os from 'os';
 import * as path from 'path';
 import { UserInfo } from "./userinfo";
