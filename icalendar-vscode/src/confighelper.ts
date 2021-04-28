@@ -54,8 +54,8 @@ export class ConfigHelper {
                 contents.push(key + ' = ' + value);
             }
 
-            return contents;           
-        }).then(contents =>{
+            return contents;
+        }).then(contents => {
             this.writeConfigFile(contents.join('\n'));
         }).catch(err => {
             console.log(`set key=${key}, value=${value} failed.`, err);
@@ -87,14 +87,14 @@ export class ConfigHelper {
         return true;
     }
 
-    private writeConfigFile(contents:string): Promise<any> {
+    private writeConfigFile(contents: string): Promise<any> {
         return new Promise((resolve, reject) => {
             fs.writeFile(ConfigHelper.getConfigFile(), contents, err => {
                 if (err) {
                     reject(err);
                 } else {
                     console.log('Promise writheConfigFile success.');
-                    resolve("success");                    
+                    resolve("success");
                 }
             });
         });
