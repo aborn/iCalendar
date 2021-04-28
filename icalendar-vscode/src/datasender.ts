@@ -17,7 +17,7 @@ export class DataSender {
 
     public postData(daybitset: DayBitSet): string {
         if (this.isNeedPost(daybitset)) {
-            var result = this.doPostData(daybitset);
+            let result = this.doPostData(daybitset);
             this.lastPostDate = new Date();
             this.lastPostData.or(daybitset.getBitSet());
             return result.msg;
@@ -27,8 +27,8 @@ export class DataSender {
     }
 
     private isNeedPost(daybitset: DayBitSet): boolean {
-        var now = new Date();
-        var timeLasped = 0;
+        const now = new Date();
+        let timeLasped = 0;
         if (this.lastPostDate !== null) {
             timeLasped = (now.getTime() - this.lastPostDate.getTime()) / 1000;
         }

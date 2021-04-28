@@ -43,15 +43,15 @@ export class DayBitSet {
     }
 
     public print(): void {
-        var dayStaticByHour = this.getDayStaticByHour();
+        let dayStaticByHour = this.getDayStaticByHour();
         console.log(`day: ${this.day}, cardinality:${this.bitset.cardinality()}, dayStaticByHour: ${this.array2string(dayStaticByHour)}`);
     }
 
     public getDayStaticByHour(): number[] {
-        var dayStaticByHour: number[] = [];
-        for (var i = 0; i < SLOT_SIZE; i++) {
+        let dayStaticByHour: number[] = [];
+        for (let i = 0; i < SLOT_SIZE; i++) {
             if (this.bitset.get(i) === 1) {
-                var ndx = Math.floor(i / SLOT_SIZE_HOUR);
+                let ndx = Math.floor(i / SLOT_SIZE_HOUR);
                 if (!dayStaticByHour[ndx]) {
                     dayStaticByHour[ndx] = 0;
                 }
@@ -62,9 +62,9 @@ export class DayBitSet {
     }
 
     private array2string(arr: number[]): string {
-        var result = '[';
-        var temp = [];
-        for (var i = 0; i < arr.length; i++) {
+        let result = '[';
+        let temp = [];
+        for (let i = 0; i < arr.length; i++) {
             if (arr[i]) {
                 temp[i] = i + ':' + arr[i];
             }

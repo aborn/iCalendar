@@ -28,14 +28,15 @@ export class TimeTrace {
     }
 
     public record(): void {
-        var currentSlot = this.daybitset.record();
+        let currentSlot = this.daybitset.record();
         if (this.isActive) {
             let openTimeSlot = this.getOpenedSlot();
 
             if (openTimeSlot >= 0) {
                 // console.log('current slot:' + currentSlot + ", openedTimeSlot:" + openTimeSlot);
-                var findVerIndex = -1;
-                for (var i = currentSlot - 1; i >= openTimeSlot; i--) {
+                let findVerIndex = -1;
+                let i = currentSlot - 1;
+                for (; i >= openTimeSlot; i--) {
                     if (this.daybitset.getBitSet().get(i)) {
                         findVerIndex = i;
                         break;
@@ -45,8 +46,8 @@ export class TimeTrace {
                 // only trace back 5 minutes, interval 10 slot.
                 if (findVerIndex >= 0 && findVerIndex < currentSlot
                     && (currentSlot - findVerIndex) < 10) {
-                    for (var j = findVerIndex + 1; j < currentSlot; j++) {
-                        this.daybitset.getBitSet().set(i);
+                    for (let j = findVerIndex + 1; j < currentSlot; j++) {
+                        this.daybitset.getBitSet().set(j);
                     }
                 }
             }

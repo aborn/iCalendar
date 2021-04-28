@@ -108,7 +108,7 @@ export class ConfigHelper {
                 } else {
                     let result: any = {};
                     let lines = data.toString().split('\n');
-                    for (var i = 0; i < lines.length; i++) {
+                    for (let i = 0; i < lines.length; i++) {
                         let line = lines[i];
                         if (line.indexOf('=') >= 0) {
                             let parts = line.split('=');

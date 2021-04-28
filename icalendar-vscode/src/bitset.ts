@@ -22,8 +22,8 @@ export class BitSet {
      * @param value Optional value that should be set 0/1.
      */
     public set(ndx: number, value?: number): void {
-        var n = ndx >>> WORD_LOG;
-        var b = ndx & 0x7;
+        let n = ndx >>> WORD_LOG;
+        let b = ndx & 0x7;
 
         if (value === 0) {
             this.data[n] &= ~(1 << b);
@@ -33,8 +33,8 @@ export class BitSet {
     }
 
     public get(ndx: number): number {
-        var n = ndx >>> WORD_LOG;
-        var b = ndx & 0x7;
+        let n = ndx >>> WORD_LOG;
+        let b = ndx & 0x7;
 
         if (n >= this.data.length) {
             throw Error('Index out of bitset.');
@@ -43,31 +43,31 @@ export class BitSet {
     }
 
     public or(bitset: BitSet): void {
-        var int8Array = bitset.toInt8Array();
-        for (var i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
+        let int8Array = bitset.toInt8Array();
+        for (let i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
             this.data[i] |= int8Array[i];
         }
     }
 
     public and(bitset: BitSet): void {
-        var int8Array = bitset.toInt8Array();
-        for (var i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
+        let int8Array = bitset.toInt8Array();
+        for (let i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
             this.data[i] &= int8Array[i];
         }
         // TODO how to deal with the left bitword when bistset.wordLength is short ?
     }
 
     public clear(): void {
-        for (var i = 0; i < this.data.length; i++) {
+        for (let i = 0; i < this.data.length; i++) {
             this.data[i] = 0;
         }
     }
 
     public cardinality(): number {
-        var s = 0;
-        var d = this.data;
-        for (var i = 0; i < d.length; i++) {
-            var n = d[i];
+        let s = 0;
+        let d = this.data;
+        for (let i = 0; i < d.length; i++) {
+            let n = d[i];
             if (n !== 0) {
                 s += this.popCount(this.toUnit8Int(n));
             }
@@ -76,8 +76,8 @@ export class BitSet {
     }
 
     public toBitSetSlotArray(): number[] {
-        var slotArray = [];
-        for (var i=0; i<this.slot; i++) {
+        let slotArray = [];
+        for (let i=0; i<this.slot; i++) {
             if (this.get(i)) {
                 slotArray.push(i);
             }
@@ -87,8 +87,8 @@ export class BitSet {
 
     // as Java action
     public toIntArray(): number[] {
-        var intArray = [];
-        for (var i = 0; i < this.data.length; i++) {
+        let intArray = [];
+        for (let i = 0; i < this.data.length; i++) {
             intArray[i] = this.data[i];
         }
         return intArray;
@@ -100,13 +100,13 @@ export class BitSet {
     }
 
     private toUnit8Int(v: number): number {
-        var u8a = new Uint8Array(1);
+        let u8a = new Uint8Array(1);
         u8a[0] = v;
         return u8a[0];
     }
 
     private popCount(v: number): number {
-        var count = 0;
+        let count = 0;
         while (v !== 0) {
             v = (v - 1) & v;
             count++;
