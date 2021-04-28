@@ -22,13 +22,13 @@ iCalendar 中文名「i极客日历」，一个专门为**程度员**定制的�
 
 ## 小程序效果图
 
-![](icalendar-wechat/images/demo/demo.png)
+![](icalendar-vscode/images/icalendar.png)
 
 ## 使用说明  
 
 1. 在「i极客日历」微信小程序中申请帐号：我的->帐号信息->申请帐号；   
-2. 在IDE中安装对应插件；  
-3. 在IDE中配置用户id和token信息。  
+2. 在IDE（支持Intellij IDEA和VS Code）中安装对应插件；  
+3. 在IDE（支持Intellij IDEA和VS Code）中配置用户id和token信息。  
 
 ## IDE支持说明
 从 plugins 目录下载打包好的插件文件（请使用最新版本）手工安装IDE插件：
@@ -56,5 +56,3 @@ iCalendar 中文名「i极客日历」，一个专门为**程度员**定制的�
 该项目需要服务器支持，你的捐赠将用于支付服务器费用，感谢你的支持。
 
 ![](icalendar-wechat/images/donate.png)  
-
-
