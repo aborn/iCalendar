@@ -30,8 +30,8 @@ iCalendar 中文名「i极客日历」，一个专门为**程度员**定制的�
 2. 在IDE（支持Intellij IDEA和VS Code）中安装对应插件；  
 3. 在IDE（支持Intellij IDEA和VS Code）中配置用户id和token信息。  
 
-## IDE支持说明
-从 plugins 目录下载打包好的插件文件（请使用最新版本）手工安装IDE插件：
+## IDE插件安装详情
+从 **plugins** 目录下载打包好的插件文件（请使用最新版本）手工安装IDE插件：
 ### Intellij IDEA
 使用Intellij IDEA开发，需要手动安装[WebX](https://github.com/aborn/WebX)插件。  
 
