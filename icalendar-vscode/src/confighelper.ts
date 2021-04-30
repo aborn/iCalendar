@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as os from 'os';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { UserInfo } from "./userinfo";
 
 export class ConfigHelper {
@@ -60,17 +61,18 @@ export class ConfigHelper {
                 contents.push(key + ' = ' + value);
                 return contents;
             } else {
+                vscode.window.showInformationMessage(`Config ${key} (value:${value}) failed. file (${error.path}) dealing failed.`);
                 return null;
             }
         }).then(contents => {
             if (contents === null) {
                 console.log(`set key=${key}, value=${value} failed. reason: read file failed.`);
-                // TODO VS.code.info
             } else {
                 this.writeConfigFile(contents.join('\n'));
             }
-        }).catch(err => {
-            console.log(`set key=${key}, value=${value} failed.`, err);
+        }).catch(error => {
+            console.log(`set key=${key}, value=${value} failed.`, error);
+            vscode.window.showInformationMessage(`Config ${key} (value:${value}) failed. file (${error.path}) dealing failed.`);
         });
     }
 
