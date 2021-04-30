@@ -54,6 +54,8 @@ export class ConfigHelper {
             }
 
             return contents;
+        }, error => {           
+            return contents;
         }).then(contents => {
             this.writeConfigFile(contents.join('\n'));
         }).catch(err => {
