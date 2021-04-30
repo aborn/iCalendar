@@ -54,10 +54,21 @@ export class ConfigHelper {
             }
 
             return contents;
-        }, error => {           
-            return contents;
+        }, error => {
+            console.log(error.message);
+            if (error.errno === -2 && error.code === 'ENOENT') {
+                contents.push(key + ' = ' + value);
+                return contents;
+            } else {
+                return null;
+            }
         }).then(contents => {
-            this.writeConfigFile(contents.join('\n'));
+            if (contents === null) {
+                console.log(`set key=${key}, value=${value} failed. reason: read file failed.`);
+                // TODO VS.code.info
+            } else {
+                this.writeConfigFile(contents.join('\n'));
+            }
         }).catch(err => {
             console.log(`set key=${key}, value=${value} failed.`, err);
         });
