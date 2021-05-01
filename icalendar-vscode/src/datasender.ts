@@ -76,7 +76,9 @@ export class DataSender {
             timeout: serverInfo.timeout
         }).then((response: any) => {
             // handle success
-            console.log(response.data);
+            let resData = response.data;
+            console.log('http resData', resData);
+            // TODO dealing code not 200!!
             return {
                 status: true, 
                 msg: 'post data success.'
