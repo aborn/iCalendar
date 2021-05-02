@@ -1,6 +1,7 @@
 import { DayBitSet } from "./daybitset";
 import { DataSender } from "./datasender";
 import * as DateUtils from "./dateutils";
+import { Logger } from "./logger";
 
 export class TimeTrace {
     private daybitset: DayBitSet;
@@ -55,7 +56,7 @@ export class TimeTrace {
     }
 
     private timerAction(): void {
-        console.log('start to post:');
+        Logger.log('start to post:');
         let log = this.datasender.postData(this.daybitset);
         console.log('post finished!', new Date(), ' : ', log);
     }

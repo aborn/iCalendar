@@ -3,6 +3,7 @@ import { DayBitSet } from "./daybitset";
 import { BitSet } from "./bitset";
 import * as servers from "./serverinfo";
 import { ConfigHelper } from "./confighelper";
+import { Logger } from "./logger";
 
 export class DataSender {
     private lastPostDate: Date | null;
@@ -15,7 +16,7 @@ export class DataSender {
         ConfigHelper.getInstance();
     }
 
-    public postData(daybitset: DayBitSet): string {
+    public postData(daybitset: DayBitSet): string {        
         if (this.isNeedPost(daybitset)) {
             let result = this.doPostData(daybitset);
             this.lastPostDate = new Date();
@@ -55,9 +56,7 @@ export class DataSender {
         }
 
         // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
-
-        console.log(`token:${token}=>` + daybitset.getDay() + ":" + daybitset.countOfCodingSlot());
-        console.log('post axios message:');
+        Logger.log(`token:${token}=>` + daybitset.getDay() + ":" + daybitset.countOfCodingSlot());
         
         axios({
             baseURL: serverInfo.baseURL,
@@ -81,7 +80,7 @@ export class DataSender {
             console.log('http resData', resData);
             // TODO dealing code not 200!!
             return {
-                status: true, 
+                status: true,
                 msg: 'post data success.'
             };
         }).catch((error: any) => {
