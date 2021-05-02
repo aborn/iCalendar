@@ -4,7 +4,7 @@ iCalendar (极客日历, Chinese) is a powerful extension for tracing your code 
 
 ## Features
 
-This extension will record your each code behaive, but will not record which file you open and file content. Your code time record will post to remote server.   
+This extension records your each code behaive, but will not record which file you have opened and file's content. Your code time record will post to remote server.   
 
 You can view your code time via WeChat mini-program「i极客日历」, preview as follows:  
 
