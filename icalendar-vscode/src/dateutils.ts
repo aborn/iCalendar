@@ -8,7 +8,8 @@ export function getSlotIndex(date: Date = new Date()): number {
 
 export function getDayInfo(date: Date = new Date()): string {
     let month = date.getMonth() + 1;
-    let arr = [date.getFullYear(), month < 10 ? '0' + month : month, date.getDate()];
+    let day = date.getDate();
+    let arr = [date.getFullYear(), month < 10 ? '0' + month : month, day < 10 ? '0' + day : day];
     return arr.join("-");
 }
 

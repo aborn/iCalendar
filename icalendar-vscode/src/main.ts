@@ -1,8 +1,11 @@
 import { DayBitSet } from "./daybitset";
-import { DataSender } from "./datasender";
+// import { DataSender } from "./datasender";
 import { BitSet } from "./bitset";
 import { UserInfo } from "./userinfo";
 import { ValidateUtils } from "./validateutils";
+import { getDayInfo } from "./dateutils";
+
+console.log('today:' + getDayInfo());
 
 console.log('0xa232585b:' + ValidateUtils.validateToken('0xa232585b'));
 console.log('0xa232585C:' + ValidateUtils.validateToken('0xa232585C'));
@@ -44,12 +47,14 @@ console.log('cardinality:' + bitset.cardinality());
 var byteArray = daybitset.getBitSet().toIntArray();
 console.log('byte length=' + byteArray.length);
 
+/**
 var a = false;
 if (a) {
     var datasender = new DataSender();
     var postResult = datasender.postData(daybitset);
     console.log(postResult);
 }
+ */
 
 console.log('end time==>' + new Date().getTime());
 console.log('end in main.');
