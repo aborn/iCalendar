@@ -3,9 +3,11 @@ import { DayBitSet } from "./daybitset";
 import { BitSet } from "./bitset";
 import { UserInfo } from "./userinfo";
 import { ValidateUtils } from "./validateutils";
-import { getDayInfo } from "./dateutils";
+import { getDayInfo, formatTime } from "./dateutils";
+
 
 console.log('today:' + getDayInfo());
+console.log(formatTime());
 
 console.log('0xa232585b:' + ValidateUtils.validateToken('0xa232585b'));
 console.log('0xa232585C:' + ValidateUtils.validateToken('0xa232585C'));

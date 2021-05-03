@@ -9,11 +9,16 @@ export function getSlotIndex(date: Date = new Date()): number {
 export function getDayInfo(date: Date = new Date()): string {
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let arr = [date.getFullYear(), month < 10 ? '0' + month : month, day < 10 ? '0' + day : day];
+    let arr = [date.getFullYear(), ('0' + month).slice(-2), ('0' + day).slice(-2)];
     return arr.join("-");
 }
 
 export function isToday(dayInfo: string): boolean {
     let todayInfo = getDayInfo();
     return todayInfo === dayInfo;
+}
+
+export function formatTime(date: Date = new Date()): string {
+    let arr = [('0' + date.getHours()).slice(-2), ('0' + date.getMinutes()).slice(-2), ('0' + date.getSeconds()).slice(-2)];
+    return '[' + getDayInfo(date) + ' ' + arr.join(":") + "." + date.getMilliseconds() + "]";
 }

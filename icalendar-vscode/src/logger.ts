@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { formatTime } from './dateutils';
 
 export class Logger {
     private static instance: Logger;
@@ -15,8 +16,14 @@ export class Logger {
             console.log('init logger');
             Logger.instance = new Logger();
         }
+        
+        let formatMsg = this.formatMsg(msg);
+        console.log(formatMsg);
+        Logger.instance.logger.appendLine(formatMsg);
+    }
 
-        console.log(msg);
-        Logger.instance.logger.appendLine(msg);
+    // level: info, error, debug
+    private static formatMsg(msg: string, level: string='info'): string {
+        return formatTime() + " [" + level + "] " + msg;
     }
 }
