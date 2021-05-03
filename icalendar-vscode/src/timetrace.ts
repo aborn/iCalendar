@@ -56,9 +56,9 @@ export class TimeTrace {
     }
 
     private timerAction(): void {
-        Logger.log('start to post:');
+        Logger.debug('start to post:');
         let log = this.datasender.postData(this.daybitset);
-        console.log('post finished!', new Date(), ' : ', log);
+        Logger.debug('post finished!', new Date(), ' : ', log);
     }
 
     public setVSCodeWindowState(state: boolean): void {

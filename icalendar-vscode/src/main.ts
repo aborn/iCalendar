@@ -5,7 +5,6 @@ import { UserInfo } from "./userinfo";
 import { ValidateUtils } from "./validateutils";
 import { getDayInfo, formatTime } from "./dateutils";
 
-
 console.log('today:' + getDayInfo());
 console.log(formatTime());
 
