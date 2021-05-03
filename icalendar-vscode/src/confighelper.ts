@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import { Logger } from "./logger";
 import { UserInfo } from "./userinfo";
 
 export class ConfigHelper {
@@ -56,7 +57,7 @@ export class ConfigHelper {
 
             return contents;
         }, error => {
-            console.log(error.message);
+            Logger.error(error.message);
             if (error.errno === -2 && error.code === 'ENOENT') {
                 contents.push(key + ' = ' + value);
                 return contents;
@@ -66,12 +67,12 @@ export class ConfigHelper {
             }
         }).then(contents => {
             if (contents === null) {
-                console.log(`set key=${key}, value=${value} failed. reason: read file failed.`);
+                Logger.error(`set key=${key}, value=${value} failed. reason: read file failed.`);
             } else {
                 this.writeConfigFile(contents.join('\n'));
             }
         }).catch(error => {
-            console.log(`set key=${key}, value=${value} failed.`, error);
+            Logger.error(`set key=${key}, value=${value} failed.`, error);
             vscode.window.showInformationMessage(`Config ${key} (value:${value}) failed. file (${error.path}) dealing failed.`);
         });
     }
@@ -107,7 +108,7 @@ export class ConfigHelper {
                 if (err) {
                     reject(err);
                 } else {
-                    console.log('Promise writheConfigFile success.');
+                    Logger.info('Promise writheConfigFile success.');
                     resolve("success");
                 }
             });
@@ -141,14 +142,17 @@ export class ConfigHelper {
         this.readConfigFile().then(result => {
             let id = result['id'];
             let token = result['token'];
-            if (id !== null && token !== null) {
+            let level = result['level']; // log level
+            Logger.setLevel(level);
+
+            if (token !== null) {
                 callback(id, token);
-                console.log(`Promise init id and token success. [id: ${id}, token: ${token}]`);
+                Logger.info(`Promise init id and token success. [id: ${id}, token: ${token}]`);
             } else {
-                console.log('Promise init id and token failed.');
+                Logger.info(`Promise init token failed. token: ${token}`);
             }
         }).catch(error => {
-            console.log('Promise error, ', error);
+            Logger.error('Promise error, ', error);
         });
     }
 

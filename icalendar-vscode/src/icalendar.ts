@@ -3,6 +3,8 @@ import * as events from "./events";
 import { TimeTrace } from "./timetrace";
 import { ValidateUtils } from "./validateutils";
 import { ConfigHelper } from "./confighelper";
+import { Logger } from "./logger";
+import { log } from "node:util";
 
 export class ICalendar {
     private timetrace: TimeTrace;
@@ -86,14 +88,14 @@ export class ICalendar {
     }
 
     private onChange(eventName = "unknown") {
-        console.log(eventName);
+        Logger.debug(eventName);
         this.record();
     }
 
     private onEdit(e: vscode.TextDocumentChangeEvent) {
         let eventName = events.FILE_EDITED;
-        console.log(eventName);
         if (e.contentChanges.length > 0) {
+            console.log(eventName);
             this.record();
         }
     }
@@ -108,6 +110,6 @@ export class ICalendar {
 
     public dispose() {
         this.timetrace.dispose();
-        console.log('iCalendar disposed.');
+        Logger.info('iCalendar disposed.');
     }
 }
