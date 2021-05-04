@@ -18,7 +18,7 @@ export class ICalendar {
         let events: vscode.Disposable[] = [];
 
         vscode.window.onDidChangeWindowState(this.onFocus, this, events);
-        vscode.window.onDidChangeTextEditorSelection(this.onTextEditorSelect, this, events);
+        // vscode.window.onDidChangeTextEditorSelection(this.onTextEditorSelect, this, events);
         vscode.window.onDidChangeTextEditorViewColumn(this.onTextEditorViewChange, this, events);
         vscode.window.onDidChangeActiveTextEditor(this.onTextEditorActive, this, events);
 
@@ -97,7 +97,7 @@ export class ICalendar {
             Logger.debug(eventName);
         }
          */
-        
+
         Logger.debug(eventName);
         this.record();
     }
@@ -105,8 +105,13 @@ export class ICalendar {
     private onEdit(e: vscode.TextDocumentChangeEvent) {
         let eventName = events.FILE_EDITED;
         if (e.contentChanges.length > 0) {
-            console.log(eventName);
-            this.record();
+            let fileName = e.document.fileName;
+
+            // only record legal file.
+            if (ValidateUtils.isLegalFileName(fileName)) {
+                Logger.debug(eventName, fileName);
+                this.record();
+            } 
         }
     }
 

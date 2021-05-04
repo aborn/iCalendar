@@ -5,6 +5,11 @@ import { UserInfo } from "./userinfo";
 import { ValidateUtils } from "./validateutils";
 import { getDayInfo, formatTime } from "./dateutils";
 
+console.log('a.txt=> ' + ("a.txt".includes('.')));
+console.log('atxt=> ' + ("atxt".includes('.')));
+console.log('atxt=> ' + ("atxt".startsWith('atx')));
+console.log(' atxt=> ' + (" atxt".trim().startsWith('atx')));
+
 console.log('today:' + getDayInfo());
 console.log(formatTime());
 

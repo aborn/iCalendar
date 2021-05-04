@@ -1,6 +1,16 @@
 import { LEVELMAP } from './consts';
 export class ValidateUtils {
 
+    public static isLegalFileName(fileName: string): boolean {
+        if (fileName
+            && fileName.trim().startsWith("extension-output")
+            && (!fileName.trim().includes("."))) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static validate(key: string, value: string) {
         return 'token' === key ? ValidateUtils.validateToken(value) :
             ValidateUtils.validateOthers(key, value);
