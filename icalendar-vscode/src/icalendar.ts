@@ -86,7 +86,7 @@ export class ICalendar {
     }
 
     private onChange(eventName = "unknown") {
-        Logger.debug(eventName);
+        // Logger.debug(eventName);
         this.record();
     }
 

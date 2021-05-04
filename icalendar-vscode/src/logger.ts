@@ -31,7 +31,13 @@ export class Logger {
             Logger.init();
             Logger.instance.level = level;
             Logger.instance.ilog("info", "log level changed to: ", Logger.instance.level);
+        } else {
+            Logger.error(`setLevel error, level: ${level}`);
         }
+    }
+
+    public static getLevel(): string {
+        return Logger.instance.level;
     }
 
     private static init() {

@@ -39,6 +39,8 @@ export class ConfigHelper {
             this.userInfo.setToken(value);
         } else if ('id' === key) {
             this.userInfo.setId(value);
+        } else if ('level' === key) {
+            Logger.setLevel(value);
         }
 
         // update key/value to config file.
@@ -93,10 +95,12 @@ export class ConfigHelper {
             id = '';
         }
 
+        let level = Logger.getLevel();
+
         let configLocal: { [key: string]: any } = {};
         configLocal['id'] = id;
         configLocal['token'] = token;
-        configLocal[key] = this.config[key];
+        configLocal[key] = level || this.config[key];
 
         callback('', configLocal[key]);
     }

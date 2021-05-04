@@ -17,7 +17,7 @@ export class ValidateUtils {
             return ValidateUtils.validateToken;
         } else {
             return (value: string) => {
-                ValidateUtils.validateOthers(key, value);
+                return ValidateUtils.validateOthers(key, value);
             };
         }
     }
