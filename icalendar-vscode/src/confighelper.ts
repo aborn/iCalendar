@@ -34,7 +34,7 @@ export class ConfigHelper {
     }
 
     public set(key: string, value: string): void {
-        // update memo instance first.
+        // update memo instance variable first.
         if ('token' === key) {
             this.userInfo.setToken(value);
         } else if ('id' === key) {

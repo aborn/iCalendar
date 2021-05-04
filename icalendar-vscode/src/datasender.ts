@@ -56,7 +56,7 @@ export class DataSender {
         }
 
         // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
-        Logger.debug(`token:${token}=>` + daybitset.getDay() + ":" + daybitset.countOfCodingSlot());
+        Logger.info(`Posting data, url:${serverInfo.baseURL}, token:${token}, day: ${daybitset.getDay()}, slot: ${daybitset.countOfCodingSlot()}`);
 
         axios({
             baseURL: serverInfo.baseURL,

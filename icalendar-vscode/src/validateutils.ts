@@ -6,12 +6,6 @@ export class ValidateUtils {
             ValidateUtils.validateOthers(key, value);
     }
 
-    /**
-    public static validateId(id: string): string {
-        return ValidateUtils.validateOthers('id', id);
-    }
-     */
-
     public static validateFn(key: string): any {
         if (key === 'token') {
             return ValidateUtils.validateToken;
@@ -23,7 +17,9 @@ export class ValidateUtils {
     }
 
     public static validateOthers(key: string, value: string): string {
-        const err = `Invalid ${key}... check WeChat miniprogram [i极客日历] for your ${key}`;
+        const err = 'level' === key ?
+            `Invalid ${key}, log level can only be one of: debug, info, error` :
+            `Invalid ${key}... check WeChat miniprogram [i极客日历] for your ${key}`;
         if (!value) {
             return err;
         }
@@ -36,7 +32,7 @@ export class ValidateUtils {
         }
 
         if ('level' === key && LEVELMAP[value] === undefined) {
-            return `Invalid ${key}, log level can only be one of: debug, info, error`;
+            return err;
         }
 
         return '';
