@@ -54,7 +54,10 @@ export class Logger {
 
     private ilog(level: string, ...optionalParams: any[]): void {
         let paramArr = optionalParams.map((item) => {
-            if (item instanceof Object) {
+            if (item instanceof Date) {
+                // default print time is utc-0, 8-hour diff from beijing time.
+                return formatTime(item);
+            } else if (item instanceof Object) {
                 return JSON.stringify(item);
             } else {
                 return item;

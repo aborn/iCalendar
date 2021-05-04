@@ -5,6 +5,16 @@ import { UserInfo } from "./user/userinfo";
 import { ValidateUtils } from "./utils/validateutils";
 import { getDayInfo, formatTime } from "./utils/dateutils";
 
+let time = new Date();
+console.log(new Date(Date.now()));
+console.log(time);
+console.log(Date.now());
+console.log(JSON.stringify(new Date()));
+console.log('format:' + formatTime(time));
+console.log('local timestring:' + time.toLocaleTimeString());
+console.log('local datestring:' + time.toLocaleDateString());
+console.log('local string:' + time.toLocaleString());
+
 console.log('a.txt=> ' + ("a.txt".includes('.')));
 console.log('atxt=> ' + ("atxt".includes('.')));
 console.log('atxt=> ' + ("atxt".startsWith('atx')));
