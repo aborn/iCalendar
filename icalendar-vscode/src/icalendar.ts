@@ -86,6 +86,7 @@ export class ICalendar {
     }
 
     private onChange(eventName = "unknown") {
+        /**
         if (events.TEXT_EDITOR_SELECT === eventName) {
             let minute = new Date().getSeconds();
             if (minute % 2 === 0) {
@@ -95,7 +96,9 @@ export class ICalendar {
         } else {
             Logger.debug(eventName);
         }
-
+         */
+        
+        Logger.debug(eventName);
         this.record();
     }
 

@@ -14,14 +14,14 @@ export class TimeTrace {
 
     constructor() {
         this.daybitset = new DayBitSet();
-        
+
         // initial record when open.
         this.record();
         this.datasender = new DataSender();
         this.isActive = true;
         this.openTime = new Date();
         this.closeTime = null;
-        
+
         // post data for each 30s 
         this.timer = setInterval((that) => {
             that.timerAction();
@@ -29,27 +29,32 @@ export class TimeTrace {
     }
 
     public record(): void {
+        if (!this.isActive) {
+            Logger.debug('current vscode is inactive, do not record.');
+            return;
+        }
+
         let currentSlot = this.daybitset.record();
-        if (this.isActive) {
-            let openTimeSlot = this.getOpenedSlot();
+        Logger.debug(`slot:${currentSlot} active`);
+        let openTimeSlot = this.getOpenedSlot();
 
-            if (openTimeSlot >= 0) {
-                // console.log('current slot:' + currentSlot + ", openedTimeSlot:" + openTimeSlot);
-                let findVerIndex = -1;
-                let i = currentSlot - 1;
-                for (; i >= openTimeSlot; i--) {
-                    if (this.daybitset.getBitSet().get(i)) {
-                        findVerIndex = i;
-                        break;
-                    }
+        if (openTimeSlot >= 0) {
+            // console.log('current slot:' + currentSlot + ", openedTimeSlot:" + openTimeSlot);
+            let findVerIndex = -1;
+            let i = currentSlot - 1;
+            for (; i >= openTimeSlot; i--) {
+                if (this.daybitset.getBitSet().get(i)) {
+                    findVerIndex = i;
+                    break;
                 }
+            }
 
-                // only trace back 5 minutes, interval 10 slot.
-                if (findVerIndex >= 0 && findVerIndex < currentSlot
-                    && (currentSlot - findVerIndex) < 10) {
-                    for (let j = findVerIndex + 1; j < currentSlot; j++) {
-                        this.daybitset.getBitSet().set(j);
-                    }
+            // only trace back 5 minutes, interval 10 slot.
+            if (findVerIndex >= 0 && findVerIndex < currentSlot
+                && (currentSlot - findVerIndex) < 10) {
+                for (let j = findVerIndex + 1; j < currentSlot; j++) {
+                    this.daybitset.getBitSet().set(j);
+                    Logger.debug(`trace slot:${j} active`);
                 }
             }
         }

@@ -74,7 +74,7 @@ export class Logger {
         } else {
             console.log(msg);
         }
-        this.logger.appendLine(msg);
+        // this.logger.appendLine(msg);
     }
 
     // level: info, error, debug
