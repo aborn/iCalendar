@@ -1,4 +1,4 @@
-import { LEVELMAP } from './logger';
+import { LEVELMAP } from './consts';
 export class ValidateUtils {
 
     public static validate(key: string, value: string) {

@@ -1,0 +1,1 @@
+export const LEVELMAP: { [key: string]: number } = { "debug": 0, "info": 1, "error": 2 };

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { formatTime } from './dateutils';
+import { LEVELMAP } from './consts';
 
-export const LEVELMAP: { [key: string]: number } = { "debug": 0, "info": 1, "error": 2 };
 export class Logger {
     private static instance: Logger;
 

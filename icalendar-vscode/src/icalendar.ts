@@ -86,7 +86,16 @@ export class ICalendar {
     }
 
     private onChange(eventName = "unknown") {
-        Logger.debug(eventName);
+        if (events.TEXT_EDITOR_SELECT === eventName) {
+            let minute = new Date().getSeconds();
+            if (minute % 2 === 0) {
+                // control freq
+                Logger.debug(eventName);
+            }
+        } else {
+            Logger.debug(eventName);
+        }
+
         this.record();
     }
 
