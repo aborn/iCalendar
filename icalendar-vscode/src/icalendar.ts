@@ -18,7 +18,7 @@ export class ICalendar {
         let events: vscode.Disposable[] = [];
 
         vscode.window.onDidChangeWindowState(this.onFocus, this, events);
-        // vscode.window.onDidChangeTextEditorSelection(this.onTextEditorSelect, this, events);
+        vscode.window.onDidChangeTextEditorSelection(this.onTextEditorSelect, this, events);
         vscode.window.onDidChangeTextEditorViewColumn(this.onTextEditorViewChange, this, events);
         vscode.window.onDidChangeActiveTextEditor(this.onTextEditorActive, this, events);
 
@@ -73,8 +73,12 @@ export class ICalendar {
         this.onChange(events.TEXT_EDITOR_VIEW_CHANGE);
     }
 
-    private onTextEditorSelect() {
-        this.onChange(events.TEXT_EDITOR_SELECT);
+    private onTextEditorSelect(e: vscode.TextEditorSelectionChangeEvent) {
+        let fileName = e.textEditor.document.fileName;
+        if (ValidateUtils.isLegalFileName(fileName)) {
+            Logger.debug(fileName);
+            this.onChange(events.TEXT_EDITOR_SELECT);
+        }
     }
 
     private onCreate() {
@@ -86,18 +90,6 @@ export class ICalendar {
     }
 
     private onChange(eventName = "unknown") {
-        /**
-        if (events.TEXT_EDITOR_SELECT === eventName) {
-            let minute = new Date().getSeconds();
-            if (minute % 2 === 0) {
-                // control freq
-                Logger.debug(eventName);
-            }
-        } else {
-            Logger.debug(eventName);
-        }
-         */
-
         Logger.debug(eventName);
         this.record();
     }
@@ -111,7 +103,7 @@ export class ICalendar {
             if (ValidateUtils.isLegalFileName(fileName)) {
                 Logger.debug(eventName, fileName);
                 this.record();
-            } 
+            }
         }
     }
 
