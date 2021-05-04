@@ -1,7 +1,7 @@
-import { DayBitSet } from "./daybitset";
-import { DataSender } from "./datasender";
-import * as DateUtils from "./dateutils";
-import { Logger } from "./logger";
+import { DayBitSet } from "./user/daybitset";
+import { DataSender } from "./sender/datasender";
+import * as DateUtils from "./utils/dateutils";
+import { Logger } from "./common/logger";
 
 export class TimeTrace {
     private daybitset: DayBitSet;

@@ -2,8 +2,8 @@ import * as fs from "fs";
 import * as os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { Logger } from "./logger";
-import { UserInfo } from "./userinfo";
+import { Logger } from "../common/logger";
+import { UserInfo } from "../user/userinfo";
 
 export class ConfigHelper {
     private static insance: ConfigHelper;

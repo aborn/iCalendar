@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
-import * as events from "./events";
+import * as events from "./common/events";
 import { TimeTrace } from "./timetrace";
-import { ValidateUtils } from "./validateutils";
-import { ConfigHelper } from "./confighelper";
-import { Logger } from "./logger";
+import { ValidateUtils } from "./utils/validateutils";
+import { ConfigHelper } from "./utils/confighelper";
+import { Logger } from "./common/logger";
 
 export class ICalendar {
     private timetrace: TimeTrace;

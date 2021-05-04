@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { ICalendar } from './icalendar';
-import { Logger } from './logger';
+import { Logger } from './common/logger';
 
 let iCalendar: ICalendar;
 

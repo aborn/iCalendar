@@ -1,5 +1,5 @@
-import { BitSet } from "./bitset";
-import * as dateutils from "./dateutils";
+import { BitSet } from "../common/bitset";
+import * as dateutils from "../utils/dateutils";
 const SLOT_SIZE = 24 * 60 * 2;
 const SLOT_SIZE_HOUR = 60 * 2;
 

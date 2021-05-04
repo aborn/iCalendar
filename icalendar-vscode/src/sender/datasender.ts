@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { DayBitSet } from "./daybitset";
-import { BitSet } from "./bitset";
+import { DayBitSet } from "../user/daybitset";
+import { BitSet } from "../common/bitset";
 import * as servers from "./serverinfo";
-import { ConfigHelper } from "./confighelper";
-import { Logger } from "./logger";
+import { ConfigHelper } from "../utils/confighelper";
+import { Logger } from "../common/logger";
 
 export class DataSender {
     private lastPostDate: Date | null;

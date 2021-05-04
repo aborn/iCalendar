@@ -1,9 +1,9 @@
-import { DayBitSet } from "./daybitset";
+import { DayBitSet } from "./user/daybitset";
 // import { DataSender } from "./datasender";
-import { BitSet } from "./bitset";
-import { UserInfo } from "./userinfo";
-import { ValidateUtils } from "./validateutils";
-import { getDayInfo, formatTime } from "./dateutils";
+import { BitSet } from "./common/bitset";
+import { UserInfo } from "./user/userinfo";
+import { ValidateUtils } from "./utils/validateutils";
+import { getDayInfo, formatTime } from "./utils/dateutils";
 
 console.log('a.txt=> ' + ("a.txt".includes('.')));
 console.log('atxt=> ' + ("atxt".includes('.')));

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { formatTime } from './dateutils';
+import { formatTime } from '../utils/dateutils';
 import { LEVELMAP } from './consts';
 
 export class Logger {

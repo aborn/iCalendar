@@ -1,4 +1,4 @@
-import { LEVELMAP } from './consts';
+import { LEVELMAP } from '../common/consts';
 export class ValidateUtils {
 
     public static isLegalFileName(fileName: string): boolean {
