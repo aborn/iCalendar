@@ -59,7 +59,7 @@ export class ICalendar {
                         vscode.window.setStatusBarMessage(validation);
                     }
                 } else {
-                    vscode.window.setStatusBarMessage('iCalendar token not provided');
+                    vscode.window.setStatusBarMessage(`iCalendar ${key} not provided`);
                 }
             });
         });
