@@ -36,6 +36,10 @@
       {
         "command": "iCalendar.id",
         "title": "iCalendar: Config ID"
+      },
+      {
+        "command": "iCalendar.level",
+        "title": "iCalendar: Config Log Level"
       }
     ]
   },

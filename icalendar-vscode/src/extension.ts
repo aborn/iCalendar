@@ -43,6 +43,13 @@ export function activate(context: vscode.ExtensionContext) {
 			iCalendar.promptConfig('id');
 		}),
 	);
+
+	
+	context.subscriptions.push(
+		vscode.commands.registerCommand('iCalendar.level', function () {
+			iCalendar.promptConfig('level');
+		}),
+	);
 }
 
 // this method is called when your extension is deactivated

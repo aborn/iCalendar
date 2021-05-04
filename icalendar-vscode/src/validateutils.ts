@@ -1,20 +1,42 @@
+import { LEVELMAP } from './logger';
 export class ValidateUtils {
 
     public static validate(key: string, value: string) {
-        return 'token' === key ? ValidateUtils.validateToken(value) : ValidateUtils.validateId(value);
+        return 'token' === key ? ValidateUtils.validateToken(value) :
+            ValidateUtils.validateOthers(key, value);
     }
 
+    /**
     public static validateId(id: string): string {
-        const err = 'Invalid id... check WeChat miniprogram [i极客日历] for your id';
-        if (!id) {
+        return ValidateUtils.validateOthers('id', id);
+    }
+     */
+
+    public static validateFn(key: string): any {
+        if (key === 'token') {
+            return ValidateUtils.validateToken;
+        } else {
+            return (value: string) => {
+                ValidateUtils.validateOthers(key, value);
+            };
+        }
+    }
+
+    public static validateOthers(key: string, value: string): string {
+        const err = `Invalid ${key}... check WeChat miniprogram [i极客日历] for your ${key}`;
+        if (!value) {
             return err;
         }
 
         const re = new RegExp(
             // 合法的id：字母、数字、下划线且长度为[3，128]之间
             '^[a-zA-Z0-9]{3,128}$', 'i');
-        if (!re.test(id)) {
+        if (!re.test(value)) {
             return err;
+        }
+
+        if ('level' === key && LEVELMAP[value] === undefined) {
+            return `Invalid ${key}, log level can only be one of: debug, info, error`;
         }
 
         return '';

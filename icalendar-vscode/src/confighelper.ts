@@ -9,6 +9,7 @@ export class ConfigHelper {
     private static insance: ConfigHelper;
 
     private userInfo: UserInfo;
+    private config: any;
 
     private constructor() {
         this.userInfo = new UserInfo();
@@ -16,8 +17,11 @@ export class ConfigHelper {
     }
 
     public updateIdAndTokenFromConfigFile() {
-        this.read((id, token) => {
-            this.userInfo.update(id, token);
+        this.read((id, token, config) => {
+            if (token !== null) {
+                this.userInfo.update(id, token);
+            }
+            this.config = config;
         });
     }
 
@@ -83,11 +87,18 @@ export class ConfigHelper {
             this.updateIdAndTokenFromConfigFile();
             token = '';
         }
+
         let id = this.getId();
         if (id === null) {
             id = '';
         }
-        callback('', 'token' === key ? token : id);
+
+        let configLocal: { [key: string]: any } = {};
+        configLocal['id'] = id;
+        configLocal['token'] = token;
+        configLocal[key] = this.config[key];
+
+        callback('', configLocal[key]);
     }
 
     public getToken(): string | null {
@@ -138,19 +149,15 @@ export class ConfigHelper {
         });
     }
 
-    private read(callback: (id: string, token: string) => void): void {
+    private read(callback: (id: string, token: string, config: {}) => void): void {
         this.readConfigFile().then(result => {
             let id = result['id'];
             let token = result['token'];
             let level = result['level']; // log level
             Logger.setLevel(level);
+            Logger.info(`Promise init id and token finished. { id: ${id}, token: ${token}, level: ${level} }`);
 
-            if (token !== null) {
-                callback(id, token);
-                Logger.info(`Promise init id and token success. [id: ${id}, token: ${token}]`);
-            } else {
-                Logger.info(`Promise init token failed. token: ${token}`);
-            }
+            callback(id, token, result);
         }).catch(error => {
             Logger.error('Promise error, ', error);
         });

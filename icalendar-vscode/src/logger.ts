@@ -1,8 +1,7 @@
-import { log } from 'node:util';
 import * as vscode from 'vscode';
 import { formatTime } from './dateutils';
 
-const LEVELMAP: { [key: string]: number } = { "debug": 0, "info": 1, "error": 2 };
+export const LEVELMAP: { [key: string]: number } = { "debug": 0, "info": 1, "error": 2 };
 export class Logger {
     private static instance: Logger;
 
@@ -28,16 +27,17 @@ export class Logger {
     }
 
     public static setLevel(level: string): void {
-        if (LEVELMAP[level]) {
+        if (LEVELMAP[level] !== undefined) {
             Logger.init();
             Logger.instance.level = level;
+            Logger.instance.ilog("info", "log level changed to: ", Logger.instance.level);
         }
     }
 
     private static init() {
         if (!Logger.instance) {
             Logger.instance = new Logger();
-            Logger.instance.ilog("info", "init logger");
+            Logger.instance.ilog("info", "init logger. log level: ", Logger.instance.level);
         }
     }
 

@@ -4,7 +4,6 @@ import { TimeTrace } from "./timetrace";
 import { ValidateUtils } from "./validateutils";
 import { ConfigHelper } from "./confighelper";
 import { Logger } from "./logger";
-import { log } from "node:util";
 
 export class ICalendar {
     private timetrace: TimeTrace;
@@ -38,19 +37,18 @@ export class ICalendar {
 
     public promptConfig(key: string): void {
         ConfigHelper.getInstance().getConfigAsync(key, (_err, defaultVal) => {
-            
             if (ValidateUtils.validate(key, defaultVal) !== '') {
                 defaultVal = '';
             }
 
             let promptOptions = {
                 prompt: `iCalendar ${key}`,
-                placeHolder: `Enter your ${key} from WeChat miniprogram [i极客日历]->我的/账号${key}`,
+                placeHolder: 'level' === key ?
+                    'Enter your log level, as one of: debug, info, error' :
+                    `Enter your ${key} from WeChat miniprogram [i极客日历]->我的/账号${key}`,
                 value: defaultVal,
                 ignoreFocusOut: true,
-                validateInput: 'token' === key ?
-                    ValidateUtils.validateToken.bind(this)
-                    : ValidateUtils.validateId.bind(this),
+                validateInput: ValidateUtils.validateFn(key).bind(this),
             };
             vscode.window.showInputBox(promptOptions).then(val => {
                 if (val !== undefined) {
