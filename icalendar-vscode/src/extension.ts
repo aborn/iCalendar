@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { ICalendar } from './icalendar';
+import { Logger } from './logger';
 
 let iCalendar: ICalendar;
 
@@ -10,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "iCalendar" is now active!');
+	Logger.info('Congratulations, your extension "iCalendar" is now active!');
 	iCalendar = new ICalendar(context.globalState);
 
 	// The command has been defined in the package.json file

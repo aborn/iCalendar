@@ -36,8 +36,8 @@ export class Logger {
 
     private static init() {
         if (!Logger.instance) {
-            console.log('init logger');
             Logger.instance = new Logger();
+            Logger.instance.ilog("info", "init logger");
         }
     }
 
@@ -54,7 +54,7 @@ export class Logger {
                 return item;
             }
         });
-        
+
         let msg = this.joinMsg(paramArr.join(' '), level);
         let levelV = LEVELMAP[level];
         let envLevel = LEVELMAP[this.level];
@@ -63,7 +63,11 @@ export class Logger {
             return;
         }
 
-        console.log(msg);
+        if (levelV === 2) {
+            console.error(msg);
+        } else {
+            console.log(msg);
+        }
         this.logger.appendLine(msg);
     }
 

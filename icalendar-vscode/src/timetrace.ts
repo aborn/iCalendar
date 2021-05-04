@@ -62,7 +62,7 @@ export class TimeTrace {
     }
 
     public setVSCodeWindowState(state: boolean): void {
-        console.log('------ window ' + (state ? 'actived' : 'deactived') + ' ------', new Date());
+        Logger.debug('------ window ' + (state ? 'actived' : 'deactived') + ' ------', new Date());
         state ? this.active() : this.deactive();
     }
 
