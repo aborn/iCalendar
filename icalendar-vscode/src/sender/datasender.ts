@@ -6,11 +6,11 @@ import { ConfigHelper } from "../utils/confighelper";
 import { Logger } from "../common/logger";
 
 export class DataSender {
-    private lastPostDate: Date | null;
+    private lastPostDateMs: number | null;
     private lastPostData: BitSet;
 
     constructor() {
-        this.lastPostDate = null;
+        this.lastPostDateMs = null;
         this.lastPostData = new DayBitSet().getBitSet();
         // init it!
         ConfigHelper.getInstance();
@@ -19,7 +19,7 @@ export class DataSender {
     public postData(daybitset: DayBitSet): string {
         if (this.isNeedPost(daybitset)) {
             let result = this.doPostData(daybitset);
-            this.lastPostDate = new Date();
+            this.lastPostDateMs = Date.now();
             this.lastPostData.or(daybitset.getBitSet());
             return result.msg;
         } else {
@@ -27,14 +27,14 @@ export class DataSender {
         }
     }
 
-    private isNeedPost(daybitset: DayBitSet): boolean {
-        const now = new Date();
+    private isNeedPost(daybitset: DayBitSet): boolean {        
         let timeLasped = 0;
-        if (this.lastPostDate !== null) {
-            timeLasped = (now.getTime() - this.lastPostDate.getTime()) / 1000;
+        if (this.lastPostDateMs !== null) {
+            timeLasped = Math.floor((Date.now() - this.lastPostDateMs) / 1000);
+            Logger.debug(new Date(Date.now()), `timeLasped: ${timeLasped}s`);
         }
 
-        if (this.lastPostDate === null
+        if (this.lastPostDateMs === null
             || this.lastPostData === null
             || daybitset.countOfCodingSlot() !== this.lastPostData.cardinality()
             || (timeLasped) > 5 * 60  // 5分钟以上

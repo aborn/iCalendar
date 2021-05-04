@@ -61,7 +61,7 @@ export class TimeTrace {
     }
 
     private timerAction(): void {
-        Logger.debug('start to post:');
+        Logger.debug('start to post:', new Date(Date.now()));        
         let log = this.datasender.postData(this.daybitset);
         Logger.debug('post finished!', new Date(), ' : ', log);
     }
