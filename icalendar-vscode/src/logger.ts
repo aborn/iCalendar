@@ -11,20 +11,20 @@ export class Logger {
 
     private constructor() {
         this.logger = vscode.window.createOutputChannel("iCalendarLog");
-        this.level = "debug";
+        this.level = "info";
         this.logger.show();
     }
 
     public static info(...optionalParams: any[]) {
-        Logger.log("info", optionalParams);
+        Logger.log("info", ...optionalParams);
     }
 
     public static error(...optionalParams: any[]) {
-        Logger.log("error", optionalParams);
+        Logger.log("error", ...optionalParams);
     }
 
     public static debug(...optionalParams: any[]) {
-        Logger.log("debug", optionalParams);
+        Logger.log("debug", ...optionalParams);
     }
 
     public static setLevel(level: string): void {
@@ -43,11 +43,19 @@ export class Logger {
 
     private static log(level: string, ...optionalParams: any[]): void {
         Logger.init();
-        Logger.instance.ilog(level, optionalParams);
+        Logger.instance.ilog(level, ...optionalParams);
     }
 
     private ilog(level: string, ...optionalParams: any[]): void {
-        let msg = this.formatMsg(optionalParams.join(' '), level);
+        let paramArr = optionalParams.map((item) => {
+            if (item instanceof Object) {
+                return JSON.stringify(item);
+            } else {
+                return item;
+            }
+        });
+        
+        let msg = this.joinMsg(paramArr.join(' '), level);
         let levelV = LEVELMAP[level];
         let envLevel = LEVELMAP[this.level];
 
@@ -60,7 +68,7 @@ export class Logger {
     }
 
     // level: info, error, debug
-    private formatMsg(msg: string, level: string = 'info'): string {
+    private joinMsg(msg: string, level: string = 'info'): string {
         return formatTime() + " [" + level + "] " + msg;
     }
 }

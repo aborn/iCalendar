@@ -16,7 +16,7 @@ export class DataSender {
         ConfigHelper.getInstance();
     }
 
-    public postData(daybitset: DayBitSet): string {        
+    public postData(daybitset: DayBitSet): string {
         if (this.isNeedPost(daybitset)) {
             let result = this.doPostData(daybitset);
             this.lastPostDate = new Date();
@@ -75,16 +75,24 @@ export class DataSender {
             },
             timeout: serverInfo.timeout
         }).then((response: any) => {
-            // handle success
             let resData = response.data;
-            console.log('http resData', resData);
-            // TODO dealing code not 200!!
-            return {
-                status: true,
-                msg: 'post data success.'
-            };
+            if (resData.status) {
+                // handle success
+                Logger.info(resData);
+                return {
+                    status: true,
+                    msg: 'post data success.'
+                };
+            } else {
+                // handle error
+                Logger.error(resData);
+                return {
+                    status: false,
+                    msg: resData.msg
+                };
+            }
         }).catch((error: any) => {
-            console.log(error);
+            Logger.error(error);
             if (error.response) {
                 return {
                     status: false,
@@ -102,7 +110,7 @@ export class DataSender {
 
         return {
             status: true,
-            msg: 'finished post, status: unknown.'
+            msg: 'post data finished, status: unknown.'
         };
     }
 

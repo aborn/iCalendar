@@ -8,6 +8,37 @@ import { getDayInfo, formatTime } from "./dateutils";
 console.log('today:' + getDayInfo());
 console.log(formatTime());
 
+let arr: any[] = [{ "a": 1, "b": 'bvalue' }, "sss", 12];
+console.log(arr);
+console.log(JSON.stringify('sss'));
+
+function ilog(level: string, ...optionalParams: any[]) {
+    let arrParams = optionalParams.map((item) => {
+        if (item instanceof Object) {
+            return JSON.stringify(item);
+        } else {
+            return item;
+        }
+    });
+    console.log('+++++++++++++++++++++++');
+    console.log(arrParams.join(' '));
+}
+
+function info(...optionalParams: any[]) {
+    console.log(optionalParams.length);
+    ilog("info", ...optionalParams);
+}
+
+info("eee", "fff");
+
+/**
+ilog('info', 'eeeeeeee', 'ff');
+ilog('info', arr);
+ilog('info', { "data": "post succ", "status": true, "code": 200 });
+ */
+
+console.log('+++++++++++++++++++++');
+
 console.log('0xa232585b:' + ValidateUtils.validateToken('0xa232585b'));
 console.log('0xa232585C:' + ValidateUtils.validateToken('0xa232585C'));
 console.log('1xa2325852:' + ValidateUtils.validateToken('1xa2325852'));
