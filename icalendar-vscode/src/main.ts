@@ -4,6 +4,25 @@ import { BitSet } from "./common/bitset";
 import { UserInfo } from "./user/userinfo";
 import { ValidateUtils } from "./utils/validateutils";
 import { getDayInfo, formatTime } from "./utils/dateutils";
+import axios from 'axios';
+
+console.log('axios example start');
+async function getUser() {
+    try {
+        const response = await axios.get('https://aborn.me/webx/status');
+        console.log(response.data);
+    } catch (error) {
+        console.error(error);
+    }
+    return "ggggggggggooooooooooooo";
+}
+
+let ggo = getUser();
+console.log(ggo.then((result) => {
+    console.log(result);
+}));
+
+console.log('axios example end.');
 
 let time = new Date();
 console.log(new Date(Date.now()));

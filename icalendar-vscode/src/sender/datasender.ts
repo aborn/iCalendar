@@ -1,9 +1,10 @@
-import axios from 'axios';
 import { DayBitSet } from "../user/daybitset";
 import { BitSet } from "../common/bitset";
 import * as servers from "./serverinfo";
 import { ConfigHelper } from "../utils/confighelper";
 import { Logger } from "../common/logger";
+import * as httpclient from "./httpclient";
+import * as structs from "./structs";
 
 export class DataSender {
     private lastPostDateMs: number | null;
@@ -16,18 +17,46 @@ export class DataSender {
         ConfigHelper.getInstance();
     }
 
-    public postData(daybitset: DayBitSet): string {
+    public postData(daybitset: DayBitSet): void {
+        let serverInfo = this.getServerInfo();
+        let token = serverInfo.token;
+
+        if (token === null || token.trim().length === 0) {
+            Logger.error(`Post failed: token is illgal, token:${token}`);
+            return;
+        }
+
         if (this.isNeedPost(daybitset)) {
-            let result = this.doPostData(daybitset);
-            this.lastPostDateMs = Date.now();
-            this.lastPostData.or(daybitset.getBitSet());
-            return result.msg;
+            let startTime = Date.now();
+            Logger.debug('post start:', new Date(startTime));
+            let promise = httpclient.doPostData(daybitset, serverInfo);
+            promise.then((result) => {
+                if (result.status) {
+                    this.lastPostDateMs = Date.now();
+                    this.lastPostData.or(daybitset.getBitSet());
+                } else {
+                    Logger.error(result.data);
+                }
+                let time = (Date.now() - startTime);
+                let info = "";
+                if (time < 1000) {
+                    info = `${time}ms`;
+                } else {
+                    info = Math.floor(time / 1000) + 's';
+                }
+
+                Logger.debug(`Post finished! time spent:${info}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
+            }, (error) => {
+                Logger.error('post error', error);
+            }).finally(() => {
+                Logger.debug('finilly in post');
+            });
         } else {
-            return "No need to post!";
+            Logger.info("No need to post!");
         }
     }
 
-    private isNeedPost(daybitset: DayBitSet): boolean {        
+    private isNeedPost(daybitset: DayBitSet): boolean {
         let timeLasped = 0;
         if (this.lastPostDateMs !== null) {
             timeLasped = Math.floor((Date.now() - this.lastPostDateMs) / 1000);
@@ -45,78 +74,12 @@ export class DataSender {
         return false;
     }
 
-    private doPostData(daybitset: DayBitSet): { status: boolean, msg: string } {
-        let serverInfo = this.getServerInfo();
+    private getServerInfo(): servers.ServerInfo {
         let token = ConfigHelper.getInstance().getToken();
-        if (token === null) {
-            return {
-                status: false,
-                msg: "token is null, doPostData failed."
-            };
-        }
-
-        // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
-        Logger.info(`Posting data, url:${serverInfo.baseURL}, token:${token}, day: ${daybitset.getDay()}, slot: ${daybitset.countOfCodingSlot()}`);
-
-        axios({
-            baseURL: serverInfo.baseURL,
-            url: 'postUserAction',
-            method: 'post',
-            headers: {
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                'Content-type': 'application/json; charset=utf-8',
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                'Accept': 'application/json'
-            },
-            data: {
-                token: token,
-                day: daybitset.getDay(),
-                dayBitSetArray: daybitset.getDayBitSetByteArray()
-            },
-            timeout: serverInfo.timeout
-        }).then((response: any) => {
-            let resData = response.data;
-            if (resData.status) {
-                // handle success
-                Logger.info(resData);
-                return {
-                    status: true,
-                    msg: 'post data success.'
-                };
-            } else {
-                // handle error
-                Logger.error(resData);
-                return {
-                    status: false,
-                    msg: resData.msg
-                };
-            }
-        }).catch((error: any) => {
-            Logger.error(error);
-            if (error.response) {
-                return {
-                    status: false,
-                    msg: 'post data failed: server error'
-                };
-            } else {
-                return {
-                    status: false,
-                    msg: error.message
-                };
-            }
-        }).then(() => {
-            // always executed
-        });
-
-        return {
-            status: true,
-            msg: 'post data finished, status: unknown.'
-        };
-    }
-
-    private getServerInfo(): any {
-        return servers.REMOTE_SERVER;
-        // return servers.LOCAL_SERVER;
+        let serverInfo = servers.REMOTE_SERVER;
+        // let serverInfo = servers.LOCAL_SERVER;
+        serverInfo.token = token;
+        return serverInfo;
     }
 
 }
