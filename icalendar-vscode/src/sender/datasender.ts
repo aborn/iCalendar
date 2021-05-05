@@ -65,7 +65,7 @@ export class DataSender {
             return true;
         }
 
-        Logger.debug(`No need to post! timeLasped: ${timeInfo.humanReadable}`);
+        Logger.info(`No need to post! timeLasped: ${timeInfo.humanReadable}`);
         return false;
     }
 
