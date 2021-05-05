@@ -3,6 +3,7 @@ import * as servers from "./serverinfo";
 import { ConfigHelper } from "../utils/confighelper";
 import { Logger } from "../common/logger";
 import * as httpclient from "./httpclient";
+import * as dateutils from "../utils/dateutils";
 
 export class DataSender {
     private lastPostDateMs: number | null;
@@ -37,30 +38,22 @@ export class DataSender {
                     Logger.error(result.data);
                 }
 
-                let time = (Date.now() - startTime);
-                let info = "";
-                if (time < 1000) {
-                    info = `${time}ms`;
-                } else {
-                    info = Math.floor(time / 1000) + 's';
-                }
-
-                Logger.info(`Post finished! time spent:${info}, slot:${daybitset.countOfCodingSlot()}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
+                let info = dateutils.timeSpent(startTime);
+                Logger.info(`Post finished! time spent:${info.humanReadable}, slot:${daybitset.countOfCodingSlot()}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
             }, (error) => {
                 Logger.error('post error', error);
             }).finally(() => {
                 Logger.debug('finilly in post');
             });
-        } else {
-            Logger.info("No need to post!");
         }
     }
 
     private isNeedPost(daybitset: DayBitSet): boolean {
         let timeLasped = 0;
+        let timeInfo = null;
         if (this.lastPostDateMs !== null) {
-            timeLasped = Math.floor((Date.now() - this.lastPostDateMs) / 1000);
-            Logger.debug(new Date(Date.now()), `timeLasped: ${timeLasped}s`);
+            timeInfo = dateutils.timeSpent(this.lastPostDateMs);
+            timeLasped = timeInfo.tS;
         }
 
         if (this.lastPostDateMs === null
@@ -71,6 +64,7 @@ export class DataSender {
             return true;
         }
 
+        Logger.debug(`No need to post! timeLasped: ${timeInfo.humanReadable}`);
         return false;
     }
 
