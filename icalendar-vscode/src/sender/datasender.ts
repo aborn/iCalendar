@@ -4,7 +4,6 @@ import * as servers from "./serverinfo";
 import { ConfigHelper } from "../utils/confighelper";
 import { Logger } from "../common/logger";
 import * as httpclient from "./httpclient";
-import * as structs from "./structs";
 
 export class DataSender {
     private lastPostDateMs: number | null;
@@ -45,7 +44,7 @@ export class DataSender {
                     info = Math.floor(time / 1000) + 's';
                 }
 
-                Logger.info(`Post finished! time spent:${info}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
+                Logger.info(`Post finished! time spent:${info}, slot:${daybitset.countOfCodingSlot()}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
             }, (error) => {
                 Logger.error('post error', error);
             }).finally(() => {
