@@ -35,15 +35,16 @@ export class DataSender {
                     this.lastPostData.clearIfNotToday(); // Note: clear if not today
                     this.lastPostData.getBitSet().or(daybitset.getBitSet());
                 } else {
+                    // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
                     Logger.error(result.data);
                 }
 
                 let info = dateutils.timeSpent(startTime);
                 Logger.info(`Post finished! time spent:${info.humanReadable}, slot:${daybitset.countOfCodingSlot()}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
             }, (error) => {
-                Logger.error('post error', error);
+                Logger.error('Post error', error);
             }).finally(() => {
-                Logger.debug('finilly in post');
+                Logger.debug('Finilly in post');
             });
         }
     }

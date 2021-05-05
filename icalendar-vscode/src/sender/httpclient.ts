@@ -6,8 +6,7 @@ import * as structs from "./structs";
 
 export async function doPostData(daybitset: DayBitSet, serverInfo: ServerInfo) {
     let token = serverInfo.token;
-    // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
-    //Logger.info(`Posting data, url:${serverInfo.baseURL}, token:${token}, day: ${daybitset.getDay()}, slot: ${daybitset.countOfCodingSlot()}`);
+    Logger.debug(`Posting data, url:${serverInfo.baseURL}, token:${token}, day: ${daybitset.getDay()}, slot: ${daybitset.countOfCodingSlot()}`);
 
     return await axios({
         baseURL: serverInfo.baseURL,
