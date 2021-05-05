@@ -1,5 +1,4 @@
 import { DayBitSet } from "../user/daybitset";
-import { BitSet } from "../common/bitset";
 import * as servers from "./serverinfo";
 import { ConfigHelper } from "../utils/confighelper";
 import { Logger } from "../common/logger";
@@ -7,11 +6,11 @@ import * as httpclient from "./httpclient";
 
 export class DataSender {
     private lastPostDateMs: number | null;
-    private lastPostData: BitSet;
+    private lastPostData: DayBitSet;
 
     constructor() {
         this.lastPostDateMs = null;
-        this.lastPostData = new DayBitSet().getBitSet();
+        this.lastPostData = new DayBitSet();
         // init it!
         ConfigHelper.getInstance();
     }
@@ -32,10 +31,12 @@ export class DataSender {
             promise.then((result) => {
                 if (result.status) {
                     this.lastPostDateMs = Date.now();
-                    this.lastPostData.or(daybitset.getBitSet());
+                    this.lastPostData.clearIfNotToday(); // Note: clear if not today
+                    this.lastPostData.getBitSet().or(daybitset.getBitSet());
                 } else {
                     Logger.error(result.data);
                 }
+
                 let time = (Date.now() - startTime);
                 let info = "";
                 if (time < 1000) {
@@ -64,7 +65,7 @@ export class DataSender {
 
         if (this.lastPostDateMs === null
             || this.lastPostData === null
-            || daybitset.countOfCodingSlot() !== this.lastPostData.cardinality()
+            || daybitset.countOfCodingSlot() !== this.lastPostData.countOfCodingSlot()
             || (timeLasped) > 5 * 60  // 5分钟以上
         ) {
             return true;

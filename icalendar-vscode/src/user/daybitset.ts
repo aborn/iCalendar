@@ -21,7 +21,7 @@ export class DayBitSet {
         return slot;
     }
 
-    private clearIfNotToday(): void {
+    public clearIfNotToday(): void {
         if (dateutils.isToday(this.day)) {
             return;
         }
