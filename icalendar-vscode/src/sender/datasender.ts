@@ -45,7 +45,7 @@ export class DataSender {
                     info = Math.floor(time / 1000) + 's';
                 }
 
-                Logger.debug(`Post finished! time spent:${info}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
+                Logger.info(`Post finished! time spent:${info}, status:${result.status}, msg:${result.msg}, httpcode:${result.httpCode}`);
             }, (error) => {
                 Logger.error('post error', error);
             }).finally(() => {
