@@ -28,7 +28,7 @@ export class ValidateUtils {
 
     public static validateOthers(key: string, value: string): string {
         const err = 'level' === key ?
-            `Invalid ${key}, log level can only be one of: debug, info, error` :
+            `Invalid ${key}, log level can only be one of: ${Object.keys(LEVELMAP).join(',')}` :
             `Invalid ${key}... check WeChat miniprogram [i极客日历] for your ${key}`;
         if (!value) {
             return err;

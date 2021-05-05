@@ -6,6 +6,11 @@ import { ValidateUtils } from "./utils/validateutils";
 import { getDayInfo, formatTime } from "./utils/dateutils";
 import axios from 'axios';
 
+let obj = {"a":1, "b":1};
+obj.a = 2;
+console.log(`obj keys: ${Object.keys(obj).join(',')}`);
+console.log('ins:' + (obj instanceof Object));
+
 console.log('axios example start');
 async function getUser() {
     try {

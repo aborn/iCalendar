@@ -4,6 +4,7 @@ import { TimeTrace } from "./timetrace";
 import { ValidateUtils } from "./utils/validateutils";
 import { ConfigHelper } from "./utils/confighelper";
 import { Logger } from "./common/logger";
+import { LEVELMAP } from "./common/consts";
 
 export class ICalendar {
     private timetrace: TimeTrace;
@@ -44,7 +45,7 @@ export class ICalendar {
             let promptOptions = {
                 prompt: `iCalendar ${key}`,
                 placeHolder: 'level' === key ?
-                    'Enter your log level, as one of: debug, info, error' :
+                    `Enter your log level, as one of: ${Object.keys(LEVELMAP).join(",")}`:
                     `Enter your ${key} from WeChat miniprogram [i极客日历]->我的/账号${key}`,
                 value: defaultVal,
                 ignoreFocusOut: true,
