@@ -4,14 +4,18 @@ import { ConfigHelper } from "../utils/confighelper";
 import { Logger } from "../common/logger";
 import * as httpclient from "./httpclient";
 import * as dateutils from "../utils/dateutils";
+import * as consts from "../common/consts";
 
 export class DataSender {
     private lastPostDateMs: number | null;
     private lastPostData: DayBitSet;
+    private postIntervalS: number;
 
     constructor() {
         this.lastPostDateMs = null;
         this.lastPostData = new DayBitSet();
+        this.postIntervalS = consts.DEFAULT_INTERVAL;
+
         // init it!
         ConfigHelper.getInstance();
     }
@@ -30,13 +34,28 @@ export class DataSender {
             Logger.debug('post start:', new Date(startTime));
             let promise = httpclient.doPostData(daybitset, serverInfo);
             promise.then((result) => {
+                this.lastPostDateMs = Date.now();
+
                 if (result.status) {
                     this.lastPostDateMs = Date.now();
                     this.lastPostData.clearIfNotToday(); // Note: clear if not today
                     this.lastPostData.getBitSet().or(daybitset.getBitSet());
+                    this.scaleInterval(-1);
                 } else {
-                    // TODO 如何检验token不合法的情况，免得频繁上报：可以上报结果加一个值，然后服务器判断
-                    Logger.error(result.data);
+                    let resData = result.data;
+                    let bizCode = resData.code;
+
+                    if (result.httpCode === 200) {
+                        
+                        this.scaleInterval(1);
+                        this.lastPostData.clearIfNotToday(); // Note: clear if not today
+                        this.lastPostData.getBitSet().or(daybitset.getBitSet());
+
+                        // bizCode: 501--time error, 401--paramter error
+                        if (bizCode === 501) {
+                            daybitset.clearIfNotToday();
+                        }
+                    }
                 }
 
                 let info = dateutils.timeSpent(startTime);
@@ -49,6 +68,19 @@ export class DataSender {
         }
     }
 
+    private scaleInterval(type: number = 0) {
+        let after = this.postIntervalS + (consts.DEFAULT_INTERVAL * type);
+        if (type === 1) {
+            if (after < 12 * consts.DEFAULT_INTERVAL) {
+                this.postIntervalS = after;
+            }
+        } else if (type === -1) {
+            if (after > consts.DEFAULT_INTERVAL) {
+                this.postIntervalS = after;
+            }
+        }
+    }
+
     private isNeedPost(daybitset: DayBitSet): boolean {
         let timeLasped = 0;
         let timeInfo = null;
@@ -57,16 +89,16 @@ export class DataSender {
             timeLasped = timeInfo.tS;
         }
 
-        if (this.lastPostDateMs === null
-            || this.lastPostData === null
-            || daybitset.countOfCodingSlot() !== this.lastPostData.countOfCodingSlot()
-            || (timeLasped) > 5 * 60  // 5分钟以上
+        let postCountSlot = daybitset.countOfCodingSlot();
+        if (this.lastPostDateMs !== null
+            && (postCountSlot === this.lastPostData.countOfCodingSlot() || postCountSlot === 0)
+            && (timeLasped) < this.postIntervalS  // 5分钟以上
         ) {
-            return true;
+            Logger.info(`No need to post! timeLasped: ${timeInfo.humanReadable}, interval: ${this.postIntervalS}`);
+            return false;
         }
 
-        Logger.info(`No need to post! timeLasped: ${timeInfo.humanReadable}`);
-        return false;
+        return true;
     }
 
     private getServerInfo(): servers.ServerInfo {
