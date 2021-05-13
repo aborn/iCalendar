@@ -70,11 +70,12 @@ Page({
       },
       success: function (res) {
         console.log(res);
-        var data = res.data.data;
-        var message = res.data.msg;
+        let data = res.data.data;
+        let message = res.data.msg;
+        let bizCode = res.data.code;
         console.log('data=' + data + ", message=" + message)
 
-        if (res.data.code === 200) {
+        if (bizCode === 200) {
           // 有可能这个config还有其他信息
           var config = wx.getStorageSync('config') || {}
           config.token = data.token
@@ -107,9 +108,14 @@ Page({
               });
             }
           })
-        } else if (res.data.code === 201) {
+        } else if (bizCode === 201) {
           wx.showModal({
             title: "帐号token或id不正确！",
+            showCancel: false
+          })
+        } else if (bizCode === 400 ) {
+          wx.showModal({
+            title: message,
             showCancel: false
           })
         } else {
