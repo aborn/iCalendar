@@ -49,7 +49,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "pkg": "vsce package && cp icalendar-0.1.0.vsix ../plugins/"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
