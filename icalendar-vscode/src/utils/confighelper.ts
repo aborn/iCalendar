@@ -84,25 +84,18 @@ export class ConfigHelper {
     }
 
     public getConfigAsync(key: string, callback: (_err: string, defaultVal: string) => void) {
-        let token = this.getToken();
-        if (token === null) {
+        let cacheValue = this.config[key];
+        
+        if (cacheValue === null) {
             this.updateIdAndTokenFromConfigFile();
-            token = '';
+            cacheValue = '';
         }
 
-        let id = this.getId();
-        if (id === null) {
-            id = '';
+        if (key === 'level') {
+            cacheValue = Logger.getLevel();
         }
 
-        let level = Logger.getLevel();
-
-        let configLocal: { [key: string]: any } = {};
-        configLocal['id'] = id;
-        configLocal['token'] = token;
-        configLocal[key] = level || this.config[key];
-
-        callback('', configLocal[key]);
+        callback('', cacheValue);
     }
 
     public getToken(): string | null {
