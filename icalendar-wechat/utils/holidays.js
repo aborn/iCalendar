@@ -16,11 +16,6 @@ export const festival = {
         name: '春节',
         label: '春节'
       },
-      8: {
-        type: 'festival',
-        name: '腊八节',
-        label: '腊八'
-      },
       15: {
         type: 'festival',
         name: '元宵节',
@@ -53,6 +48,13 @@ export const festival = {
         label: '中元节'
       }
     },
+    8: {
+      15: {
+        type: 'festival',
+        name: '中秋节',
+        label: '中秋节'
+      }
+    },
     9: {
       9: {
         type: 'festival',
@@ -61,6 +63,11 @@ export const festival = {
       }
     },
     12: {
+      8: {
+        type: 'festival',
+        name: '腊八节',
+        label: '腊八'
+      },
       30: {
         type: 'festival',
         name: '除夕',
@@ -113,6 +120,11 @@ export const festival = {
         type: 'festival',
         name: '劳动节',
         label: '劳动节'
+      },
+      4: {
+        type: 'festival',
+        name: '青年节',
+        label: '青年节'
       }
     },
     6: {
@@ -153,6 +165,11 @@ export const festival = {
         type: 'festival',
         name: '程序员节',
         label: '程序员节'
+      },
+      31: {
+        type: 'festival',
+        name: '万圣节',
+        label: '万圣节'
       }
     },
     12: {
