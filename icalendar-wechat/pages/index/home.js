@@ -1,6 +1,9 @@
 // pages/read/home/home.js
 const util = require('../../utils/util.js')
 const timeUtil = require('../../utils/timeutil.js')
+import {
+  nationalholidays
+} from '../../cache/nationalholidays.js'
 import convertSolarLunar from '../../utils/lunar'
 import {
   isToday
@@ -237,8 +240,16 @@ Page({
   },
   showMonthHolidays(month, yearCache) {
     // month的格式为：2021-02
-    const holidaysTypeCache = yearCache || wx.getStorageSync("year-" + month.substring(0, 4))
+    const year = month.substring(0, 4);
+    let holidaysTypeCache = yearCache || wx.getStorageSync("year-" + year);
+
+    const localCacheHolidays = nationalholidays[year];
     var holidayTips = {};
+
+    // 如果远程没有数据，以本地为准
+    if (!holidaysTypeCache) {
+      holidaysTypeCache = localCacheHolidays;
+    }
 
     if (holidaysTypeCache) {
       const holidaysType = util.formatHoliday(holidaysTypeCache)
@@ -364,7 +375,7 @@ Page({
     util.updateTabBarTipsInfo();
     this.show()
   },
-  onTabItemTap(item) {   
+  onTabItemTap(item) {
     if (item.index == 0) {
       this.show()
     }
@@ -372,7 +383,7 @@ Page({
   onPullDownRefresh() {
     console.log('onPullDownRefresh call')
     this.show();
-    setTimeout(()=>{
+    setTimeout(() => {
       wx.stopPullDownRefresh();
     }, 500)
   },
