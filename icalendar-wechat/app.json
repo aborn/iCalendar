@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/code/home",
+    "pages/index/home",
     "pages/about/home",
     "pages/setting/index"
   ],
@@ -10,7 +10,7 @@
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [{
-        "pagePath": "pages/code/home",
+        "pagePath": "pages/index/home",
         "iconPath": "images/tabbar/home.png",
         "selectedIconPath": "images/tabbar/home-filling.png",
         "text": "极客日历"
