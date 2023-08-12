@@ -166,8 +166,8 @@
 
 .van-calendar_dot-circle {
   position: relative;
-  right: -45rpx;
-  top: -35rpx;
+  right: -50rpx;
+  top: -40rpx;
   /*这三行是定位*/
   width: 8rpx;
   height: 8rpx;

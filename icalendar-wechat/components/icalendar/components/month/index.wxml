@@ -21,7 +21,7 @@
 
         <view class="{{ computed.getDayTextStyle(item, holidayTips[index]) }}">
           {{ item.text }}
-          <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index].dot === 1}}"></view>
+          <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index].dot >= 1}}"></view>
         </view>
 
         <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info {{ item.bottomStyle }}">
@@ -40,7 +40,7 @@
 
         <view class="{{ computed.getDayTextStyle(item, holidayTips[index]) }}">
           {{ item.text }}
-          <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index].dot === 1}}"></view>
+          <view class="van-calendar_dot-circle" wx:if="{{tips && tips[index].dot >= 1}}"></view>
         </view>
 
         <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info {{ item.bottomStyle }}">
