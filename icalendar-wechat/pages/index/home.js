@@ -187,7 +187,7 @@ Page({
     if (isFuture) {
       return
     }
-    var url = 'https://aborn.me/webx/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
+    var url = 'https://cp.popkit.org/api/v1/codepulse/admin/getUserAction?token=' + app.getToken() + '&day=' + dayInfo
     console.log('url=' + url);
 
     // 获取写代码的时间信息
@@ -282,7 +282,7 @@ Page({
     if (util.isFuture(date)) {
       return;
     }
-    var url = 'https://aborn.me/webx/getMonthActionStatus?token=' + app.getToken() + '&month=' + month
+    var url = 'https://cp.popkit.org/api/v1/codepulse/admin/getMonthActionStatus?token=' + app.getToken() + '&month=' + month
     console.log('url=' + url);
 
     // 获取每个月的代码提示信息
