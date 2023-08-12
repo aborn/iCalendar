@@ -64,17 +64,9 @@ Component({
       var regDate = app.globalData.config.regDate;
       var type = this.data.typemap[app.globalData.config.type] || "普通帐号";
       var desc = '';
-      var testConfig = app.globalData.TestConfig;
-      if (id === testConfig.id && token === testConfig.token) {
-        desc = "当前为测试帐号，请申请自己的帐号！";
-        this.setData({
-          isTest: true
-        })
-      } else {
-        this.setData({
-          isTest: false
-        })
-      }
+      this.setData({
+        isTest: false
+      })
       this.setData({
         id,
         token,

@@ -1,14 +1,13 @@
 <!--pages/setting/index.wxml-->
 
-<view class="icalander-block__title">{{isTest ? '申请帐号' : '设置帐号信息'}}</view>
+<view class="icalander-block__title">设置帐号信息</view>
 <van-cell-group>
-  <van-field label="帐号id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id" data-actiontype="{{isTest ? '1' : '0'}}"
-    border="{{ true }}" bind:change="onChange" required />
-  <van-field wx:if="{{ !isTest }}" label="帐号token" value="{{ token }}" data-field='token' data-value="{{ token }}" placeholder="请输id对应的token"
-    border="{{ false }}" bind:change="onChange" required />
-</van-cell-group>
+  <van-field label="帐号id" value="{{ id }}" data-field='id' data-value="{{ id }}" placeholder="请输入github的id" data-actiontype="0" border="{{ true }}" bind:change="onChange" required />
+  <van-field label="帐号token" value="{{ token }}" data-field='token' data-value="{{ token }}" placeholder="请输id对应的token" border="{{ false }}" bind:change="onChange" required />
+</van-cell-group> 
 
 <view class="icalander-setting__sub-button">
   <van-button type="primary" disabled="{{disabled}}" color="#FFD400" bind:click="onSubmit" loading="{{loading}}" loading-text="处理中...">
-    <view class="icalendar_default-font-color">{{isTest ? '提交申请' : '提交修改'}}</view></van-button>
+    <view class="icalendar_default-font-color">保存</view>
+  </van-button>
 </view>
