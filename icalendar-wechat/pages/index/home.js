@@ -219,7 +219,7 @@ Page({
           })
         } else {
           self.setData({
-            codeTime: '请求出错-501',
+            codeTime: res.data.code === 501 ? '用户不存在': '未知错误',
             dayStaticByHour: util.transToLevel(util.initCellData(), type),
             codeDayColor: util.getCodeDayColor(0)
           })
