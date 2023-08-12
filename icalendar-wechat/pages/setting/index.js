@@ -3,7 +3,6 @@ const app = getApp()
 const util = require('../../utils/util.js')
 
 Page({
-
   /**
    * Page initial data
    */
@@ -16,7 +15,6 @@ Page({
     loading: false,
     isTest: false
   },
-
   methods: {},
   onChange(e) {
     var cvalue = e.detail;
@@ -48,7 +46,7 @@ Page({
     var ctoken = this.data.ctoken;
     var cid = this.data.cid;
 
-    that.setData({
+    this.setData({
       loading: true,
       disabled: true
     })
@@ -58,11 +56,12 @@ Page({
 
     // 有可能这个config还有其他信息
     var config = wx.getStorageSync('config') || {}
-    config.token = data.token
-    config.id = data.id
-    
+    config.token = ctoken
+    config.id = cid
+
     // 更新下全局信息
     app.globalData.config = config;
+
     // 数据保存起来
     wx.setStorage({
       key: "config",
@@ -109,14 +108,6 @@ Page({
       ctoken,
       cid
     })
-
-    var testConfig = app.globalData.TestConfig;
-    if (id === testConfig.id && token === testConfig.token) {
-      this.setData({
-        isTest: true,
-        id: ''
-      })
-    }
   },
 
   /**

@@ -12,7 +12,7 @@
       <view class="icalander-about_content-p">3、在IDE配置用户id和token（见小程序帐号信息）</view>
     </view>
     <view class="icalander-about_content-p">
-      <van-icon name="info" />具体操作详情见：</view>
+      具体操作详情见：</view>
     <view class='icalander-about_content-h3'>https://github.com/aborn/CodePulse</view>
   </view>
 </view>
