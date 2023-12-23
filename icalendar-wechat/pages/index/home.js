@@ -219,7 +219,7 @@ Page({
           })
         } else {
           self.setData({
-            codeTime: res.data.code === 501 ? '用户不存在': '未知错误',
+            codeTime: res.data.code === 501 ? '用户不存在' : '未知错误',
             dayStaticByHour: util.transToLevel(util.initCellData(), type),
             codeDayColor: util.getCodeDayColor(0)
           })
@@ -241,15 +241,8 @@ Page({
   showMonthHolidays(month, yearCache) {
     // month的格式为：2021-02
     const year = month.substring(0, 4);
-    let holidaysTypeCache = yearCache || wx.getStorageSync("year-" + year);
-
-    const localCacheHolidays = nationalholidays[year];
+    const holidaysTypeCache = nationalholidays[year];
     var holidayTips = {};
-
-    // 如果远程没有数据，以本地为准
-    if (!holidaysTypeCache) {
-      holidaysTypeCache = localCacheHolidays;
-    }
 
     if (holidaysTypeCache) {
       const holidaysType = util.formatHoliday(holidaysTypeCache)
@@ -303,52 +296,6 @@ Page({
       }
     })
   },
-  loadYearHolidays(year, month) {
-    var self = this;
-    // 获取这一年的假日信息并缓存下来 （每次页面加载的时候请求一次，每天请求一次）      
-    const key = "year-" + year;
-    var dataCache = wx.getStorageSync(key);
-    if (dataCache) {
-      var today = new Date();
-      const todayStr = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
-      const cacheTime = util.getDate(dataCache.time)
-      const cacheDayStr = cacheTime.getFullYear() + "-" + cacheTime.getMonth() + "-" + cacheTime.getDate()
-      if (month) {
-        self.showMonthHolidays(month, dataCache)
-      }
-
-      if (cacheDayStr === todayStr) {
-        // 同一天不需要重新请求
-        return;
-      }
-    }
-
-    var url = 'https://aborn.me/webx/conf/loadYearHolidays?token=' + app.getToken() + '&year=' + year
-    console.log('url=' + url);
-    wx.request({
-      url: url,
-      data: {},
-      success: function (res) {
-        console.log(res);
-        if (res.data.code === 200) {
-          console.log(year + '有假期数据。')
-          var data = res.data.data;
-          data.time = new Date();
-
-          wx.setStorage({
-            key: key,
-            data: data,
-          })
-
-          self.showMonthHolidays(month, data)
-        } else if (res.data.code === 201) {
-          console.log('暂无这年的假期数据。')
-        } else {
-          console.log('服务器异常。')
-        }
-      }
-    })
-  },
   afterSelectDate(e) {
     // 两种情况会触发：1. 手工选种一个日期时； 2. 切换月时
     var date = e.detail;
@@ -369,9 +316,8 @@ Page({
   },
   onReady() {
     var date = new Date();
-    var year = date.getFullYear();
-    var monthFormat = util.getDayFullValue(date, true);
-    this.loadYearHolidays(year, monthFormat);
+    var month = util.getDayFullValue(date, true)
+    this.showMonthHolidays(month)
     util.updateTabBarTipsInfo();
     this.show()
   },
