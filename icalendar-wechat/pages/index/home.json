@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "极客日历",
+  "navigationBarTitleText": "忆历",
   "usingComponents": {
     "code-grid": "./code-grid/code-grid"
   }

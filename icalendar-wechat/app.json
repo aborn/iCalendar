@@ -13,7 +13,7 @@
         "pagePath": "pages/index/home",
         "iconPath": "images/tabbar/home.png",
         "selectedIconPath": "images/tabbar/home-filling.png",
-        "text": "极客日历"
+        "text": "忆历"
       },
       {
         "pagePath": "pages/about/home",
@@ -25,7 +25,7 @@
   },
   "window": {
     "navigationBarBackgroundColor": "#FBC900",
-    "navigationBarTitleText": "极客日历",
+    "navigationBarTitleText": "忆历",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark",
     "backgroundColor": "#FBC900",

@@ -1,4 +1,4 @@
-<view class="icalander-about__title">关于「i极客日历」</view>
+<view class="icalander-about__title">关于「忆历」</view>
 <view class="icalander-about_preview">
   <view class="icalander-about_content">
     <view class="icalander-about_content-p">通过本小程序可以查看自己的编程足迹。</view>
